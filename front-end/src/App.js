@@ -1,3 +1,5 @@
+//this is a comment
+
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminDashboard from "./screens/admin/adminDashBoard";
