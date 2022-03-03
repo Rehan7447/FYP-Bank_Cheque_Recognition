@@ -20,7 +20,7 @@ const getProfile = asyncHandler(async (req, res, next) => {
 // Employee Controllers
 const getAllEmployees = asyncHandler(async (req, res, next) => {
 	employeeM
-		.find({ isAdmin: false })
+		.find({ isEmployee: true })
 		.populate("user")
 		.then((result) => {
 			res.status(200);
