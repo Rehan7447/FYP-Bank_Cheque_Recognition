@@ -1,0 +1,36 @@
+.table-row {
+	width: 100%;
+	margin-left: 0;
+	padding: 2rem 0;
+}
+
+.card {
+	margin-bottom: 30px;
+	border: 0px;
+	border-radius: 0.625rem !important;
+	box-shadow: 6px 11px 41px -28px #a99de7;
+}
+
+.card .card-body {
+	padding: 1.88rem 1rem;
+}
+
+.card-title {
+	text-align: center;
+}
+
+.table {
+	width: 100%;
+	margin-bottom: 1rem;
+	background-color: transparent;
+}
+.table thead tr {
+	border-bottom: none;
+	border-top: none;
+	vertical-align: middle;
+}
+
+.table td,
+.table th {
+	border-color: #f3f3f3;
+}

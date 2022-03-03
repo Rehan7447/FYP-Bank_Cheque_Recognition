@@ -1,0 +1,9 @@
+.search1 {
+	display: block !important;
+}
+
+@media only screen and (max-width: 767px) {
+	.search1 {
+		display: none !important;
+	}
+}

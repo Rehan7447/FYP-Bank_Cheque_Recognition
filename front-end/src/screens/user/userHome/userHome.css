@@ -1,0 +1,27 @@
+.mainSub {
+	padding: 2%;
+}
+
+.menu {
+	display: flex;
+	justify-content: space-around;
+	margin: 5% auto;
+}
+
+.menuHeading {
+	margin-top: 5%;
+	text-align: center;
+	text-decoration: underline;
+}
+
+.horizontalRow {
+	width: 80%;
+	margin: auto;
+	color: rgb(165, 165, 165);
+}
+
+.botDiv {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 5rem;
+}

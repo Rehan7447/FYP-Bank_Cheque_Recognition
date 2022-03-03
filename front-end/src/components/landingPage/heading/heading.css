@@ -1,0 +1,15 @@
+.headingDiv {
+    text-align: center;
+    color: white;
+    height: 70vh;
+  }
+  .mainHeaading {
+    margin:15% auto auto;
+    font-weight: 400;
+    font-size: 3rem;
+    user-select: none;
+  }
+  .fa-chevron-down{
+      margin-top: 3%;
+      font-size: 2rem;
+  }

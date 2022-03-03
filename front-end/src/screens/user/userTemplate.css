@@ -1,0 +1,14 @@
+.userMain {
+  background-image: url("../../assets/banner.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.userMainContent {
+  background-color: white;
+  min-height: 500px;
+  max-width: 95%;
+  margin: 2% auto;
+  border-radius: 10px;
+}

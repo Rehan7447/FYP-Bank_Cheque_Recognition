@@ -1,0 +1,35 @@
+.mainDiv {
+  margin-bottom: 5%;
+}
+
+.welcomeDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+.amountDiv {
+  margin: 2%;
+  text-align: center;
+}
+
+.subAmountDiv {
+  margin: 5% auto;
+}
+
+.amount {
+  font-size: 2.5rem;
+  display: inline-block;
+}
+
+.amount span {
+  font-size: 1.5rem;
+}
+
+.balanceHeading {
+  color: rgb(167, 167, 167);
+}
+
+.subMenu {
+  display: flex;
+  justify-content: space-around;
+}
