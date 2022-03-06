@@ -23,7 +23,7 @@ export default function Login() {
 			};
 			setLoading(true);
 			const { data } = await axios.post(
-				"/api/users/login",
+				"/users/login",
 				{
 					email,
 					password,
@@ -34,7 +34,7 @@ export default function Login() {
 			localStorage.setItem("userInfo", JSON.stringify(data));
 			setError(false);
 			setLoading(false);
-			navigate("/");
+			navigate("/user");
 		} catch (error) {
 			setError(true);
 			setLoading(false);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header/header";
 import ErrorMessage from "../../components/errorMessage";
@@ -18,13 +18,19 @@ export default function SignUp() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [pic, setPic] = useState("");
 	const [message, setMessage] = useState(null);
-	const [setPicMessage] = useState(null);
+	const [picMessage,setPicMessage] = useState(null);
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	// const [pic, setPic] = useState(
 	// 	"https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
 	// );
+
+	useEffect(()=>{
+		if(localStorage.getItem("userInfo")){
+			navigate("/user")
+		}
+	});
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
