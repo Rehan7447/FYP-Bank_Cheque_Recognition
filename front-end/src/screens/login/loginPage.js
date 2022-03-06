@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/header";
 import axios from "axios";
 import Loading from "../../components/loading";
@@ -12,6 +12,12 @@ export default function Login() {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
+
+	useEffect(()=>{
+		if(localStorage.getItem("userInfo")){
+			navigate("/user")
+		}
+	});
 
 	const submitHandler = async (e) => {
 		e.preventDefault();

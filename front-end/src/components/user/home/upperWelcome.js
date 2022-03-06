@@ -4,10 +4,11 @@ import "./upperWelcome.css";
 
 function WelcomeMenu() {
 	const [amount] = useState("5000");
+	const [userInfo] = useState(JSON.parse(localStorage.getItem("userInfo")));
 	return (
 		<div className="mainDiv">
 			<div className="welcomeDiv">
-				<h2>Welcome, User!</h2>
+				<h2>Welcome, {userInfo.name}!</h2>
 				<h5>
 					<Clock />
 				</h5>

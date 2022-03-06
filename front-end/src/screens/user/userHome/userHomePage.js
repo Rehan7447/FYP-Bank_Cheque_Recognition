@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {useEffect, useState } from "react";
 // import UserHeader from "../../../components/header/userHeader";
 import WelcomeMenu from "../../../components/user/home/upperWelcome";
 import UserCardMenu from "../../../components/user/home/userCardMenu";
@@ -10,6 +10,7 @@ import "./userHome.css";
 import UserTemplate from "../userTemplate";
 
 export default function User() {
+
   return (
     <UserTemplate>
       <div className="mainSub">
