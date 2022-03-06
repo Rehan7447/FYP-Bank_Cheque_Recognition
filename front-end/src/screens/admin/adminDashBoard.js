@@ -6,22 +6,20 @@ import CashierTableTable from "../../components/admin/cashierTable";
 import ErrorTable from "../../components/admin/errorTable";
 import EmployeeTable from "../../components/admin/employeeTable";
 
-export default class AdminDashboard extends React.Component {
-	render() {
-		return (
-			<div
-				style={{
-					width: "100%",
-					display: "inline-block",
-					backgroundColor: "#F3F3F9",
-				}}
-			>
-				<AdminHeader />
-				<CustomerTable></CustomerTable>
-				<EmployeeTable></EmployeeTable>
-				<CashierTableTable></CashierTableTable>
-				<ErrorTable></ErrorTable>
-			</div>
-		);
-	}
+export default function AdminDashboard() {
+  return (
+    <div
+      style={{
+        width: "100%",
+        display: "inline-block",
+        backgroundColor: "#F3F3F9",
+      }}
+    >
+      <AdminHeader />
+      <CustomerTable></CustomerTable>
+      <EmployeeTable></EmployeeTable>
+      <CashierTableTable></CashierTableTable>
+      <ErrorTable></ErrorTable>
+    </div>
+  );
 }

@@ -1,34 +1,25 @@
-import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
+import React, {useEffect } from "react";
 import UserHeader from "../../components/header/userHeader";
 import "./userTemplate.css";
 
-class UserTemplate extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoggedIn: localStorage.getItem("userInfo"),
-    };
-  }
+function UserTemplate (props) {
+  const navigate = useNavigate();
 
-  componentDidMount() {
-    this.isLogged();
-  }
-
-  isLogged() {
-    if (this.state.isLoggedIn === null) {
-      window.location.href = "/login";
-    }
-  }
-
-  render() {
+  useEffect(()=>{
+    if(!localStorage.getItem("userInfo")){
+			navigate("/login")
+		}
+  });
+  
     return (
       <div className="userMain">
         <UserHeader />
-        <div className="userMainContent">{this.props.children}</div>
+        <div className="userMainContent">{props.children}</div>
         <div>footer</div>
       </div>
     );
-  }
+  
 }
 
 export default UserTemplate;
