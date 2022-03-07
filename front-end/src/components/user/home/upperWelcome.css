@@ -7,6 +7,16 @@
     justify-content: space-between;
 }
 
+.welcomeDiv h2{
+  margin-bottom: 0;
+}
+
+.iban{
+  opacity: 0.8;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
 .amountDiv {
   margin: 2%;
   text-align: center;

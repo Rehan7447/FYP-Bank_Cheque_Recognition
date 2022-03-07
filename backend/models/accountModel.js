@@ -10,25 +10,13 @@ const accountSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	bankName: {
-		type: String,
-		required: true,
-	},
-	bankCode: {
-		type: String,
-		required: true,
-	},
-	branchCode: {
-		type: String,
-		required: true,
-	},
 	status: {
 		type: String,
 		default: "active",
 	},
 	balance: {
 		type: String,
-		default: "0",
+		default: "50000",
 	},
 });
 
