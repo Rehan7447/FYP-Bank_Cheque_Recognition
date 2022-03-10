@@ -16,7 +16,8 @@ const moneyTransferSchema = mongoose.Schema(
         },
         status:{
             type: String,
-            required: true
+            required: true,
+            default:"pending"
         },
         reason:{
             type: String,
@@ -27,7 +28,7 @@ const moneyTransferSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        reciverBank:{
+        recieverBank:{
             type: String,
             required: true
         },

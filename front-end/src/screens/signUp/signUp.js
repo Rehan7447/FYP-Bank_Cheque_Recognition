@@ -19,7 +19,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [pic, setPic] = useState("");
   const [message, setMessage] = useState(null);
-  const [picMessage, setPicMessage] = useState(null);
+  const [, setPicMessage] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
