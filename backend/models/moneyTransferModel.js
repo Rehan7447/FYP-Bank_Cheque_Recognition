@@ -7,11 +7,11 @@ const moneyTransferSchema = mongoose.Schema(
             required: true
         },
         senderAccount:{
-            type: mongoose.Types.ObjectId,
+            type: String,
             required: true
         },
         recieverAccount:{
-            type: mongoose.Types.ObjectId,
+            type: String,
             required: true
         },
         status:{

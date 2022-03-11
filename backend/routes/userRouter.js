@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAccountDetails, findAccount, editAccount } = require("../controller/accountController");
+const { getAccountDetails, findAccount, editAccount, findAccountByAccountNumber } = require("../controller/accountController");
 const { createTransfer, editTransferRequest } = require("../controller/moneyTransferController");
 const router = express.Router();
 const { registerUser, authorizeUser } = require("../controller/userController");
@@ -12,6 +12,7 @@ router.post("/transferRequest", createTransfer);
 router.get("/findBankAccount/:id", findAccount);
 router.put("/updateAccount/:id", editAccount);
 router.put("/editMoneyTransfer/:id", editTransferRequest);
+router.get("/findAccountByAccountNumber", findAccountByAccountNumber)
 
 
 module.exports = router;
