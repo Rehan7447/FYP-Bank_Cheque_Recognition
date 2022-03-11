@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React from "react";
 // import UserHeader from "../../../components/header/userHeader";
 import WelcomeMenu from "../../../components/user/home/upperWelcome";
 import UserCardMenu from "../../../components/user/home/userCardMenu";

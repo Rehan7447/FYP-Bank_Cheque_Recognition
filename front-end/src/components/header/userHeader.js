@@ -81,6 +81,7 @@ export default function UserHeader() {
 
 	const handleLogout = (event) => {
 		localStorage.removeItem("userInfo");
+		localStorage.removeItem("userAccountInfo");
 		navigate("/login");
 	};
 
