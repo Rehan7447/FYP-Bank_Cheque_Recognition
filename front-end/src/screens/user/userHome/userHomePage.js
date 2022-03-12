@@ -10,6 +10,15 @@ import "./userHome.css";
 import UserTemplate from "../userTemplate";
 
 export default function User() {
+  const chatBot = React.createRef();
+
+  function chatBotBut() {
+    if (chatBot.current.style.display !== "none") {
+      chatBot.current.style.display = "none";
+    } else {
+      chatBot.current.style.display = "inline-block";
+    }
+  }
 
   return (
     <UserTemplate>
@@ -44,6 +53,8 @@ export default function User() {
       </div>
       <div className="botDiv">
         <iframe
+          className="chatBot"
+          ref={chatBot}
           name="ChatBot"
           title="Ask Anything"
           width="90%"
@@ -51,6 +62,9 @@ export default function User() {
           allow="microphone;"
           src="https://console.dialogflow.com/api-client/demo/embedded/1bebf071-b8c1-4f62-bd3c-1f24cec93f20"
         ></iframe>
+        <a className="float" id="chatButton" onClick={chatBotBut}>
+          <i className="fa-solid fa-comments my-float"></i>
+        </a>
       </div>
     </UserTemplate>
   );

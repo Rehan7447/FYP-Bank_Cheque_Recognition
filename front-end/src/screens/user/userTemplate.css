@@ -12,3 +12,32 @@
   margin: 2% auto;
   border-radius: 10px;
 }
+
+.botDiv{
+  width: 30%;
+  position: fixed;
+  bottom:40px;
+	right:40px;
+}
+
+.chatBot{
+  display: none;
+}
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#1976d2;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+  cursor: pointer;
+}
+
+.my-float{
+	margin-top:22px;
+}

@@ -21,11 +21,11 @@ const editTransferRequest = asyncHandler(async (req, res) => {
       res.status(201);
       res.json(updated);
     } else {
-      res.json(400);
+      res.status(400);
       throw new Error("Transfer Request not found");
     }
   } else {
-    res.json(400);
+    res.status(400);
     throw new Error("Error While Updating Transfer Request");
   }
 });
