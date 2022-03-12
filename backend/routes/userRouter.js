@@ -10,7 +10,7 @@ router.post("/login", authorizeUser);
 router.get("/account", getAccountDetails);
 router.post("/transferRequest", createTransfer);
 router.get("/findBankAccount/:id", findAccount);
-router.put("/updateAccount/:id", editAccount);
+router.put("/updateAccount", editAccount);
 router.put("/editMoneyTransfer/:id", editTransferRequest);
 router.get("/findAccountByAccountNumber", findAccountByAccountNumber)
 

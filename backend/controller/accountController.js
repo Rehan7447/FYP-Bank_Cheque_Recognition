@@ -29,7 +29,7 @@ const findAccountByAccountNumber = asyncHandler(async (req, res) => {
 
 const editAccount = asyncHandler(async (req, res) => {
   const IBAN = req.body.IBAN;
-  const bankInfo = await accountM.findOne({ IBAN } || req.params.id);
+  const bankInfo = await accountM.findOne({ IBAN });
   if (bankInfo) {
     if (bankInfo.balance < (req.body.amount + req.body.fee && req.body.fee)) {
       res.status(400);
@@ -38,18 +38,20 @@ const editAccount = asyncHandler(async (req, res) => {
       res.status(201);
       let amount;
       if (req.body.fee) {
-        amount = bankInfo.balance - (req.body.amount + req.body.fee);
+        amount =
+          bankInfo.balance -
+          (parseInt(req.body.amount) + parseInt(req.body.fee));
       } else {
-        amount = bankInfo.balance + req.body.amount;
+        amount = parseInt(bankInfo.balance) + parseInt(req.body.amount);
       }
       const account = await accountM.findOneAndUpdate(
-        { IBAN } || req.params.id,
+        { IBAN },
         {
           balance: amount,
         }
       );
       if (account) {
-        const updated = await accountM.findOne({ IBAN } || req.params.id);
+        const updated = await accountM.findOne({ IBAN });
         if (updated) {
           res.status(201);
           res.json(updated);
