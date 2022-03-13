@@ -2,7 +2,7 @@ const userM = require("../models/userModel");
 const employeeM = require("../models/employeeModel");
 const asyncHandler = require("express-async-handler");
 const accountM = require("../models/accountModel");
-const generateToken = require("../utils/generateToken");
+// const generateToken = require("../utils/generateToken");
 
 // Get Admin Profile
 const getProfile = asyncHandler(async (req, res, next) => {

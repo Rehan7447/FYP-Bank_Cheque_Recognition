@@ -7,6 +7,7 @@ import Loading from "../../../components/loading";
 import { useNavigate } from "react-router-dom";
 
 function MoneyTransfer() {
+
   const navigate = useNavigate();
   const [amount, setAmount] = useState();
   const [senderAccount, setSenderAccount] = useState();
