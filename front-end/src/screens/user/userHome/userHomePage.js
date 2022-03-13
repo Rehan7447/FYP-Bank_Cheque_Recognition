@@ -1,5 +1,4 @@
 import React from "react";
-// import UserHeader from "../../../components/header/userHeader";
 import WelcomeMenu from "../../../components/user/home/upperWelcome";
 import UserCardMenu from "../../../components/user/home/userCardMenu";
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
