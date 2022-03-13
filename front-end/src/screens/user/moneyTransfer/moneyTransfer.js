@@ -3,17 +3,28 @@ import UserTemplate from "../userTemplate";
 import "./moneyTransfer.css";
 import axios from "axios";
 import asyncHandler from "express-async-handler";
+import Loading from "../../../components/loading";
+import { useNavigate } from "react-router-dom";
 
 function MoneyTransfer() {
+  const navigate = useNavigate();
   const [amount, setAmount] = useState();
   const [senderAccount, setSenderAccount] = useState();
   const [recieverAccount, setRecieverAccount] = useState();
   const [recieverBank, setRecieverBank] = useState();
   const [senderBank, setSenderBank] = useState();
   const [reason, setReason] = useState();
-  const [senderAccountId, setSenderAccountId] = useState();
-  const [recieverAccountId, setRecieverAccountId] = useState();
   const [fee, setFee] = useState(0);
+  // const [flag, setFlag] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [transferInfo, setTransferInfo] = useState({
+    senderAccount: "",
+    recieverAccount: "",
+    amount: "",
+    fee: "",
+    reason: "",
+    status: "",
+  });
 
   useEffect(() => {
     setSenderAccount(JSON.parse(localStorage.getItem("userAccountInfo")).IBAN);
@@ -30,39 +41,63 @@ function MoneyTransfer() {
       setSenderBank("MBL");
     }
     if (amount && senderBank !== recieverBank) {
-      setFee(amount / 10);
-    }else{
+      setFee(amount * (5 / 100));
+    } else {
       setFee(0);
     }
   });
 
   const submit = asyncHandler(async (e) => {
     e.preventDefault();
-    const { data } = await axios.post("/users/transferRequest", {
-      amount,
-      senderAccount,
-      recieverAccount,
-      reason,
-      senderBank,
-      recieverBank,
-      fee,
-    });
-    const { senderAccountUpdate } = await axios.put("/users/updateAccount", {
-      IBAN: senderAccount,
-      amount,
-      fee,
-    });
-    const { recieverAccountUpdate } = await axios.put("/users/updateAccount", {
-      IBAN: recieverAccount,
-      amount,
-    });
-    console.log(data._id);
-    const { requestUpdate } = await axios.put(
-      "/users/editMoneyTransfer/" + data._id,
+    // setFlag(true);
+    setLoading(true);
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    const { data } = await axios.post(
+      "/users/transferRequest",
       {
-        status: "complete",
-      }
+        amount,
+        senderAccount,
+        recieverAccount,
+        reason,
+        senderBank,
+        recieverBank,
+        fee,
+      },
+      config
     );
+    const { senderAccountUpdate } = await axios.put(
+      "/users/updateAccount",
+      {
+        IBAN: senderAccount,
+        amount,
+        fee,
+      },
+      config
+    );
+    const { recieverAccountUpdate } = await axios.put(
+      "/users/updateAccount",
+      {
+        IBAN: recieverAccount,
+        amount,
+      },
+      config
+    );
+    const { updated } = axios
+      .put(
+        "/users/editMoneyTransfer/" + data._id,
+        {
+          status: "complete",
+        },
+        config
+      )
+      .then((updateData) => {
+        setTransferInfo(updateData.data);
+        setLoading(false);
+      });
   });
 
   return (
@@ -144,12 +179,77 @@ function MoneyTransfer() {
           </div>
           <div className="form-group row submitDiv">
             <div className="col-sm-10 text-right">
-              <button type="submit" className="btn btn-success">
+              <button
+                type="submit"
+                className="btn btn-success"
+                data-toggle="modal"
+                data-target="#exampleModalLong"
+              >
                 Transfer
               </button>
             </div>
           </div>
         </form>
+      </div>
+
+      <div
+        className="modal fade"
+        id="exampleModalLong"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLongTitle">
+                Transfer Overview
+              </h5>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              {loading ? (
+                <Loading />
+              ) : (
+                <div>
+                  <p>To: {transferInfo.recieverAccount}</p>
+                  <p>From: {transferInfo.senderAccount}</p>
+                  <p>Amount: {transferInfo.amount}</p>
+                  <p>Fee: {transferInfo.fee}</p>
+                  <p>Reason: {transferInfo.reason}</p>
+                  <p>Status: {transferInfo.status}</p>
+                </div>
+              )}
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-success"
+                data-dismiss="modal"
+                onClick={() => {
+                  navigate("/user");
+                }}
+              >
+                Home
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </UserTemplate>
   );
