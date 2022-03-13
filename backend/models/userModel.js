@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		IBAN:{
+		IBAN: {
 			type: String,
 			required: true,
 			unique: true,
@@ -45,7 +45,6 @@ const userSchema = mongoose.Schema(
 		},
 		isEmployee: {
 			type: Boolean,
-			required: true,
 			default: false,
 		},
 	},
