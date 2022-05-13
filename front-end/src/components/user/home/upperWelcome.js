@@ -57,7 +57,7 @@ function WelcomeMenu() {
           <h5 className="balanceHeading">Current Balance</h5>
         </div>
         <div className="subMenu">
-          <a href="/">Transfer History</a>
+          <a href="/transferHistory">Transfer History</a>
           <a href="/">Recent Cheque Deposits</a>
           <a href="/">Recent Cheque Transactions</a>
         </div>

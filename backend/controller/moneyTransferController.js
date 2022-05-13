@@ -13,6 +13,18 @@ const createTransfer = asyncHandler(async (req, res) => {
   }
 });
 
+const getTransfer = asyncHandler(async (req, res) => {
+
+  const transfer = await transferM.find({IBAN: req.body.IBAN});
+  if (transfer) {
+    res.status(201);
+    res.json(transfer);
+  } else {
+    res.status(400);
+    throw new Error("Failed to create transfer request");
+  }
+});
+
 const editTransferRequest = asyncHandler(async (req, res) => {
   const transfer = await transferM.findByIdAndUpdate(req.params.id, req.body);
   if (transfer) {
@@ -30,6 +42,4 @@ const editTransferRequest = asyncHandler(async (req, res) => {
   }
 });
 
-
-
-module.exports = { createTransfer, editTransferRequest };
+module.exports = { createTransfer, editTransferRequest, getTransfer };

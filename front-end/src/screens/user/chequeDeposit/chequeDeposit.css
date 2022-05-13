@@ -1,5 +1,5 @@
-.userMainContent{
-    padding: 3%;
+.userMainContent {
+  padding: 3%;
 }
 .mainContainer {
   display: flex;
@@ -24,6 +24,6 @@
   justify-content: center;
 }
 
-.submitButton{
-    text-align: center;
+.submitButton {
+  text-align: center;
 }
