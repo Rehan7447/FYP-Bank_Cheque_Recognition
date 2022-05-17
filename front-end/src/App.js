@@ -1,6 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminDashboard from "./screens/admin/adminDashBoard";
+
+//global pages
 import LandingPage from "./screens/LandingPage/LandingPage";
 import Login from "./screens/login/loginPage";
 import SignUp from "./screens/signUp/signUp";
@@ -23,6 +25,9 @@ import AdminUpdateCashier from "./screens/admin/Update/updateCashier";
 
 // import AdminErrors from "./screens/admin/adminErrors";
 
+
+
+//user routes
 import User from "./screens/user/userHome/userHomePage";
 import MoneyTransfer from "./screens/user/moneyTransfer/moneyTransfer";
 import RegisterComplain from "./screens/user/complain/registerComplain";
