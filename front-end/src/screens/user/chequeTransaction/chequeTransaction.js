@@ -6,6 +6,7 @@ import "./chequeTransaction.css";
 import Loading from "../../../components/loading";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const videoConstraints = {
   width: 2048,
@@ -32,7 +33,28 @@ function ChequeTransaction() {
   //     image.src = URL.createObjectURL(event.target.files[0]);
   //   };
 
-  const postDetails = () => {
+  const getText = async (img) => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        "/users/chequeTransaction",
+        { pic: img, type: "Withdraw" },
+        config
+      );
+      sessionStorage.setItem("chequeTransaction", JSON.stringify(data));
+      console.log(data);
+      setLoading(false);
+      navigate("/chequeData");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const postDetails = async () => {
     if (!pic || pic === "") {
       return setPicMessage("Please Select an image");
     }
@@ -42,17 +64,13 @@ function ChequeTransaction() {
     data.append("file", pic);
     data.append("upload_preset", "userAuth");
     data.append("cloud_name", "dxrrifozh");
-    fetch("https://api.cloudinary.com/v1_1/dxrrifozh/upload", {
+    await fetch("https://api.cloudinary.com/v1_1/dxrrifozh/upload", {
       method: "post",
       body: data,
     })
       .then((res) => res.json())
       .then((data) => {
-        setPic(data.url.toString());
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-        navigate("/chequeData");
+        getText(data.url.toString());
       })
       .catch((err) => {
         console.log("Error is: " + err);

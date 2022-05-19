@@ -1,6 +1,18 @@
 const express = require("express");
-const { getAccountDetails, findAccount, editAccount, findAccountByAccountNumber } = require("../controller/accountController");
-const { createTransfer, editTransferRequest, getTransfer } = require("../controller/moneyTransferController");
+const {
+  getAccountDetails,
+  findAccount,
+  editAccount,
+  findAccountByAccountNumber,
+} = require("../controller/accountController");
+const {
+  createChequeTransfer,
+} = require("../controller/chequeTransferController");
+const {
+  createTransfer,
+  editTransferRequest,
+  getTransfer,
+} = require("../controller/moneyTransferController");
 const router = express.Router();
 const { registerUser, authorizeUser } = require("../controller/userController");
 // const notes = require("../data/notes");
@@ -14,6 +26,6 @@ router.put("/updateAccount", editAccount);
 router.put("/editMoneyTransfer/:id", editTransferRequest);
 router.get("/findAccountByAccountNumber", findAccountByAccountNumber);
 router.get("/getTransferHistory", getTransfer);
-
+router.post("/chequeTransaction", createChequeTransfer);
 
 module.exports = router;

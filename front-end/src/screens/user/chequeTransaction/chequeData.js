@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 // import WebcamCapture from "../../../components/user/chequeTransaction/webcam";
@@ -10,13 +10,103 @@ function ChequeData() {
   //   const submit = () => {
   //     navigate("/pin");
   //   };
+  const [date, setDate] = useState("");
+  const [chequeNumber, setChequeNumber] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [holderName, setHolderName] = useState("");
+  const [name, setName] = useState("");
+  const [bank, setBank] = useState("");
+  const [amount, setAmount] = useState("");
+  const [image, setImage] = useState("");
+  const [check, setCheck] = useState(false);
+  const [accountBal, setAccountBal] = useState("");
+  const [IBAN, setIBAN] = useState("");
+  const [flag, setFlag] = useState(true);
+  const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    if (!check) {
+      const accountData = JSON.parse(localStorage.getItem("userAccountInfo"));
+      const data = JSON.parse(sessionStorage.getItem("chequeTransaction"));
+      setDate(data.date);
+      setChequeNumber(data.chequeNumber);
+      setAccountNumber(data.holderAccountNumber);
+      setHolderName(data.holderName);
+      setName(data.chequeName);
+      setBank(data.holderBankName);
+      setAmount(data.amount);
+      setImage(data.chequeImage);
+      setAccountBal(accountData.balance);
+      setIBAN(accountData.IBAN);
+      // sessionStorage.setItem("chequeTransaction", "");
+      setCheck(true);
+    }
+
+    // if (holderName != name) {
+    //   var temp = errors;
+    //   temp.push("Account Holder Name and the Payee Name Dont Match");
+    //   setErrors(temp);
+    //   setFlag(false);
+    // }
+    // if (parseInt(amount) > parseInt(accountBal)) {
+    //   var temp = errors;
+    //   temp.push("Insufficient Balance");
+    //   setErrors(temp);
+    //   setFlag(false);
+    // }
+    // if (accountNumber != IBAN.replace(/\s*/g, "")) {
+    //   var temp = errors;
+    //   temp.push("User account number and Cheque account number dont match");
+    //   setErrors(temp);
+    //   setFlag(false);
+    // }
+  });
 
   return (
     <UserTemplate>
       <form>
         <h1>Cheque Information</h1>
-        <br />
-        <br />
+        {/* <div className="d-flex justify-content-center">
+          <img src={image} alt="chequeImage" width="500px" className="m-2" />
+        </div> */}
+        <div className="text-center">
+          {errors.map((error) => {
+            return <p style={{ color: "red" }}>Error: {error}</p>;
+          })}
+        </div>
+
+        <div className="form-group row">
+          <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+            Date:
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text"
+              className="form-control"
+              id="inputEmail3"
+              placeholder="Date"
+              disabled
+              value={date}
+              //   onChange={(e) => setRecieverAccount(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="form-group row">
+          <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+            Cheque Number:
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text"
+              className="form-control"
+              id="inputEmail3"
+              placeholder="Account No"
+              disabled
+              value={chequeNumber}
+              //   onChange={(e) => setRecieverAccount(e.target.value)}
+            />
+          </div>
+        </div>
         <div className="form-group row">
           <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
             Account Number:
@@ -28,7 +118,7 @@ function ChequeData() {
               id="inputEmail3"
               placeholder="Account No"
               disabled
-              value="PK87 BAHL 1736 7173 8828 7373"
+              value={accountNumber}
               //   onChange={(e) => setRecieverAccount(e.target.value)}
             />
           </div>
@@ -44,7 +134,7 @@ function ChequeData() {
               id="inputEmail3"
               placeholder="Account No"
               disabled
-              value="Basim Ayub"
+              value={name}
               //   onChange={(e) => setRecieverAccount(e.target.value)}
             />
           </div>
@@ -60,7 +150,7 @@ function ChequeData() {
               id="inputEmail3"
               placeholder="Account No"
               disabled
-              value="33000"
+              value={amount + " /-PKR"}
               //   onChange={(e) => setRecieverAccount(e.target.value)}
             />
           </div>
@@ -79,13 +169,24 @@ function ChequeData() {
           >
             Retake Image
           </Button>
-          <Button
-            className="col-sm-2 btn-success "
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            Continue
-          </Button>
+          {errors.length > 0 ? (
+            <Button
+              className="col-sm-2 btn-success "
+              data-toggle="modal"
+              data-target="#exampleModal"
+              disabled
+            >
+              Cheque has Mistakes
+            </Button>
+          ) : (
+            <Button
+              className="col-sm-2 btn-success "
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              Continue
+            </Button>
+          )}
         </div>
       </form>
       <div
