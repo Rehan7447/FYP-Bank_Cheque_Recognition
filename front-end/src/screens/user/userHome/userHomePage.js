@@ -33,7 +33,7 @@ export default function User() {
               name="Cheque Transaction"
             />
             <UserCardMenu
-              NavigateTo="/cehqueDeposit"
+              NavigateTo="/chequeDeposit"
               iconName={<IosShareIcon sx={{ fontSize: 40 }} />}
               name="Cheque Deposit"
             />

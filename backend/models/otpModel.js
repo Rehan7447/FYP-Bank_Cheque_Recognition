@@ -2,27 +2,28 @@ const mongoose = require("mongoose");
 
 const otpSchema = mongoose.Schema(
   {
-    transactionId:{
+    transactionId: {
       type: mongoose.Types.ObjectId,
-      required: true
-    },
-    expiration:{
-      type: "String",
       required: true,
-      default:"24hrs"
     },
-    status:{
+    pin: {
       type: String,
       required: true,
-      default: "active"
-    }
+    },
+    expiration: {
+      type: "String",
+      required: true,
+    },
+    status: {
+      type: String,
+      required: true,
+      default: "Active",
+    },
   },
   {
     timestamps: true,
   }
 );
-
-
 
 const otp = mongoose.model("OTP", otpSchema);
 

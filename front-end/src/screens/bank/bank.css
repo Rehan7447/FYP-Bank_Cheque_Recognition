@@ -1,0 +1,37 @@
+.landMain {
+  text-align: center;
+}
+
+.landMain h1{
+  margin: 5% auto;
+}
+
+.landContent {
+  box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.31);
+  -webkit-box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.31);
+  -moz-box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.31);
+  width: 50%;
+  margin: auto;
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.landContent h2 {
+  font-size: 2rem;
+  margin-bottom: 10%;
+}
+
+.landContent input{
+    width: 90%;
+}
+
+.OTP-Input div{
+  justify-content: center;
+  margin: 50px auto;
+}
+
+.OTP-Input input{
+  width: 40px !important; 
+  height: 50px !important;
+  font-size: 1.5rem;
+}

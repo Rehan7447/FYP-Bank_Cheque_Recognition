@@ -66,6 +66,7 @@ export default function SignUp() {
     if (!pics) {
       return setPicMessage("Please Select an image");
     }
+    console.log(pics);
     setPicMessage(null);
     const data = new FormData();
     data.append("file", pics);
@@ -81,7 +82,7 @@ export default function SignUp() {
         setPic(data.url.toString());
       })
       .catch((err) => {
-        console.log("Error is: ".error);
+        console.log("Error is: " + err);
       });
   };
 

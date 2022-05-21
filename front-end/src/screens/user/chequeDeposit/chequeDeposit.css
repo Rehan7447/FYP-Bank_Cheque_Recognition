@@ -1,5 +1,5 @@
-.userMainContent{
-    padding: 3%;
+.userMainContent {
+  padding: 3%;
 }
 .mainContainer {
   display: flex;
@@ -24,11 +24,6 @@
   justify-content: center;
 }
 
-.imageView img{
-  max-width: 500px;
-  min-width: 300px;
-}
-
-.submitButton{
-    text-align: center;
+.submitButton {
+  text-align: center;
 }
