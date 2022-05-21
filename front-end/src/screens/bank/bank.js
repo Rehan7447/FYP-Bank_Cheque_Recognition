@@ -23,25 +23,51 @@ export default function Bank() {
         },
         config
       );
-      const transactionData = await axios.post(
-        "/users/getChequeTransaction",
-        {
-          id: data[0].transactionId,
-        },
-        config
-      );
-      const IBAN = transactionData.data[0].holderAccountNumber;
-      const amount = transactionData.data[0].amount;
-      const accountUpdate = await axios.put(
-        "/users/updateAccount",
-        {
-          IBAN: IBAN,
-          amount: amount,
-          fee: 10,
-        },
-        config
-      );
-      console.log(accountUpdate.data);
+      if (data) {
+        const transactionData = await axios.post(
+          "/users/getChequeTransaction",
+          {
+            id: data[0].transactionId,
+          },
+          config
+        );
+        if (transactionData) {
+          const IBAN = transactionData.data[0].holderAccountNumber;
+          const amount = transactionData.data[0].amount;
+          const accountUpdate = await axios.put(
+            "/users/updateAccount",
+            {
+              IBAN: IBAN,
+              amount: amount,
+              fee: 10,
+            },
+            config
+          );
+          if (accountUpdate) {
+            const { updated } = axios
+              .put(
+                "/users/updateChequeTransaction/" + data[0].transactionId,
+                {
+                  status: "complete",
+                },
+                config
+              )
+              .then((updateData) => {
+                const { updatePin } = axios
+                  .put(
+                    "/users/updatePin/" + data[0]._id,
+                    {
+                      status: "Used",
+                    },
+                    config
+                  )
+                  .then((updated) => {
+                    console.log(updated);
+                  });
+              });
+          }
+        }
+      }
     } catch (e) {
       console.log("Error is: " + e);
     }

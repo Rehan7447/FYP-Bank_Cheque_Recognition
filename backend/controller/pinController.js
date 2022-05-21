@@ -53,4 +53,21 @@ const getPin = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createPIN, getPin };
+const updatePin = asyncHandler(async (req, res) => {
+  const pin = await pinM.findByIdAndUpdate(req.params.id, req.body);
+  if (pin) {
+    const updated = await pinM.findById(req.params.id);
+    if (updated) {
+      res.status(201);
+      res.json(updated);
+    } else {
+      res.status(400);
+      throw new Error("Pin not found");
+    }
+  } else {
+    res.status(400);
+    throw new Error("Error While Updating Pin");
+  }
+});
+
+module.exports = { createPIN, getPin, updatePin };
