@@ -50,7 +50,8 @@ function ChequeTransaction() {
       setLoading(false);
       navigate("/chequeData");
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      alert(error);
     }
   };
 

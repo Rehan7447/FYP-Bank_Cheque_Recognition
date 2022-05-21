@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +22,8 @@ function ChequeData() {
   const [check, setCheck] = useState(false);
   const [accountBal, setAccountBal] = useState("");
   const [IBAN, setIBAN] = useState("");
+  const [id, setId] = useState("");
+  const [pin, setPin] = useState("");
   const [flag, setFlag] = useState(true);
   const [errors, setErrors] = useState([]);
 
@@ -36,6 +39,7 @@ function ChequeData() {
       setBank(data.holderBankName);
       setAmount(data.amount);
       setImage(data.chequeImage);
+      setId(data._id);
       setAccountBal(accountData.balance);
       setIBAN(accountData.IBAN);
       // sessionStorage.setItem("chequeTransaction", "");
@@ -61,6 +65,18 @@ function ChequeData() {
     //   setFlag(false);
     // }
   });
+
+  const createOTP = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.post("/users/createPin", { id: id }, config);
+      setPin(data.pin);
+    } catch (error) {}
+  };
 
   return (
     <UserTemplate>
@@ -183,6 +199,7 @@ function ChequeData() {
               className="col-sm-2 btn-success "
               data-toggle="modal"
               data-target="#exampleModal"
+              onClick={createOTP}
             >
               Continue
             </Button>
@@ -227,7 +244,7 @@ function ChequeData() {
                     id="inputEmail3"
                     placeholder="Account No"
                     disabled
-                    value="482629"
+                    value={pin}
                     //   onChange={(e) => setRecieverAccount(e.target.value)}
                   />
                 </div>

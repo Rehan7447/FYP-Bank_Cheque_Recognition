@@ -7,7 +7,6 @@ import LandingPage from "./screens/LandingPage/LandingPage";
 import Login from "./screens/login/loginPage";
 import SignUp from "./screens/signUp/signUp";
 
-
 // Admin Add
 import AdminAddCashier from "./screens/admin/Add/addCashier";
 import AdminAddEmployee from "./screens/admin/Add/addEmployee";
@@ -25,16 +24,15 @@ import AdminUpdateCashier from "./screens/admin/Update/updateCashier";
 
 // import AdminErrors from "./screens/admin/adminErrors";
 
-
-
 //user routes
 import User from "./screens/user/userHome/userHomePage";
 import MoneyTransfer from "./screens/user/moneyTransfer/moneyTransfer";
 import RegisterComplain from "./screens/user/complain/registerComplain";
 import ChequeTransaction from "./screens/user/chequeTransaction/chequeTransaction";
 import ChequeDeposit from "./screens/user/chequeDeposit/chequeDeposit";
-import ChequeData from "./screens/user/chequeTransaction/chequeData"
+import ChequeData from "./screens/user/chequeTransaction/chequeData";
 import TransferHistory from "./screens/user/transferHistory/transferHistory";
+import Bank from "./screens/bank/bank";
 
 const App = () => {
   return (
@@ -75,6 +73,8 @@ const App = () => {
         <Route path="/registerComplain" element={<RegisterComplain />} />
         <Route path="/chequeData" element={<ChequeData />} />
         <Route path="/transferHistory" element={<TransferHistory />} />
+
+        <Route path="/bank" element={<Bank />} />
       </Routes>
     </BrowserRouter>
   );

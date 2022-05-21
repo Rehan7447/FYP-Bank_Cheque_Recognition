@@ -8306,6 +8306,11 @@
   "resolved" "https://registry.npmjs.org/os-browserify/-/os-browserify-0.3.0.tgz"
   "version" "0.3.0"
 
+"otp-input-react@^0.3.0":
+  "integrity" "sha512-6HDgAUp+biz18cfeX8189g6sOqA5UGmTeqkREz1MI8x92N8kU/M8YtwLtl60j3pbGkMVbrm3f4n4wtXPeVpMmg=="
+  "resolved" "https://registry.npmjs.org/otp-input-react/-/otp-input-react-0.3.0.tgz"
+  "version" "0.3.0"
+
 "p-each-series@^2.1.0":
   "integrity" "sha512-ycIL2+1V32th+8scbpTvyHNaHe02z0sjgh91XXjAk+ZeXoPN4Z46DVUnzdso0aX4KckKw0FNNFHdjZ2UsZvxiA=="
   "resolved" "https://registry.npmjs.org/p-each-series/-/p-each-series-2.2.0.tgz"

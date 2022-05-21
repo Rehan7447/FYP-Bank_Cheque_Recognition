@@ -74,4 +74,15 @@ const createChequeTransfer = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createChequeTransfer };
+const getChequeTransfer = asyncHandler(async (req, res) => {
+  const transfer = await chequeM.find({ _id: req.body.id });
+  if (transfer) {
+    res.status(201);
+    res.json(transfer);
+  } else {
+    res.status(400);
+    throw new Error("Cheque Transfer Doesnt exist");
+  }
+});
+
+module.exports = { createChequeTransfer, getChequeTransfer };
