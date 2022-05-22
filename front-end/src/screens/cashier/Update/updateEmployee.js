@@ -6,7 +6,7 @@ import ErrorMessage from "../../../components/errorMessage";
 import axios from "axios";
 import Loading from "../../../components/loading";
 
-export default function CashierAddCustomer() {
+export default function AdminAddCustomer() {
 	const navigate = useNavigate();
 	const [pic, setPic] = useState("");
 	const [name, setName] = useState("");
@@ -38,7 +38,7 @@ export default function CashierAddCustomer() {
 
 			setLoading(true);
 			const { data } = await axios.put(
-				`/cashier/updateEmployee/${id}`,
+				`/admin/updateEmployee/${id}`,
 				{
 					pic,
 					name,
@@ -85,7 +85,7 @@ export default function CashierAddCustomer() {
 
 	useEffect(() => {
 		const fetchCustomerWithId = async () => {
-			const { data } = await axios.get(`/cashier/employee/${id}`);
+			const { data } = await axios.get(`/admin/employee/${id}`);
 			setPic(data.user.pic);
 			setName(data.user.name);
 			setEmail(data.user.email);

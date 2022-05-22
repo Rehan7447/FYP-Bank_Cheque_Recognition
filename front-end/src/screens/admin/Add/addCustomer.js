@@ -45,7 +45,6 @@ export default function AdminAddCustomer() {
 					config
 				);
 				setLoading(false);
-				localStorage.setItem("userInfo", JSON.stringify(data));
 				navigate("/admin");
 			} catch (error) {
 				setError(error.ErrorMessage);

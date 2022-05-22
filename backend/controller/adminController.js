@@ -57,13 +57,13 @@ const addEmployee = asyncHandler(async (req, res, next) => {
 		designation,
 		role,
 	} = req.body;
-
 	const userExists = await userM.findOne({ email });
 	if (userExists) {
+		console.log("user already exist");
 		res.status(400);
-		var err = new Error("User with this email already exists.");
-		next(err);
+		throw new Error("User with this email already exists.");
 	}
+	console.log("user not exist");
 	const user = await userM.create({
 		name,
 		email,
@@ -75,14 +75,17 @@ const addEmployee = asyncHandler(async (req, res, next) => {
 		pic,
 		isEmployee: true,
 	});
+	console.log(user);
 	const employee = await employeeM.create({
 		user: user._id,
 		salary,
 		designation,
 		role,
 	});
-
+	// console.log(employee);
+	
 	if (employee) {
+		console.log("employee created");
 		res.status(201);
 		return res.json({
 			_id: user._id,
@@ -219,6 +222,7 @@ const getCashierWithId = asyncHandler(async (req, res, next) => {
 });
 
 const addCashier = asyncHandler(async (req, res, next) => {
+	console.log(req.body);
 	const {
 		name,
 		email,
@@ -234,10 +238,11 @@ const addCashier = asyncHandler(async (req, res, next) => {
 
 	const userExists = await userM.findOne({ email });
 	if (userExists) {
+		console.log("User Exists already");
 		res.status(400);
-		var err = new Error("User with this email already exists.");
-		next(err);
+		throw new Error("User with this email already exists.");
 	}
+	console.log("User does not already exist");
 	const user = await userM.create({
 		name,
 		email,
@@ -281,7 +286,7 @@ const updateCashierWithId = asyncHandler(async (req, res, next) => {
 	if (cashierExist == null) {
 		res.status(400);
 		var err = new Error("Cashier does not exist.");
-		return next(err);
+		throw new Error(err);
 	}
 	var userId;
 
@@ -309,7 +314,7 @@ const updateCashierWithId = asyncHandler(async (req, res, next) => {
 			console.log("Error in user updation " + error);
 			res.status(500);
 			res.send(error);
-			return next(error);
+			throw new Error(error);
 		});
 
 	await employeeM
@@ -332,7 +337,7 @@ const updateCashierWithId = asyncHandler(async (req, res, next) => {
 			console.log("Error in cashier updation " + error);
 			res.status(500);
 			res.send(error);
-			return next(error);
+			throw new Error(error);
 		});
 });
 
@@ -600,29 +605,30 @@ const deleteAccountWithId = asyncHandler(async (req, res, next) => {
 	const accountExist = await accountM.findById({ _id: req.params.aid });
 	if (accountExist == null) {
 		res.status(400);
-		var err = new Error("Account does not exist.");
-		return next(err);
+		throw new Error("Account does not exist.");
 	}
-	var accountId;
+	var customerId;
 
-	await AccountM
-		.findById({ _id: req.params.aid })
+	await accountM.findById({ _id: req.params.aid })
 		.then((account) => {
-			accountId = account.accountHolder;
+			customerId = account.accountHolder;
 		})
-		.catch(console.log("Account has no holder"));
+		.catch(() => {
+			res.status(400);
+			throw new Error("Account has no holder");
+		});
 
 	await userM
-		.deleteOne({ _id: accountId })
+		.deleteOne({ _id: customerId })
 		.then(console.log("Account Holder deleted"))
 		.catch((error) => {
 			console.log("Error in account holder deletion " + error);
 			res.status(500);
 			res.send(error);
-			return next(error);
+			throw new Error(error);
 		});
 
-	await AccountM.deleteOne({ _id: req.params.aid })
+	await accountM.deleteOne({ _id: req.params.aid })
 		.then((result) => {
 			console.log("AccountM deleted");
 			return res.json(result);

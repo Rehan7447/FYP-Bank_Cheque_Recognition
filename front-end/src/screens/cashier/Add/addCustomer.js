@@ -7,7 +7,7 @@ import ErrorMessage from "../../../components/errorMessage";
 import axios from "axios";
 import Loading from "../../../components/loading";
 
-export default function CashierAddCustomer() {
+export default function AdminAddCustomer() {
 	const navigate = useNavigate();
 	const [pic, setPic] = useState("");
 	const [name, setName] = useState("");
@@ -45,7 +45,6 @@ export default function CashierAddCustomer() {
 					config
 				);
 				setLoading(false);
-				localStorage.setItem("userInfo", JSON.stringify(data));
 				navigate("/cashier");
 			} catch (error) {
 				setError(error.ErrorMessage);

@@ -28,7 +28,6 @@ const userSchema = mongoose.Schema(
 		},
 		IBAN: {
 			type: String,
-			unique: true,
 		},
 		CNIC: {
 			type: String,

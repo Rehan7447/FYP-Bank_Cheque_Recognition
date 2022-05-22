@@ -60,7 +60,6 @@ export default function AdminAddEmployee() {
 					config
 				);
 				setLoading(false);
-				localStorage.setItem("userInfo", JSON.stringify(data));
 				navigate("/admin");
 			} catch (error) {
 				setError(error.ErrorMessage);
@@ -83,7 +82,7 @@ export default function AdminAddEmployee() {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				// console.log(data.url.toString());
+				console.log(data.url.toString());
 				setPic(data.url.toString());
 			})
 			.catch((err) => {

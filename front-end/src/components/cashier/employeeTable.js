@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import CurrencyFormat from "react-currency-format";
+import axios from "axios";
 import { Button } from "react-bootstrap";
 
 export default function EmployeeTable() {
@@ -73,6 +73,7 @@ export default function EmployeeTable() {
 								<span className="badge badge-success px-2 py-1">Present</span>
 							</td>
 							<td>{employee.createdAt.substring(0, 10)}</td>
+
 							<td>
 								<CurrencyFormat
 									value={employee.salary}

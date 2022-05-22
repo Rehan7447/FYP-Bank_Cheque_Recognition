@@ -3,7 +3,7 @@ import Side from "../../../components/cashier/sideNav";
 import Top from "../../../components/cashier/topNav";
 import CustomerTable from "../../../components/cashier/customerTable";
 
-export default function CashierViewCustomer() {
+export default function AdminViewCustomer() {
 	return (
 		<div id="wrapper">
 			<Side />
