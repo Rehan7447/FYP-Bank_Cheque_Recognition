@@ -33,15 +33,17 @@ function ChequeData() {
     if (!check) {
       const accountData = JSON.parse(localStorage.getItem("userAccountInfo"));
       const data = JSON.parse(sessionStorage.getItem("chequeTransaction"));
-      setDate(data.date);
-      setChequeNumber(data.chequeNumber);
-      setAccountNumber(data.holderAccountNumber);
-      setHolderName(data.holderName);
-      setName(data.chequeName);
-      setBank(data.holderBankName);
-      setAmount(data.amount);
-      setImage(data.chequeImage);
-      setId(data._id);
+      if (data) {
+        setDate(data.date);
+        setChequeNumber(data.chequeNumber);
+        setAccountNumber(data.holderAccountNumber);
+        setHolderName(data.holderName);
+        setName(data.chequeName);
+        setBank(data.holderBankName);
+        setAmount(data.amount);
+        setImage(data.chequeImage);
+        setId(data._id);
+      }
       setAccountBal(accountData.balance);
       setIBAN(accountData.IBAN);
       // sessionStorage.setItem("chequeTransaction", "");
@@ -49,8 +51,13 @@ function ChequeData() {
     }
 
     if (holderName != name) {
-      var temp = errors;
-      temp.push("Account Holder Name and the Payee Name Dont Match");
+      if (name.toLocaleLowerCase() != "self") {
+        var temp = errors;
+        temp.push(
+          "Account Holder Name and the Payee Name Dont Match, Cheque is invalid"
+        );
+      }
+
       setErrors(temp);
       setFlag(false);
     }
@@ -139,7 +146,7 @@ function ChequeData() {
               type="text"
               className="form-control"
               id="inputEmail3"
-              placeholder="Account No"
+              placeholder="Cheque No"
               disabled
               value={chequeNumber}
               //   onChange={(e) => setRecieverAccount(e.target.value)}
@@ -171,7 +178,7 @@ function ChequeData() {
               type="text"
               className="form-control"
               id="inputEmail3"
-              placeholder="Account No"
+              placeholder="Name"
               disabled
               value={name}
               //   onChange={(e) => setRecieverAccount(e.target.value)}
@@ -187,7 +194,7 @@ function ChequeData() {
               type="text"
               className="form-control"
               id="inputEmail3"
-              placeholder="Account No"
+              placeholder="Amount"
               disabled
               value={amount + " /-PKR"}
               //   onChange={(e) => setRecieverAccount(e.target.value)}

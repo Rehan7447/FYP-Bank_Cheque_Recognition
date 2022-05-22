@@ -9,7 +9,7 @@
   background-color: white;
   min-height: 500px;
   max-width: 95%;
-  margin: 2% auto;
+  margin: 2% auto 10%;
   border-radius: 10px;
 }
 
@@ -54,4 +54,9 @@
 
 .my-float {
   margin-top: 22px;
+}
+
+.footerMainTemplate footer{
+  background-color: #1976d2 !important;
+  color: white;
 }
