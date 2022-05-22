@@ -3,6 +3,7 @@ const employeeM = require("../models/employeeModel");
 const asyncHandler = require("express-async-handler");
 const accountM = require("../models/accountModel");
 const errorM = require("../models/errorModel");
+const chequeTransferM = require("../models/chequeTransModel")
 // const generateToken = require("../utils/generateToken");
 
 // Get Admin Profile
@@ -606,7 +607,7 @@ const deleteAccountWithId = asyncHandler(async (req, res, next) => {
 
 // Cheque Controllers
 const getAllCheques = asyncHandler(async (req, res, next) => {
-	accountM
+	chequeTransferM
 		.find()
 		.then((results) => {
 			res.status(200);

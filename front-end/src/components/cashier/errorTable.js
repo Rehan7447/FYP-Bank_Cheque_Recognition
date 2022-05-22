@@ -1,6 +1,4 @@
 import React from "react";
-// import "./adminBody.css";
-import "./dashboard/dashboard.css";
 
 export default function errorTable() {
 	return (

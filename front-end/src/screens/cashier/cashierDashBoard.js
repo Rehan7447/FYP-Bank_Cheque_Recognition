@@ -1,5 +1,4 @@
 import React from "react";
-import "../../components/cashier/dashboard/dashboard.css"
 import Side from "../../components/cashier/sideNav";
 import Top from "../../components/cashier/topNav";
 import ErrorTable from "../../components/cashier/errorTable";
