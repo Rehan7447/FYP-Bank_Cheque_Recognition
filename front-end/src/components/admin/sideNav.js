@@ -99,19 +99,6 @@ export default function AdminNavbars() {
 					</div>
 				</div>
 			</li>
-
-			<div className="text-center d-none d-md-inline">
-				<button
-					className="rounded-circle border-0"
-					id="sidebarToggle"
-					// type="button"
-					// data-toggle="collapse"
-					// data-target="#accordionSidebar"
-					// aria-controls="accordionSidebar"
-					// aria-expanded="false"
-					// aria-label="Toggle navigation"
-				></button>
-			</div>
 		</ul>
 	);
 }
