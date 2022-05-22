@@ -5,6 +5,7 @@ import Chart from "../chart";
 import EmployeeTable from "../employeeTable";
 import CustomerTable from "../customerTable";
 import CashierTable from "../cashierTable";
+import ErrorTable from "../errorTable";
 import PieChart from "../piechart";
 
 export default function Dashboard() {
@@ -19,7 +20,7 @@ export default function Dashboard() {
 		setCheques(data);
 		var total = 0;
 		data.map((cheque) => {
-			if (cheque.status == "pending") total++;
+			if (cheque.status != "complete") total++;
 		});
 		setPending(total);
 	};
@@ -195,7 +196,7 @@ export default function Dashboard() {
 								<h4 className="small font-weight-bold">
 									Error ratio
 									<span className="float-right">
-										{(cheques.length / pending) * 100}%
+										{pending == 0 ? 0 : (cheques.length / pending) * 100}%
 									</span>
 								</h4>
 								<div className="progress mb-4">
@@ -281,6 +282,16 @@ export default function Dashboard() {
 					</div>
 					<div className="card-body">
 						<CashierTable />
+					</div>
+				</div>
+				<div className="card shadow mb-4">
+					<div className="card-header py-3">
+						<h6 className="m-0 font-weight-bold text-primary">
+							Transaction Requests
+						</h6>
+					</div>
+					<div className="card-body">
+						<ErrorTable />
 					</div>
 				</div>
 

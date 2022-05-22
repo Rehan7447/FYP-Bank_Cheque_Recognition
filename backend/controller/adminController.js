@@ -3,7 +3,8 @@ const employeeM = require("../models/employeeModel");
 const asyncHandler = require("express-async-handler");
 const accountM = require("../models/accountModel");
 const errorM = require("../models/errorModel");
-const chequeTransferM = require("../models/chequeTransModel")
+const chequeM = require("../models/chequeTransModel");
+const chequeTransferM = require("../models/chequeTransModel");
 // const generateToken = require("../utils/generateToken");
 
 // Get Admin Profile
@@ -218,7 +219,6 @@ const getCashierWithId = asyncHandler(async (req, res, next) => {
 });
 
 const addCashier = asyncHandler(async (req, res, next) => {
-	
 	const {
 		name,
 		email,
@@ -501,14 +501,24 @@ const getAllAccounts = asyncHandler(async (req, res, next) => {
 		.catch((err) => next(err));
 });
 
+const getCustomerAccountWithCustomerId = asyncHandler(
+	async (req, res, next) => {
+		accountM
+			.find({ accountHolder: req.params.cid })
+			.then((result) => {
+				res.status(200);
+				return res.json(result);
+			})
+			.catch((err) => next(err));
+	}
+);
+
 const getAccountWithId = asyncHandler(async (req, res, next) => {
 	accountM
 		.findById({ _id: req.params.aid })
-		.populate("accountHolder")
 		.then((result) => {
 			res.status(200);
-			res.send(result);
-			res.json(result);
+			return res.json(result);
 		})
 		.catch((err) => next(err));
 });
@@ -593,15 +603,35 @@ const deleteAccountWithId = asyncHandler(async (req, res, next) => {
 		var err = new Error("Account does not exist.");
 		return next(err);
 	}
-	accountM
-		.deleteOne({ _id: req.params.aid })
-		.then((result) => {
-			console.log("Account deleted successfully.");
-			res.json(result);
+	var accountId;
+
+	await AccountM
+		.findById({ _id: req.params.aid })
+		.then((account) => {
+			accountId = account.accountHolder;
 		})
-		.catch((err) => {
-			console.log("Error while deleting the account.");
-			next(err);
+		.catch(console.log("Account has no holder"));
+
+	await userM
+		.deleteOne({ _id: accountId })
+		.then(console.log("Account Holder deleted"))
+		.catch((error) => {
+			console.log("Error in account holder deletion " + error);
+			res.status(500);
+			res.send(error);
+			return next(error);
+		});
+
+	await AccountM.deleteOne({ _id: req.params.aid })
+		.then((result) => {
+			console.log("AccountM deleted");
+			return res.json(result);
+		})
+		.catch((error) => {
+			console.log("Error in AccountM deletion " + error);
+			res.status(500);
+			res.send(error);
+			return next(error);
 		});
 });
 
@@ -617,7 +647,7 @@ const getAllCheques = asyncHandler(async (req, res, next) => {
 });
 
 // Cheque Controllers
-const getAllErrors= asyncHandler(async (req, res, next) => {
+const getAllErrors = asyncHandler(async (req, res, next) => {
 	errorM
 		.find()
 		.then((results) => {
@@ -625,6 +655,17 @@ const getAllErrors= asyncHandler(async (req, res, next) => {
 			return res.json(results);
 		})
 		.catch((err) => next(err));
+});
+
+const getAllChequeTransactions = asyncHandler(async (req, res, next) => {
+	const transfer = await chequeM.find();
+	if (transfer) {
+		res.status(201);
+		res.json(transfer);
+	} else {
+		res.status(400);
+		throw new Error("Cheque Transfer Doesnt exist");
+	}
 });
 
 // Export All Controllers
@@ -651,6 +692,7 @@ module.exports = {
 
 	getAllAccounts,
 	getAccountWithId,
+	getCustomerAccountWithCustomerId,
 	addAccount,
 	updateAccountWithId,
 	deleteAccountWithId,
@@ -658,4 +700,6 @@ module.exports = {
 	getAllCheques,
 
 	getAllErrors,
+
+	getAllChequeTransactions,
 };

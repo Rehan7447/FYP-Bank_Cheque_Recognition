@@ -1,249 +1,187 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+// import CurrencyFormat from "react-currency-format";
+import axios from "axios";
+import { Button } from "react-bootstrap";
 
-export default function errorTable() {
+export default function ErrorTable() {
+	const [, setLoading] = useState(false);
+	const [, setError] = useState(false);
+	const [cheques, setCheques] = useState([]);
+
+	const fetchCheques = async () => {
+		const { data } = await axios.get(`/admin/cheques`);
+		setCheques(data);
+	};
+
+	const ZoomIt = (i) => {
+		if (
+			document.fullscreenElement != null ||
+			document.webkitFullscreenElement != null
+		) {
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+			} else {
+				document.webkitCancelFullScreen();
+			}
+		}
+
+		// (B2) ENTER FULLSCREEN
+		else {
+			if (i.requestFullscreen) {
+				i.requestFullscreen();
+			} else {
+				i.webkitRequestFullScreen();
+			}
+		}
+	};
+
+	const resolveHandler = async (e, id) => {
+		e.preventDefault();
+		try {
+			const config = {
+				headers: {
+					"Content-type": "application/json",
+				},
+			};
+			setLoading(true);
+			axios.put(
+				"/users/updateChequeTransaction/" + id,
+				{
+					status: "pending",
+				},
+				config
+			);
+
+			try {
+				const config = {
+					headers: {
+						"Content-type": "application/json",
+					},
+				};
+				const { data } = await axios.post(
+					"/users/createPin",
+					{ id: id },
+					config
+				);
+				console.log(data);
+			} catch (error) {}
+
+			setLoading(false);
+			window.location.reload(false);
+		} catch (error) {
+			setError(error.response.data.message);
+		}
+	};
+
+	const rejectHandler = async (e, id) => {
+		e.preventDefault();
+		try {
+			const config = {
+				headers: {
+					"Content-type": "application/json",
+				},
+			};
+			setLoading(true);
+			axios.put(
+				"/users/updateChequeTransaction/" + id,
+				{
+					status: "rejected",
+				},
+				config
+			);
+			setLoading(false);
+			window.location.reload(false);
+		} catch (error) {
+			setError(error.response.data.message);
+		}
+	};
+
+	useEffect(() => {
+		fetchCheques();
+	}, []);
+
 	return (
-		<div className="row table-row">
-			<div className="col-md-12">
-				<div className="card">
-					<div className="card-body">
-						<div className="card-title">
-							<h3>Errors</h3>
-						</div>
-						<div className="table-responsive">
-							<table className="table">
-								<thead>
-									<tr>
-										<th>#</th>
-										<th>Description</th>
-										<th>Time</th>
-										<th>Date</th>
-										<th>Status</th>
-										<th>Operation</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>1</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-danger px-2 py-1">
-												Pending
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>2</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-danger px-2 py-1">
-												Pending
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>3</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-success px-2 py-1">
-												Resolved
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>4</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-danger px-2 py-1">
-												Pending
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>5</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-danger px-2 py-1">
-												Pending
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>6</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-success px-2 py-1">
-												Resolved
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>7</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-danger px-2 py-1">
-												Pending
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>8</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-danger px-2 py-1">
-												Pending
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>9</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-success px-2 py-1">
-												Resolved
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>10</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-danger px-2 py-1">
-												Pending
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>11</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-danger px-2 py-1">
-												Pending
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-									<tr>
-										<th>12</th>
-										<td>Cheque Scan Failed</td>
-										<td>12:56:32</td>
-										<td>Jan 12, 2019</td>
-										<td>
-											<span className="badge badge-success px-2 py-1">
-												Resolved
-											</span>
-										</td>
-										<td>
-											<i
-												className="fas fa-eye"
-												style={{ marginRight: "1rem" }}
-											></i>
-											<i className="fa fa-trash"></i>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div className="table-responsive">
+			<table className="table">
+				<thead>
+					<tr>
+						<th className="m-0 font-weight-bold text-primary">S.No.</th>
+						<th className="m-0 font-weight-bold text-primary">Image</th>
+						<th className="m-0 font-weight-bold text-primary">Date</th>
+						<th className="m-0 font-weight-bold text-primary">Time</th>
+						<th className="m-0 font-weight-bold text-primary">
+							Account Number
+						</th>
+						<th className="m-0 font-weight-bold text-primary">Cheque Number</th>
+						<th className="m-0 font-weight-bold text-primary">Amount</th>
+						<th className="m-0 font-weight-bold text-primary">Fee</th>
+						<th className="m-0 font-weight-bold text-primary">Status</th>
+						<th className="m-0 font-weight-bold text-primary">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{cheques.map((transaction, i) => (
+						<tr key={transaction._id}>
+							<th className="m-0 font-weight-bold text-primary">{i + 1}</th>
+							<td>
+								<img
+									onClick={(e) => {
+										ZoomIt(e.target);
+									}}
+									src={transaction.chequeImage}
+									alt="Cheque image"
+									style={{
+										width: "50px",
+										height: "50px",
+									}}
+								/>
+							</td>
+							<td>{transaction.createdAt.substring(0, 10)}</td>
+							<td>{transaction.createdAt.substring(11, 19)}</td>
+							<td>{transaction.holderAccountNumber}</td>
+							<td>{transaction.chequeNumber}</td>
+							<td>{transaction.amount} Rs</td>
+							<td>10 Rs</td>
+							<td>
+								<span
+									className={
+										transaction.status === "error"
+											? "badge px-2 py-1 badge-danger"
+											: "badge px-2 py-1 badge-success"
+									}
+								>
+									{transaction.status}
+								</span>
+							</td>
+							{transaction.status === "error" ? (
+								<td>
+									<Button
+										variant="primary"
+										className="mx-1 border-0"
+										onClick={(e) => {
+											resolveHandler(e, transaction._id);
+										}}
+									>
+										<i class="fas fa-solid fa-check"></i>
+									</Button>
+
+									<Button
+										variant="danger"
+										className="mx-1 border-0"
+										onClick={(e) => {
+											rejectHandler(e, transaction._id);
+										}}
+									>
+										<i class="fa fa-ban" aria-hidden="true"></i>
+									</Button>
+								</td>
+							) : (
+								""
+							)}
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</div>
 	);
 }

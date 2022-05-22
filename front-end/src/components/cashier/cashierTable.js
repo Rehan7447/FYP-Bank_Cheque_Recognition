@@ -74,7 +74,7 @@ export default function CashierTable() {
 							<td>
 								<span className="badge badge-success px-2 py-1">Present</span>
 							</td>
-							<td>{cashier.createdAt}</td>
+							<td>{cashier.createdAt.substring(0, 10)}</td>
 							<td>
 								<CurrencyFormat
 									value={cashier.salary}

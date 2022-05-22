@@ -25,48 +25,6 @@ export default function SignUp() {
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
 
-	const [newIBAN, setNewIBAN] = useState("");
-
-	// const [pic, setPic] = useState(
-	// 	"https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-	// );
-
-	const cleanInput = (input) => {
-		console.log(input);
-		let tests = [
-			/[A-Z]/i,
-			/[A-Z]/i,
-			/\d/,
-			/\d/,
-			/[A-Z]/i,
-			/[A-Z]/i,
-			/[A-Z]/i,
-			/[A-Z]/i,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-			/\d/,
-    ];
-		for (let i = 0; i < tests.length; i++) {
-			if (input[i] == undefined || !tests[i].test(input[i])) {
-				setNewIBAN(input.slice(0, i));
-			}
-		}
-		setNewIBAN(input.slice(0, tests.length));
-	};
-
 	useEffect(() => {
 		if (localStorage.getItem("userInfo")) {
 			navigate("/user");
@@ -222,21 +180,21 @@ export default function SignUp() {
 											/>
 										</div>
 										<div className="login-form-group">
-											<input
+											{/* <input
 												type="text"
 												className="login-form-control"
 												placeholder="IBAN"
 												value={newIBAN}
 												onChange={(e) => cleanInput(e.target.value)}
 												// onChange={(e) => setIBAN(e.target.value)}
-											/>
-											{/* <CurrencyFormat
+											/> */}
+											<CurrencyFormat
 												className="login-form-control"
 												placeholder="IBAN"
 												format="PK## ABPL  #### #### #### ####"
 												mask="_"
 												onChange={(e) => setIBAN(e.target.value)}
-											/> */}
+											/>
 										</div>
 										<div className="login-form-group">
 											<input
