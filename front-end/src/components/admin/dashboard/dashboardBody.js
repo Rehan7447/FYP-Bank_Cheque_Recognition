@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CurrencyFormat from "react-currency-format";
 import Chart from "../chart";
-import "./dashboard.css";
 import EmployeeTable from "../employeeTable";
 import CustomerTable from "../customerTable";
 import CashierTable from "../cashierTable";
@@ -11,39 +10,39 @@ import PieChart from "../piechart";
 export default function Dashboard() {
 	const [cheques, setCheques] = useState([]);
 	const [employees, setEmployees] = useState([]);
+	const [customers, setCustomers] = useState([]);
 	const [errors, setErrors] = useState([]);
 	const [salaries, setSalaries] = useState();
 	const [pending, setPending] = useState();
 	const fetchCheques = async () => {
 		const { data } = await axios.get(`/admin/cheques`);
 		setCheques(data);
+		var total = 0;
+		data.map((cheque) => {
+			if (cheque.status == "pending") total++;
+		});
+		setPending(total);
 	};
 	const fetchEmployees = async () => {
 		const { data } = await axios.get(`/admin/employees`);
-		setEmployees(data);
+		// setEmployees(data);
+		var total = 0;
+		data.map((employee) => (total = total + employee.salary));
+		setSalaries(total);
 	};
 	const fetchErrors = async () => {
 		const { data } = await axios.get(`/admin/errors`);
 		setErrors(data);
 	};
-	const calculateSalaries = async () => {
-		var total = 0;
-		employees.map((employee) => (total = total + employee.salary));
-		setSalaries(total);
-	};
-	const calculatePending = async () => {
-		var total = 0;
-		errors.map((error) => {
-			if (error.isPending === true) total++;
-		});
-		setPending(total);
+	const fetchCustomers = async () => {
+		const { data } = await axios.get(`/admin/customers`);
+		setCustomers(data);
 	};
 	useEffect(() => {
 		fetchCheques();
 		fetchEmployees();
 		fetchErrors();
-		calculateSalaries();
-		calculatePending();
+		fetchCustomers();
 	}, []);
 	return (
 		<div>
@@ -107,7 +106,7 @@ export default function Dashboard() {
 											Cutomers
 										</div>
 										<div className="h5 mb-0 font-weight-bold text-gray-800">
-											{errors.length}
+											{customers.length}
 										</div>
 									</div>
 									<div className="col-auto">
@@ -293,8 +292,6 @@ export default function Dashboard() {
 					</div>
 				</footer>
 			</div>
-
-			
 		</div>
 	);
 }

@@ -63,14 +63,14 @@ import Bank from "./screens/bank/bank";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<LandingPage />} />
+				<Route path="/admin" element={<AdminDashboard />} />
+				<Route path="/signUp" element={<SignUp />} />
+				<Route path="/login" element={<Login />} />
 
-        <Route path="/admin/profile" element={<AdminProfile />} />
+				<Route path="/admin/profile" element={<AdminProfile />} />
 
 				<Route path="admin/addCashier" element={<AdminAddCashier />} />
 				<Route path="admin/addEmployee" element={<AdminAddEmployee />} />
@@ -146,20 +146,20 @@ const App = () => {
 					element={<CashierUpdateCashier />}
 				/>
 
-        {/* <Route path="/admin/errors" element={<AdminErrors />} /> */}
+				{/* <Route path="/admin/errors" element={<AdminErrors />} /> */}
 
-        <Route path="/user" element={<User />} />
-        <Route path="/transferMoney" element={<MoneyTransfer />} />
-        <Route path="/chequeTransaction" element={<ChequeTransaction />} />
-        <Route path="/chequeDeposit" element={<ChequeDeposit />} />
-        <Route path="/registerComplain" element={<RegisterComplain />} />
-        <Route path="/chequeData" element={<ChequeData />} />
-        <Route path="/transferHistory" element={<TransferHistory />} />
+				<Route path="/user" element={<User />} />
+				<Route path="/transferMoney" element={<MoneyTransfer />} />
+				<Route path="/chequeTransaction" element={<ChequeTransaction />} />
+				<Route path="/chequeDeposit" element={<ChequeDeposit />} />
+				<Route path="/registerComplain" element={<RegisterComplain />} />
+				<Route path="/chequeData" element={<ChequeData />} />
+				<Route path="/transferHistory" element={<TransferHistory />} />
 
-        <Route path="/bank" element={<Bank />} />
-      </Routes>
-    </BrowserRouter>
-  );
+				<Route path="/bank" element={<Bank />} />
+			</Routes>
+		</BrowserRouter>
+	);
 };
 
 export default App;
