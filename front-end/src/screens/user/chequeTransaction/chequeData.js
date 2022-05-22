@@ -79,7 +79,8 @@ function ChequeData() {
   };
 
   const generateError = (e)=>{
-    console.log("in")
+    e.preventDefault();
+    
   }
 
   return (
@@ -192,7 +193,6 @@ function ChequeData() {
           <Button
             className="col-sm-2 btn-primary"
             onClick={(e) => {
-              e.preventDefault();
               generateError(e);
             }}
           >
