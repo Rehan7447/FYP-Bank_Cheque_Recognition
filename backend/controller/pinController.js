@@ -73,4 +73,15 @@ const updatePin = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createPIN, getPin, updatePin };
+const getPinByTransaction = asyncHandler(async (req, res) => {
+  const pin = await pinM.find({ transactionId: req.body.id });
+  if (pin) {
+    res.status(201);
+    res.json(pin);
+  } else {
+    res.status(400);
+    throw new Error("Failed to get transfer request");
+  }
+});
+
+module.exports = { createPIN, getPin, updatePin, getPinByTransaction };

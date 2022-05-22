@@ -75,7 +75,13 @@ const createChequeTransfer = asyncHandler(async (req, res) => {
 });
 
 const getChequeTransfer = asyncHandler(async (req, res) => {
-  const transfer = await chequeM.find({ _id: req.body.id });
+  var query = {};
+  if (req.body.id) {
+    query = { _id: req.body.id };
+  } else {
+    query = { holderAccountNumber: req.body.iban };
+  }
+  const transfer = await chequeM.find(query);
   if (transfer) {
     res.status(201);
     res.json(transfer);

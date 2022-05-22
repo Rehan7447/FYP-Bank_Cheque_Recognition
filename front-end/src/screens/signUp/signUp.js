@@ -118,6 +118,7 @@ export default function SignUp() {
                         className="login-form-control"
                         placeholder="Name"
                         value={name}
+                        required
                         onChange={(e) => setName(e.target.value)}
                       />
                     </div>
@@ -127,6 +128,7 @@ export default function SignUp() {
                         className="login-form-control"
                         placeholder="Email"
                         value={email}
+                        required
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
@@ -136,6 +138,7 @@ export default function SignUp() {
                         className="login-form-control"
                         placeholder="Contact No."
                         value={phoneNumber}
+                        required
                         onChange={(e) => setPhoneNumber(e.target.value)}
                       />
                     </div>
@@ -145,6 +148,7 @@ export default function SignUp() {
                         className="login-form-control"
                         placeholder="Address"
                         value={address}
+                        required
                         onChange={(e) => setAddress(e.target.value)}
                       />
                     </div>
@@ -154,6 +158,7 @@ export default function SignUp() {
                         className="login-form-control"
                         placeholder="CNIC"
                         value={CNIC}
+                        required
                         onChange={(e) => setCNIC(e.target.value)}
                       />
                     </div>
@@ -163,6 +168,7 @@ export default function SignUp() {
                         className="login-form-control"
                         placeholder="IBAN"
                         value={IBAN}
+                        required
                         onChange={(e) => setIBAN(e.target.value)}
                       />
                     </div>
@@ -172,6 +178,7 @@ export default function SignUp() {
                         className="login-form-control"
                         placeholder="Date of Birth"
                         value={dob}
+                        required
                         onChange={(e) => setDob(e.target.value)}
                       />
                     </div>
@@ -180,6 +187,7 @@ export default function SignUp() {
                         type="password"
                         className="login-form-control"
                         placeholder="Password"
+                        required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -190,6 +198,7 @@ export default function SignUp() {
                         className="login-form-control"
                         placeholder="Confirm Password"
                         value={confirmPassword}
+                        required
                         onChange={(e) => setConfirmPassword(e.target.value)}
                       />
                     </div>
