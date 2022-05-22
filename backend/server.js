@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const userRouter = require("./routes/userRouter");
 const adminRouter = require("./routes/adminRouter");
+const cashierRouter = require("./routes/cashierRouter");
 const connectDB = require("./config/db");
 // const notes = require("./data/notes");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleWare");
@@ -16,6 +17,7 @@ app.get("/", (re, res) => {
 });
 app.use("/admin", adminRouter);
 app.use("/users", userRouter);
+app.use("/cashier", cashierRouter);
 // app.use("/api/users", userRouter);
 
 // app.get("/api/notes", (req, res) => {

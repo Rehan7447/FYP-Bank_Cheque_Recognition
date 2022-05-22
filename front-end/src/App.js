@@ -1,11 +1,16 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AdminDashboard from "./screens/admin/adminDashBoard";
 
 //global pages
 import LandingPage from "./screens/LandingPage/LandingPage";
 import Login from "./screens/login/loginPage";
 import SignUp from "./screens/signUp/signUp";
+
+// Admin Dashboard
+import AdminDashboard from "./screens/admin/adminDashBoard";
+
+// Admin Profile
+import AdminProfile from "./screens/admin/profile";
 
 // Admin Add
 import AdminAddCashier from "./screens/admin/Add/addCashier";
@@ -21,6 +26,28 @@ import AdminViewCustomer from "./screens/admin/View/viewCustomer";
 import AdminUpdateCustomer from "./screens/admin/Update/updateCustomer";
 import AdminUpdateEmployee from "./screens/admin/Update/updateEmployee";
 import AdminUpdateCashier from "./screens/admin/Update/updateCashier";
+
+
+// Cashier Dashboard
+import CashierDashboard from "./screens/cashier/cashierDashBoard";
+
+// Cashier Profile
+import CashierProfile from "./screens/cashier/profile";
+
+// Cashier Add
+import CashierAddCashier from "./screens/cashier/Add/addCashier";
+import CashierAddEmployee from "./screens/cashier/Add/addEmployee";
+import CashierAddCustomer from "./screens/cashier/Add/addCustomer";
+
+// Cashier View
+import CashierViewCashier from "./screens/cashier/View/viewCashier";
+import CashierViewEmployee from "./screens/cashier/View/viewEmployee";
+import CashierViewCustomer from "./screens/cashier/View/viewCustomer";
+
+// Cashier Update
+import CashierUpdateCustomer from "./screens/cashier/Update/updateCustomer";
+import CashierUpdateEmployee from "./screens/cashier/Update/updateEmployee";
+import CashierUpdateCashier from "./screens/cashier/Update/updateCashier";
 
 // import AdminErrors from "./screens/admin/adminErrors";
 
@@ -43,26 +70,81 @@ const App = () => {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
 
-        <Route path="admin/addCashier" element={<AdminAddCashier />} />
-        <Route path="admin/addEmployee" element={<AdminAddEmployee />} />
-        <Route path="admin/addCustomer" element={<AdminAddCustomer />} />
+        <Route path="/admin/profile" element={<AdminProfile />} />
 
-        <Route path="admin/Cashiers" element={<AdminViewCashier />} />
-        <Route path="admin/Employees" element={<AdminViewEmployee />} />
-        <Route path="admin/Customers" element={<AdminViewCustomer />} />
+				<Route path="admin/addCashier" element={<AdminAddCashier />} />
+				<Route path="admin/addEmployee" element={<AdminAddEmployee />} />
+				<Route path="admin/addCustomer" element={<AdminAddCustomer />} />
 
-        <Route
-          path="admin/updateCustomer/:id"
-          element={<AdminUpdateCustomer />}
-        />
-        <Route
-          path="admin/updateEmployee/:id"
-          element={<AdminUpdateEmployee />}
-        />
-        <Route
-          path="admin/updateCashier/:id"
-          element={<AdminUpdateCashier />}
-        />
+				<Route path="admin/Cashiers" element={<AdminViewCashier />} />
+				<Route path="admin/Employees" element={<AdminViewEmployee />} />
+				<Route path="admin/Customers" element={<AdminViewCustomer />} />
+
+				<Route
+					path="admin/updateCustomer/:id"
+					element={<AdminUpdateCustomer />}
+				/>
+				<Route
+					path="admin/admin/updateCustomer/:id"
+					element={<AdminUpdateCustomer />}
+				/>
+
+				<Route
+					path="admin/updateEmployee/:id"
+					element={<AdminUpdateEmployee />}
+				/>
+				<Route
+					path="admin/admin/updateEmployee/:id"
+					element={<AdminUpdateEmployee />}
+				/>
+
+				<Route
+					path="admin/updateCashier/:id"
+					element={<AdminUpdateCashier />}
+				/>
+				<Route
+					path="admin/admin/updateCashier/:id"
+					element={<AdminUpdateCashier />}
+				/>
+
+				<Route path="/cashier" element={<CashierDashboard />} />
+
+				<Route path="/cashier/profile" element={<CashierProfile />} />
+
+				<Route path="cashier/addCashier" element={<CashierAddCashier />} />
+				<Route path="cashier/addEmployee" element={<CashierAddEmployee />} />
+				<Route path="cashier/addCustomer" element={<CashierAddCustomer />} />
+
+				<Route path="cashier/Cashiers" element={<CashierViewCashier />} />
+				<Route path="cashier/Employees" element={<CashierViewEmployee />} />
+				<Route path="cashier/Customers" element={<CashierViewCustomer />} />
+
+				<Route
+					path="cashier/updateCustomer/:id"
+					element={<CashierUpdateCustomer />}
+				/>
+				<Route
+					path="cashier/cashier/updateCustomer/:id"
+					element={<CashierUpdateCustomer />}
+				/>
+
+				<Route
+					path="cashier/updateEmployee/:id"
+					element={<CashierUpdateEmployee />}
+				/>
+				<Route
+					path="cashier/cashier/updateEmployee/:id"
+					element={<CashierUpdateEmployee />}
+				/>
+
+				<Route
+					path="cashier/updateCashier/:id"
+					element={<CashierUpdateCashier />}
+				/>
+				<Route
+					path="cashier/cashier/updateCashier/:id"
+					element={<CashierUpdateCashier />}
+				/>
 
         {/* <Route path="/admin/errors" element={<AdminErrors />} /> */}
 

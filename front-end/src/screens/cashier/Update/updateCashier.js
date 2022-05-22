@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
-import { useNavigate } from "react-router-dom";
-import Side from "../../../components/admin/sideNav";
-import Top from "../../../components/admin/topNav";
+import { useNavigate, useParams } from "react-router-dom";
+import Side from "../../../components/cashier/sideNav";
+import Top from "../../../components/cashier/topNav";
 import ErrorMessage from "../../../components/errorMessage";
 import axios from "axios";
 import Loading from "../../../components/loading";
 
-export default function AdminAddEmployee() {
+export default function CashierAddCashier() {
 	const navigate = useNavigate();
+	const [pic, setPic] = useState("");
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -17,54 +18,45 @@ export default function AdminAddEmployee() {
 	const [dob, setDob] = useState("");
 	const [salary, setSalary] = useState("");
 	const [designation, setDesignation] = useState("");
-	const [role, setRole] = useState("");
-	const [password, setPassword] = useState("");
-	const [pic, setPic] = useState("");
 
-	const [confirmPassword, setConfirmPassword] = useState("");
-	const [message, setMessage] = useState(null);
+	// Extract id of user from url
+	const { id } = useParams();
+
+	const [message] = useState(null);
 	const [, setPicMessage] = useState(null);
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
-		if (password !== confirmPassword) {
-			setMessage("Passwords does not match");
-		} else {
-			setMessage();
-			try {
-				const config = {
-					headers: {
-						"Content-type": "application/json",
-					},
-				};
+		try {
+			const config = {
+				headers: {
+					"Content-type": "application/json",
+				},
+			};
 
-				setLoading(true);
-				// console.log(name, email, phoneNumber, address, CNIC, dob, pic,password);
-				const { data } = await axios.post(
-					"/admin/addEmployee",
-					{
-						name,
-						email,
-						phoneNumber,
-						address,
-						password,
-						CNIC,
-						dob,
-						pic,
-						salary,
-						designation,
-						role,
-					},
-					config
-				);
-				setLoading(false);
-				localStorage.setItem("userInfo", JSON.stringify(data));
-				navigate("/admin");
-			} catch (error) {
-				setError(error.ErrorMessage);
-			}
+			setLoading(true);
+			const { data } = await axios.put(
+				`/cashier/updateCashier/${id}`,
+				{
+					pic,
+					name,
+					email,
+					phoneNumber,
+					address,
+					CNIC,
+					dob,
+					designation,
+					salary,
+				},
+				config
+			);
+			setLoading(false);
+			localStorage.setItem("userInfo", JSON.stringify(data));
+			navigate("/cashier");
+		} catch (error) {
+			setError(error.ErrorMessage);
 		}
 	};
 
@@ -83,13 +75,29 @@ export default function AdminAddEmployee() {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				// console.log(data.url.toString());
+				console.log(data.url.toString());
 				setPic(data.url.toString());
 			})
 			.catch((err) => {
 				console.log("Error is: ".error);
 			});
 	};
+
+	useEffect(() => {
+		const fetchCashierWithId = async () => {
+			const { data } = await axios.get(`/cashier/cashier/${id}`);
+			setPic(data.user.pic);
+			setName(data.user.name);
+			setEmail(data.user.email);
+			setPhoneNumber(data.user.phoneNumber);
+			setAddress(data.user.address);
+			setCNIC(data.user.CNIC);
+			setDob(data.user.dob);
+			setSalary(data.salary);
+			setDesignation(data.designation);
+		};
+		fetchCashierWithId();
+	}, [id]);
 
 	return (
 		<div id="wrapper">
@@ -99,7 +107,7 @@ export default function AdminAddEmployee() {
 					<Top />
 					<div className="container-fluid">
 						<div className="d-sm-flex align-items-center justify-content-between mb-4">
-							<h1 className="h3 mb-0 text-gray-800">Add Employee</h1>
+							<h1 className="h3 mb-0 text-gray-800">Edit Cashier</h1>
 						</div>
 						<div>
 							<div className="row">
@@ -126,16 +134,12 @@ export default function AdminAddEmployee() {
 															<div className="row">
 																<div className="col-md-6 m-auto">
 																	<div className="login-form-group text-center">
-																		{pic ? (
-																			<img
-																				className="img-fluid img-thumbnail rounded-lg"
-																				src={pic}
-																				alt="User Profile"
-																				style={{ height: "50%", width: "50%" }}
-																			/>
-																		) : (
-																			<span>Please select an image</span>
-																		)}
+																		<img
+																			className="img-fluid img-thumbnail rounded-lg"
+																			src={pic}
+																			alt="User Profile"
+																			style={{ height: "50%", width: "50%" }}
+																		/>
 																		<br></br>
 																		<br></br>
 																		<label
@@ -152,8 +156,6 @@ export default function AdminAddEmployee() {
 																			className="login-form-control px-3"
 																			type={"file"}
 																			id="image"
-																			name="image"
-																			required
 																			accept="image/png, image/jpeg, image/jfif, image/JPG"
 																			onChange={(e) =>
 																				postDetails(e.target.files[0])
@@ -168,6 +170,7 @@ export default function AdminAddEmployee() {
 																		<input
 																			type="text"
 																			placeholder="Name"
+																			value={name}
 																			class="login-form-control px-3 bg-secondary"
 																			onChange={(e) => setName(e.target.value)}
 																		/>
@@ -176,8 +179,9 @@ export default function AdminAddEmployee() {
 																		<label for="email">Email:</label>
 																		<br />
 																		<input
-																			placeholder="Email:"
 																			type="text"
+																			placeholder="Email"
+																			value={email}
 																			class="login-form-control px-3 bg-secondary"
 																			onChange={(e) => setEmail(e.target.value)}
 																		/>
@@ -188,6 +192,7 @@ export default function AdminAddEmployee() {
 																		<CurrencyFormat
 																			className="login-form-control px-3 bg-secondary"
 																			placeholder="Contact No."
+																			value={phoneNumber}
 																			format="+92 (###) #######"
 																			mask="_"
 																			onChange={(e) =>
@@ -200,8 +205,9 @@ export default function AdminAddEmployee() {
 																		<br />
 																		<input
 																			type="text"
-																			placeholder="Address"
 																			class="login-form-control px-3 bg-secondary"
+																			value={address}
+																			placeholder="Address"
 																			onChange={(e) =>
 																				setAddress(e.target.value)
 																			}
@@ -214,6 +220,7 @@ export default function AdminAddEmployee() {
 																		<CurrencyFormat
 																			className="login-form-control px-3 bg-secondary"
 																			placeholder="CNIC"
+																			value={CNIC}
 																			format="#####-#######-#"
 																			mask="_"
 																			onChange={(e) => setCNIC(e.target.value)}
@@ -226,6 +233,7 @@ export default function AdminAddEmployee() {
 																			type="date"
 																			class="login-form-control px-3 bg-secondary"
 																			placeholder="Date of Birth"
+																			value={dob}
 																			onChange={(e) => setDob(e.target.value)}
 																		/>
 																	</div>
@@ -238,6 +246,7 @@ export default function AdminAddEmployee() {
 																			thousandSeparator={true}
 																			prefix={"RS: "}
 																			placeholder="Salary"
+																			value={salary}
 																			onChange={(e) => {
 																				setSalary(
 																					parseInt(
@@ -256,44 +265,10 @@ export default function AdminAddEmployee() {
 																		<br />
 																		<input
 																			type="text"
-																			placeholder="Designation"
 																			class="login-form-control px-3 bg-secondary"
+																			value={designation}
 																			onChange={(e) =>
 																				setDesignation(e.target.value)
-																			}
-																		/>
-																	</div>
-																	<div className="login-form-group">
-																		<label for="role">Role:</label>
-																		<br />
-																		<input
-																			type="text"
-																			placeholder="Role"
-																			class="login-form-control px-3 bg-secondary"
-																			onChange={(e) => setRole(e.target.value)}
-																		/>
-																	</div>
-																	<div className="login-form-group">
-																		<label for="password">Password:</label>
-																		<br />
-																		<input
-																			type="password"
-																			class="login-form-control px-3 bg-secondary"
-																			onChange={(e) =>
-																				setPassword(e.target.value)
-																			}
-																		/>
-																	</div>
-																	<div className="login-form-group">
-																		<label for="confirmpassword">
-																			Confirm Password:
-																		</label>
-																		<br />
-																		<input
-																			type="password"
-																			class="login-form-control px-3 bg-secondary"
-																			onChange={(e) =>
-																				setConfirmPassword(e.target.value)
 																			}
 																		/>
 																	</div>
@@ -303,7 +278,7 @@ export default function AdminAddEmployee() {
 																		className="btn login-form-btn submit w-50"
 																		type="submit"
 																	>
-																		Add Employee
+																		Update Cashier
 																	</button>
 																</div>
 															</div>

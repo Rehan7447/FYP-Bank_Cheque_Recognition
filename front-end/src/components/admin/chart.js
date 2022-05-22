@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
-export default class ApexChart extends Component {
+export default class BarChart extends Component {
 	constructor(props) {
 		super(props);
 
@@ -36,22 +36,12 @@ export default class ApexChart extends Component {
 	}
 	render() {
 		return (
-			<div>
-				<Chart
-					options={this.state.options}
-					series={this.state.series}
-					type="line"
-					width="100%"
-					height={450}
-				/>
-				<Chart
-					options={this.state.options}
-					series={this.state.series}
-					type="bar"
-					width="100%"
-					height={450}
-				/>
-			</div>
+			<Chart
+				options={this.state.options}
+				series={this.state.series}
+				type={this.props.chartType}
+				height="100%"
+			/>
 		);
 	}
 }
