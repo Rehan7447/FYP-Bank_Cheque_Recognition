@@ -72,7 +72,7 @@ export default function EmployeeTable() {
 							<td>
 								<span className="badge badge-success px-2 py-1">Present</span>
 							</td>
-							<td>{employee.createdAt}</td>
+							<td>{employee.createdAt.substring(0, 10)}</td>
 
 							<td>
 								<CurrencyFormat

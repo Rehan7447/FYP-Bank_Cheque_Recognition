@@ -69,7 +69,7 @@ export default function CustomerTable() {
 									}}
 								/>
 							</td>
-							<td>account</td>
+							<td>{customer.IBAN}</td>
 							<td>{customer.name}</td>
 							<td>{customer.phoneNumber}</td>
 							<td>{customer.CNIC}</td>
@@ -77,7 +77,7 @@ export default function CustomerTable() {
 							<td>
 								<span className="badge badge-primary px-2 py-1">Active</span>
 							</td>
-							<td>{customer.createdAt}</td>
+							<td>{customer.createdAt.substring(0, 10)}</td>
 							<td>Rs: 211,356.0</td>
 							<td style={{ textAlign: "center" }}>
 								<Button
