@@ -7,10 +7,12 @@ const errorM = require("../models/errorModel");
 
 // Get Admin Profile
 const getProfile = asyncHandler(async (req, res, next) => {
+	console.log("fetching cashier");
 	employeeM
-		.findOne({ isAdmin: true })
+		.findOne({ role: "cashier" })
 		.populate("user")
 		.then((result) => {
+			console.log("cashier fetched");
 			res.status(200);
 			res.send(result);
 			res.json(result);
@@ -217,7 +219,6 @@ const getCashierWithId = asyncHandler(async (req, res, next) => {
 });
 
 const addCashier = asyncHandler(async (req, res, next) => {
-	
 	const {
 		name,
 		email,
@@ -616,7 +617,7 @@ const getAllCheques = asyncHandler(async (req, res, next) => {
 });
 
 // Cheque Controllers
-const getAllErrors= asyncHandler(async (req, res, next) => {
+const getAllErrors = asyncHandler(async (req, res, next) => {
 	errorM
 		.find()
 		.then((results) => {

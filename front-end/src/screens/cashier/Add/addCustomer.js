@@ -1,26 +1,22 @@
 import React, { useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { useNavigate } from "react-router-dom";
-import Side from "../../../components/admin/sideNav";
-import Top from "../../../components/admin/topNav";
+import Side from "../../../components/cashier/sideNav";
+import Top from "../../../components/cashier/topNav";
 import ErrorMessage from "../../../components/errorMessage";
 import axios from "axios";
 import Loading from "../../../components/loading";
 
-export default function AdminAddEmployee() {
+export default function CashierAddCustomer() {
 	const navigate = useNavigate();
+	const [pic, setPic] = useState("");
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [address, setAddress] = useState("");
 	const [CNIC, setCNIC] = useState("");
 	const [dob, setDob] = useState("");
-	const [salary, setSalary] = useState("");
-	const [designation, setDesignation] = useState("");
-	const [role, setRole] = useState("");
 	const [password, setPassword] = useState("");
-	const [pic, setPic] = useState("");
-
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [message, setMessage] = useState(null);
 	const [, setPicMessage] = useState(null);
@@ -41,27 +37,33 @@ export default function AdminAddEmployee() {
 				};
 
 				setLoading(true);
-				// console.log(name, email, phoneNumber, address, CNIC, dob, pic,password);
+				console.log(
+					pic,
+					name,
+					email,
+					phoneNumber,
+					address,
+					CNIC,
+					dob,
+					password
+				);
 				const { data } = await axios.post(
-					"/admin/addEmployee",
+					"/cashier/addCustomer",
 					{
+						pic,
 						name,
 						email,
 						phoneNumber,
 						address,
-						password,
 						CNIC,
 						dob,
-						pic,
-						salary,
-						designation,
-						role,
+						password,
 					},
 					config
 				);
 				setLoading(false);
 				localStorage.setItem("userInfo", JSON.stringify(data));
-				navigate("/admin");
+				navigate("/cashier");
 			} catch (error) {
 				setError(error.ErrorMessage);
 			}
@@ -99,7 +101,7 @@ export default function AdminAddEmployee() {
 					<Top />
 					<div className="container-fluid">
 						<div className="d-sm-flex align-items-center justify-content-between mb-4">
-							<h1 className="h3 mb-0 text-gray-800">Add Employee</h1>
+							<h1 className="h3 mb-0 text-gray-800">Add Customer</h1>
 						</div>
 						<div>
 							<div className="row">
@@ -176,8 +178,8 @@ export default function AdminAddEmployee() {
 																		<label for="email">Email:</label>
 																		<br />
 																		<input
-																			placeholder="Email:"
 																			type="text"
+																			placeholder="Email"
 																			class="login-form-control px-3 bg-secondary"
 																			onChange={(e) => setEmail(e.target.value)}
 																		/>
@@ -188,6 +190,7 @@ export default function AdminAddEmployee() {
 																		<CurrencyFormat
 																			className="login-form-control px-3 bg-secondary"
 																			placeholder="Contact No."
+																			value={phoneNumber}
 																			format="+92 (###) #######"
 																			mask="_"
 																			onChange={(e) =>
@@ -202,6 +205,7 @@ export default function AdminAddEmployee() {
 																			type="text"
 																			placeholder="Address"
 																			class="login-form-control px-3 bg-secondary"
+																			value={address}
 																			onChange={(e) =>
 																				setAddress(e.target.value)
 																			}
@@ -214,6 +218,7 @@ export default function AdminAddEmployee() {
 																		<CurrencyFormat
 																			className="login-form-control px-3 bg-secondary"
 																			placeholder="CNIC"
+																			value={CNIC}
 																			format="#####-#######-#"
 																			mask="_"
 																			onChange={(e) => setCNIC(e.target.value)}
@@ -226,51 +231,8 @@ export default function AdminAddEmployee() {
 																			type="date"
 																			class="login-form-control px-3 bg-secondary"
 																			placeholder="Date of Birth"
+																			value={dob}
 																			onChange={(e) => setDob(e.target.value)}
-																		/>
-																	</div>
-																	<div className="login-form-group">
-																		<label for="salary">Salary:</label>
-																		<br />
-																		<CurrencyFormat
-																			type="salary"
-																			className="login-form-control px-3 bg-secondary"
-																			thousandSeparator={true}
-																			prefix={"RS: "}
-																			placeholder="Salary"
-																			onChange={(e) => {
-																				setSalary(
-																					parseInt(
-																						e.target.value
-																							.replace(/,/g, "")
-																							.slice(4, e.target.value.length)
-																					)
-																				);
-																			}}
-																		/>
-																	</div>
-																	<div className="login-form-group">
-																		<label for="deeignation">
-																			Designation:
-																		</label>
-																		<br />
-																		<input
-																			type="text"
-																			placeholder="Designation"
-																			class="login-form-control px-3 bg-secondary"
-																			onChange={(e) =>
-																				setDesignation(e.target.value)
-																			}
-																		/>
-																	</div>
-																	<div className="login-form-group">
-																		<label for="role">Role:</label>
-																		<br />
-																		<input
-																			type="text"
-																			placeholder="Role"
-																			class="login-form-control px-3 bg-secondary"
-																			onChange={(e) => setRole(e.target.value)}
 																		/>
 																	</div>
 																	<div className="login-form-group">
@@ -279,6 +241,7 @@ export default function AdminAddEmployee() {
 																		<input
 																			type="password"
 																			class="login-form-control px-3 bg-secondary"
+																			value={password}
 																			onChange={(e) =>
 																				setPassword(e.target.value)
 																			}
@@ -292,6 +255,7 @@ export default function AdminAddEmployee() {
 																		<input
 																			type="password"
 																			class="login-form-control px-3 bg-secondary"
+																			value={confirmPassword}
 																			onChange={(e) =>
 																				setConfirmPassword(e.target.value)
 																			}
@@ -303,7 +267,7 @@ export default function AdminAddEmployee() {
 																		className="btn login-form-btn submit w-50"
 																		type="submit"
 																	>
-																		Add Employee
+																		Add Customer
 																	</button>
 																</div>
 															</div>

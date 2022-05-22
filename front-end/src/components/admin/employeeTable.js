@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./adminBody.css";
+import CurrencyFormat from "react-currency-format";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 
@@ -32,90 +32,75 @@ export default function EmployeeTable() {
 		fetchEmployees();
 	}, []);
 	return (
-		<div className="row table-row">
-			<div className="col-md-12">
-				<div className="card">
-					<div className="card-body">
-						<div className="card-title">
-							<h3>Employees</h3>
-						</div>
-						<div className="table-responsive">
-							<table className="table">
-								<thead>
-									<tr>
-										<th>S.No.</th>
-										<th>Profile Pic</th>
-										<th>Name</th>
-										<th>Email</th>
-										<th>Phone No</th>
-										<th>Address</th>
-										<th>CNIC</th>
-										<th>DOB</th>
-										<th>Designation</th>
-										<th>Role</th>
-										<th>Status</th>
-										<th>Joining Date</th>
-										<th>Salary</th>
-										<th>Operation</th>
-									</tr>
-								</thead>
-								<tbody>
-									{employees.map((employee, i) => (
-										<tr key={employee._id}>
-											<th>{i + 1}</th>
-											<td>
-												<img
-													src={employee.user.pic}
-													alt="Profile Pic of Cashier"
-													style={{
-														width: "50px",
-														height: "50px",
-														borderRadius: "50%",
-													}}
-												/>
-											</td>
-											<td>{employee.user.name}</td>
-											<td>{employee.user.email}</td>
-											<td>{employee.user.phoneNumber}</td>
-											<td>{employee.user.address}</td>
-											<td>{employee.user.CNIC}</td>
-											<td>{employee.user.dob}</td>
-											<td>{employee.designation}</td>
-											<td>{employee.role}</td>
-											<td>
-												<span className="badge badge-success px-2 py-1">
-													Present
-												</span>
-											</td>
-											<td>{employee.createdAt}</td>
-											<td>{employee.salary}</td>
-											<td style={{ textAlign: "center" }}>
-												<Button
-													variant="secondary"
-													className="mx-1"
-													href={`admin/updateEmployee/${employee._id}`}
-												>
-													<i
-														className="fas fa-eye"
-														style={{ color: "black" }}
-													></i>
-												</Button>
-												<Button
-													variant="danger"
-													className="mx-1"
-													onClick={() => deleteHandler(employee._id)}
-												>
-													<i className="fa fa-trash"></i>
-												</Button>
-											</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div className="table-responsive">
+			<table className="table">
+				<thead>
+					<tr>
+						<th className="m-0 font-weight-bold text-primary">S.No.</th>
+						<th className="m-0 font-weight-bold text-primary">Name</th>
+						<th className="m-0 font-weight-bold text-primary">Profile Pic</th>
+						<th className="m-0 font-weight-bold text-primary">Phone No</th>
+						<th className="m-0 font-weight-bold text-primary">CNIC</th>
+						<th className="m-0 font-weight-bold text-primary">DOB</th>
+						<th className="m-0 font-weight-bold text-primary">Designation</th>
+						<th className="m-0 font-weight-bold text-primary">Status</th>
+						<th className="m-0 font-weight-bold text-primary">Joining Date</th>
+						<th className="m-0 font-weight-bold text-primary">Salary</th>
+						<th className="m-0 font-weight-bold text-primary">Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					{employees.map((employee, i) => (
+						<tr key={employee._id}>
+							<th className="m-0 font-weight-bold text-primary">{i + 1}</th>
+							<td>
+								<img
+									src={employee.user.pic}
+									alt="Profile Pic of Cashier"
+									style={{
+										width: "50px",
+										height: "50px",
+										borderRadius: "50%",
+									}}
+								/>
+							</td>
+							<td>{employee.user.name}</td>
+							<td>{employee.user.phoneNumber}</td>
+							<td>{employee.user.CNIC}</td>
+							<td>{employee.user.dob}</td>
+							<td>{employee.designation}</td>
+							<td>
+								<span className="badge badge-success px-2 py-1">Present</span>
+							</td>
+							<td>{employee.createdAt}</td>
+
+							<td>
+								<CurrencyFormat
+									value={employee.salary}
+									displayType={"text"}
+									thousandSeparator={true}
+									prefix={"Rs: "}
+								/>
+							</td>
+							<td style={{ textAlign: "center" }}>
+								<Button
+									className="mx-1 bg-gray-500 border-0"
+									href={`admin/updateEmployee/${employee._id}`}
+								>
+									<i className="fas fa-eye" style={{ color: "black" }}></i>
+								</Button>
+								<Button
+									variant="danger"
+									className="mx-1 border-0"
+									onClick={() => deleteHandler(employee._id)}
+								>
+									<i className="fa fa-trash"></i>
+								</Button>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</div>
 	);
 }

@@ -1,28 +1,21 @@
 import React from "react";
-import "./adminBody.css";
-import AdminHeader from "../../components/header/adminHeader";
-import CustomerTable from "../../components/admin/customerTable";
-import CashierTableTable from "../../components/admin/cashierTable";
+import "../../components/admin/dashboard/dashboard.css"
+import Side from "../../components/admin/sideNav";
+import Top from "../../components/admin/topNav";
 import ErrorTable from "../../components/admin/errorTable";
-import EmployeeTable from "../../components/admin/employeeTable";
-import ApexChart from "../../components/charts/chart";
+import CustomBody from "../../components/admin/dashboard/dashboardBody";
 
 export default function AdminDashboard() {
 	return (
-		<div
-			style={{
-				width: "100%",
-				display: "inline-block",
-				backgroundColor: "#F3F3F9",
-			}}
-		>
-			<AdminHeader />
-			<ApexChart />
-
-			<CustomerTable></CustomerTable>
-			<EmployeeTable></EmployeeTable>
-			<CashierTableTable></CashierTableTable>
-			<ErrorTable></ErrorTable>
+		<div id="wrapper">
+			<Side />
+			<div id="content-wrapper" class="d-flex flex-column">
+				<div id="content">
+					<Top />
+					{/* <ErrorTable></ErrorTable> */}
+					<CustomBody></CustomBody>
+				</div>
+			</div>
 		</div>
 	);
 }

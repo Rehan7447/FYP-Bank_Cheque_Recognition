@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
-import "./adminBody.css";
+import CurrencyFormat from "react-currency-format";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 
@@ -36,88 +36,72 @@ export default function CashierTable() {
 	};
 
 	return (
-		<div className="row table-row">
-			<div className="col-md-12">
-				<div className="card">
-					<div className="card-body">
-						<div className="card-title">
-							<h3>Cahiers</h3>
-						</div>
-						<div className="table-responsive">
-							<table className="table">
-								<thead>
-									<tr>
-										<th>S.No.</th>
-										<th>Profile Pic</th>
-										<th>Name</th>
-										<th>Email</th>
-										<th>Phone No</th>
-										<th>Address</th>
-										<th>CNIC</th>
-										<th>DOB</th>
-										<th>Designation</th>
-										<th>Status</th>
-										<th>Joining Date</th>
-										<th>Salary</th>
-										<th>Operation</th>
-									</tr>
-								</thead>
-								<tbody>
-									{cashiers.map((cashier, i) => (
-										<tr key={cashier._id}>
-											<th>{i + 1}</th>
-											<td>
-												<img
-													src={cashier.user.pic}
-													alt="Profile Pic of Cashier"
-													style={{
-														width: "50px",
-														height: "50px",
-														borderRadius: "50%",
-													}}
-												/>
-											</td>
-											<td>{cashier.user.name}</td>
-											<td>{cashier.user.email}</td>
-											<td>{cashier.user.phoneNumber}</td>
-											<td>{cashier.user.address}</td>
-											<td>{cashier.user.CNIC}</td>
-											<td>{cashier.user.dob}</td>
-											<td>{cashier.designation}</td>
-											<td>
-												<span className="badge badge-success px-2 py-1">
-													Present
-												</span>
-											</td>
-											<td>{cashier.createdAt}</td>
-											<td>{cashier.salary}</td>
-											<td style={{ textAlign: "center" }}>
-												<Button
-													variant="secondary"
-													className="mx-1"
-													href={`admin/updateCashier/${cashier._id}`}
-												>
-													<i
-														className="fas fa-eye"
-														style={{ color: "black" }}
-													></i>
-												</Button>
-												<Button
-													variant="danger"
-													className="mx-1"
-													onClick={() => deleteHandler(cashier._id)}
-												>
-													<i className="fa fa-trash"></i>
-												</Button>
-											</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div className="table-responsive">
+			<table className="table">
+				<thead>
+					<tr>
+						<th className="m-0 font-weight-bold text-primary">S.No.</th>
+						<th className="m-0 font-weight-bold text-primary">Profile Pic</th>
+						<th className="m-0 font-weight-bold text-primary">Name</th>
+						<th className="m-0 font-weight-bold text-primary">Phone No</th>
+						<th className="m-0 font-weight-bold text-primary">CNIC</th>
+						<th className="m-0 font-weight-bold text-primary">DOB</th>
+						<th className="m-0 font-weight-bold text-primary">Status</th>
+						<th className="m-0 font-weight-bold text-primary">Joining Date</th>
+						<th className="m-0 font-weight-bold text-primary">Salary</th>
+						<th className="m-0 font-weight-bold text-primary">Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					{cashiers.map((cashier, i) => (
+						<tr key={cashier._id}>
+							<th className="m-0 font-weight-bold text-primary">{i + 1}</th>
+							<td>
+								<img
+									src={cashier.user.pic}
+									alt="Profile Pic of Cashier"
+									style={{
+										width: "50px",
+										height: "50px",
+										borderRadius: "50%",
+									}}
+								/>
+							</td>
+							<td>{cashier.user.name}</td>
+							<td>{cashier.user.phoneNumber}</td>
+							<td>{cashier.user.CNIC}</td>
+							<td>{cashier.user.dob}</td>
+							<td>
+								<span className="badge badge-success px-2 py-1">Present</span>
+							</td>
+							<td>{cashier.createdAt}</td>
+							<td>
+								<CurrencyFormat
+									value={cashier.salary}
+									displayType={"text"}
+									thousandSeparator={true}
+									prefix={"Rs: "}
+								/>
+							</td>
+							<td style={{ textAlign: "center" }}>
+								<Button
+									className="mx-1 bg-gray-500 border-0"
+									href={`admin/updateCashier/${cashier._id}`}
+								>
+									<i className="fas fa-eye" style={{ color: "black" }}></i>
+								</Button>
+								<Button
+									variant="danger"
+									className="mx-1 border-0"
+									onClick={() => deleteHandler(cashier._id)}
+								>
+									<i className="fa fa-trash"></i>
+								</Button>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</div>
 	);
 }

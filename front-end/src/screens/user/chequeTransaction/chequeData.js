@@ -78,6 +78,11 @@ function ChequeData() {
     } catch (error) {}
   };
 
+  const generateError = (e)=>{
+    e.preventDefault();
+    console.log("generate error");
+  }
+
   return (
     <UserTemplate>
       <form>
@@ -188,8 +193,7 @@ function ChequeData() {
           <Button
             className="col-sm-2 btn-primary"
             onClick={(e) => {
-              e.preventDefault();
-              navigate(-1);
+              generateError(e);
             }}
           >
             Report Transaction

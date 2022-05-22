@@ -1,9 +1,9 @@
 import React from "react";
-import Side from "../../../components/admin/sideNav";
-import Top from "../../../components/admin/topNav";
-import CustomerTable from "../../../components/admin/customerTable";
+import Side from "../../../components/cashier/sideNav";
+import Top from "../../../components/cashier/topNav";
+import CustomerTable from "../../../components/cashier/customerTable";
 
-export default function AdminViewCustomer() {
+export default function CashierViewCustomer() {
 	return (
 		<div id="wrapper">
 			<Side />

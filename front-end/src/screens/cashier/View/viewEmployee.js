@@ -1,9 +1,9 @@
 import React from "react";
-import Side from "../../../components/admin/sideNav";
-import Top from "../../../components/admin/topNav";
-import CustomerTable from "../../../components/admin/customerTable";
+import Side from "../../../components/cashier/sideNav";
+import Top from "../../../components/cashier/topNav";
+import EmployeeTable from "../../../components/cashier/employeeTable";
 
-export default function AdminViewCustomer() {
+export default function CashierViewEmployee() {
 	return (
 		<div id="wrapper">
 			<Side />
@@ -12,9 +12,9 @@ export default function AdminViewCustomer() {
 					<Top />
 					<div className="container-fluid">
 						<div className="d-sm-flex align-items-center justify-content-between mb-4">
-							<h1 className="h3 mb-0 text-gray-800">Customers</h1>
+							<h1 className="h3 mb-0 text-gray-800">Employees</h1>
 						</div>
-						<CustomerTable />
+						<EmployeeTable />
 					</div>
 				</div>
 			</div>

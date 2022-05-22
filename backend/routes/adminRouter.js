@@ -9,6 +9,7 @@ router.get("/employees", adminC.getAllEmployees);
 router.get("/employee/:eid", adminC.getEmployeeWithId);
 router.post("/addEmployee", adminC.addEmployee);
 router.put("/updateEmployee/:eid", adminC.updateEmployeeWithId);
+router.put("/employees/updateEmployee/:eid", adminC.updateEmployeeWithId);
 router.delete("/deleteEmployee/:eid", adminC.deleteEmployeeWithId);
 
 // Cashier Routes
@@ -31,4 +32,10 @@ router.get("/account/:aid", adminC.getAccountWithId);
 router.post("/addAccount/:uid", adminC.addAccount);
 router.put("/updateAccount/:aid", adminC.updateAccountWithId);
 router.delete("/deleteAccount/:aid", adminC.deleteAccountWithId);
+
+// Cheque Routes
+router.get("/cheques", adminC.getAllCheques);
+
+// Report Error Routes
+router.get("/errors", adminC.getAllErrors);
 module.exports = router;

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import CurrencyFormat from "react-currency-format";
 import { useNavigate } from "react-router-dom";
-import Header from "../../../components/header/adminHeader";
+import Side from "../../../components/admin/sideNav";
+import Top from "../../../components/admin/topNav";
 import ErrorMessage from "../../../components/errorMessage";
 import axios from "axios";
 import Loading from "../../../components/loading";
@@ -92,110 +94,189 @@ export default function AdminAddCustomer() {
 	};
 
 	return (
-		<div className="login-body">
-			<Header />
-			{message && <ErrorMessage variant="danger"> {message} </ErrorMessage>}
-			{error && <ErrorMessage variant="danger"> Error </ErrorMessage>}
-			{loading && <Loading />}
-			<div className="container h-100">
-				<div className="row login-form-area">
-					<div className="col-xl-6">
-						<div className="login-form-input-content">
-							<div className="login-card mb-0">
-								<div className="login-card-body">
-									<h4 className="text-center">Sign Up</h4>
-									<form className="login-input" onSubmit={submitHandler}>
-										<div className="login-form-group">
-											<span>Upload Clear Picture of Cashier: </span>
-											<input
-												className="login-form-control"
-												type="file"
-												id="image"
-												name="image"
-												required
-												accept="image/png, image/jpeg, image/jfif, image/JPG"
-												onChange={(e) => postDetails(e.target.files[0])}
-											/>
+		<div id="wrapper">
+			<Side />
+			<div id="content-wrapper" class="d-flex flex-column">
+				<div id="content">
+					<Top />
+					<div className="container-fluid">
+						<div className="d-sm-flex align-items-center justify-content-between mb-4">
+							<h1 className="h3 mb-0 text-gray-800">Add Customer</h1>
+						</div>
+						<div>
+							<div className="row">
+								<div className="col-xl-12 col-md-12 mb-4">
+									<div className="card border-primary shadow h-100 py-2">
+										<div className="card-body justify-content-center align-items-center">
+											{message && (
+												<ErrorMessage variant="danger">
+													{" "}
+													{message}{" "}
+												</ErrorMessage>
+											)}
+											{error && (
+												<ErrorMessage variant="danger"> Error </ErrorMessage>
+											)}
+											{loading && <Loading />}
+											<div className="login-form-input-content">
+												<div className="login-card mb-0">
+													<div className="login-card-body">
+														<form
+															className="login-input"
+															onSubmit={submitHandler}
+														>
+															<div className="row">
+																<div className="col-md-6 m-auto">
+																	<div className="login-form-group text-center">
+																		{pic ? (
+																			<img
+																				className="img-fluid img-thumbnail rounded-lg"
+																				src={pic}
+																				alt="User Profile"
+																				style={{ height: "50%", width: "50%" }}
+																			/>
+																		) : (
+																			<span>Please select an image</span>
+																		)}
+																		<br></br>
+																		<br></br>
+																		<label
+																			htmlFor="image"
+																			className="btn login-form-btn submit p-2"
+																		>
+																			Upload Profile Picture
+																		</label>
+																		<input
+																			style={{
+																				color: "rgba(0, 0, 0, 0)",
+																				visibility: "hidden",
+																			}}
+																			className="login-form-control px-3"
+																			type={"file"}
+																			id="image"
+																			name="image"
+																			required
+																			accept="image/png, image/jpeg, image/jfif, image/JPG"
+																			onChange={(e) =>
+																				postDetails(e.target.files[0])
+																			}
+																		/>
+																	</div>
+																</div>
+																<div className="col-md-6">
+																	<div className="login-form-group">
+																		<label for="name">Name:</label>
+																		<br />
+																		<input
+																			type="text"
+																			placeholder="Name"
+																			class="login-form-control px-3 bg-secondary"
+																			onChange={(e) => setName(e.target.value)}
+																		/>
+																	</div>
+																	<div className="login-form-group">
+																		<label for="email">Email:</label>
+																		<br />
+																		<input
+																			type="text"
+																			placeholder="Email"
+																			class="login-form-control px-3 bg-secondary"
+																			onChange={(e) => setEmail(e.target.value)}
+																		/>
+																	</div>
+																	<div className="login-form-group">
+																		<label for="contact">Contact No:</label>
+																		<br />
+																		<CurrencyFormat
+																			className="login-form-control px-3 bg-secondary"
+																			placeholder="Contact No."
+																			value={phoneNumber}
+																			format="+92 (###) #######"
+																			mask="_"
+																			onChange={(e) =>
+																				setPhoneNumber(e.target.value)
+																			}
+																		/>
+																	</div>
+																	<div className="login-form-group">
+																		<label for="address">Address:</label>
+																		<br />
+																		<input
+																			type="text"
+																			placeholder="Address"
+																			class="login-form-control px-3 bg-secondary"
+																			value={address}
+																			onChange={(e) =>
+																				setAddress(e.target.value)
+																			}
+																		/>
+																	</div>
+																	<div className="login-form-group">
+																		<label for="CNIC">CNIC:</label>
+																		<br />
+
+																		<CurrencyFormat
+																			className="login-form-control px-3 bg-secondary"
+																			placeholder="CNIC"
+																			value={CNIC}
+																			format="#####-#######-#"
+																			mask="_"
+																			onChange={(e) => setCNIC(e.target.value)}
+																		/>
+																	</div>
+																	<div className="login-form-group">
+																		<label for="DOB">Date of Birth:</label>
+																		<br />
+																		<input
+																			type="date"
+																			class="login-form-control px-3 bg-secondary"
+																			placeholder="Date of Birth"
+																			value={dob}
+																			onChange={(e) => setDob(e.target.value)}
+																		/>
+																	</div>
+																	<div className="login-form-group">
+																		<label for="password">Password:</label>
+																		<br />
+																		<input
+																			type="password"
+																			class="login-form-control px-3 bg-secondary"
+																			value={password}
+																			onChange={(e) =>
+																				setPassword(e.target.value)
+																			}
+																		/>
+																	</div>
+																	<div className="login-form-group">
+																		<label for="confirmpassword">
+																			Confirm Password:
+																		</label>
+																		<br />
+																		<input
+																			type="password"
+																			class="login-form-control px-3 bg-secondary"
+																			value={confirmPassword}
+																			onChange={(e) =>
+																				setConfirmPassword(e.target.value)
+																			}
+																		/>
+																	</div>
+																</div>
+																<div className="login-form-group text-center">
+																	<button
+																		className="btn login-form-btn submit w-50"
+																		type="submit"
+																	>
+																		Add Customer
+																	</button>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
 										</div>
-										<div className="login-form-group">
-											<input
-												type="name"
-												className="login-form-control"
-												placeholder="Name"
-												value={name}
-												onChange={(e) => setName(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="email"
-												className="login-form-control"
-												placeholder="Email"
-												value={email}
-												onChange={(e) => setEmail(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="tel"
-												className="login-form-control"
-												placeholder="Contact No."
-												value={phoneNumber}
-												onChange={(e) => setPhoneNumber(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="text"
-												className="login-form-control"
-												placeholder="Address"
-												value={address}
-												onChange={(e) => setAddress(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="text"
-												className="login-form-control"
-												placeholder="CNIC"
-												value={CNIC}
-												onChange={(e) => setCNIC(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="text"
-												className="login-form-control"
-												placeholder="Date of Birth"
-												value={dob}
-												onChange={(e) => setDob(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="password"
-												className="login-form-control"
-												placeholder="Password"
-												value={password}
-												onChange={(e) => setPassword(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="password"
-												className="login-form-control"
-												placeholder="Confirm Password"
-												value={confirmPassword}
-												onChange={(e) => setConfirmPassword(e.target.value)}
-											/>
-										</div>
-										<button
-											className="btn login-form-btn submit w-100"
-											type="submit"
-										>
-											Add Customer
-										</button>
-									</form>
+									</div>
 								</div>
 							</div>
 						</div>

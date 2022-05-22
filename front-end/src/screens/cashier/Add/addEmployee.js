@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { useNavigate } from "react-router-dom";
-import Side from "../../../components/admin/sideNav";
-import Top from "../../../components/admin/topNav";
+import Side from "../../../components/cashier/sideNav";
+import Top from "../../../components/cashier/topNav";
 import ErrorMessage from "../../../components/errorMessage";
 import axios from "axios";
 import Loading from "../../../components/loading";
 
-export default function AdminAddEmployee() {
+export default function CashierAddEmployee() {
 	const navigate = useNavigate();
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -43,7 +43,7 @@ export default function AdminAddEmployee() {
 				setLoading(true);
 				// console.log(name, email, phoneNumber, address, CNIC, dob, pic,password);
 				const { data } = await axios.post(
-					"/admin/addEmployee",
+					"/cashier/addEmployee",
 					{
 						name,
 						email,
@@ -61,7 +61,7 @@ export default function AdminAddEmployee() {
 				);
 				setLoading(false);
 				localStorage.setItem("userInfo", JSON.stringify(data));
-				navigate("/admin");
+				navigate("/cashier");
 			} catch (error) {
 				setError(error.ErrorMessage);
 			}

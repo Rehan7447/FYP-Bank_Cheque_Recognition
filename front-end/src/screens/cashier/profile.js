@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { useNavigate, useParams } from "react-router-dom";
-import Side from "../../../components/admin/sideNav";
-import Top from "../../../components/admin/topNav";
-import ErrorMessage from "../../../components/errorMessage";
+import Side from "../../components/cashier/sideNav";
+import Top from "../../components/cashier/topNav";
+import ErrorMessage from "../../components/errorMessage";
 import axios from "axios";
-import Loading from "../../../components/loading";
+import Loading from "../../components/loading";
 
-export default function AdminAddCashier() {
+export default function CashierAddCustomer() {
 	const navigate = useNavigate();
 	const [pic, setPic] = useState("");
 	const [name, setName] = useState("");
@@ -18,6 +18,7 @@ export default function AdminAddCashier() {
 	const [dob, setDob] = useState("");
 	const [salary, setSalary] = useState("");
 	const [designation, setDesignation] = useState("");
+	const [role, setRole] = useState("");
 
 	// Extract id of user from url
 	const { id } = useParams();
@@ -38,7 +39,8 @@ export default function AdminAddCashier() {
 
 			setLoading(true);
 			const { data } = await axios.put(
-				`/admin/updateCashier/${id}`,
+				// `/cashier/updateEmployee/${id}`,
+				`/cashier/updateEmployee/622ecf2af859a5ee65a6dc32`,
 				{
 					pic,
 					name,
@@ -47,6 +49,7 @@ export default function AdminAddCashier() {
 					address,
 					CNIC,
 					dob,
+					role,
 					designation,
 					salary,
 				},
@@ -54,9 +57,9 @@ export default function AdminAddCashier() {
 			);
 			setLoading(false);
 			localStorage.setItem("userInfo", JSON.stringify(data));
-			navigate("/admin");
-		} catch (error) {
-			setError(error.ErrorMessage);
+			navigate("/cashier");
+		} catch (err) {
+			setError(err.ErrorMessage);
 		}
 	};
 
@@ -75,17 +78,17 @@ export default function AdminAddCashier() {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data.url.toString());
 				setPic(data.url.toString());
 			})
 			.catch((err) => {
-				console.log("Error is: ".error);
+				console.log("Error is: " + err);
 			});
 	};
 
 	useEffect(() => {
-		const fetchCashierWithId = async () => {
-			const { data } = await axios.get(`/admin/cashier/${id}`);
+		const fetchcashier = async () => {
+			// const { data } = await axios.get(`/cashier/employee/${id}`);
+			const { data } = await axios.get(`/cashier`);
 			setPic(data.user.pic);
 			setName(data.user.name);
 			setEmail(data.user.email);
@@ -95,8 +98,10 @@ export default function AdminAddCashier() {
 			setDob(data.user.dob);
 			setSalary(data.salary);
 			setDesignation(data.designation);
+			setRole(data.role);
 		};
-		fetchCashierWithId();
+		fetchcashier();
+		setSalary(salary);
 	}, [id]);
 
 	return (
@@ -107,7 +112,7 @@ export default function AdminAddCashier() {
 					<Top />
 					<div className="container-fluid">
 						<div className="d-sm-flex align-items-center justify-content-between mb-4">
-							<h1 className="h3 mb-0 text-gray-800">Edit Cashier</h1>
+							<h1 className="h3 mb-0 text-gray-800">Profile</h1>
 						</div>
 						<div>
 							<div className="row">
@@ -146,7 +151,7 @@ export default function AdminAddCashier() {
 																			htmlFor="image"
 																			className="btn login-form-btn submit p-2"
 																		>
-																			Upload Profile Picture
+																			Change Profile Picture
 																		</label>
 																		<input
 																			style={{
@@ -156,7 +161,7 @@ export default function AdminAddCashier() {
 																			className="login-form-control px-3"
 																			type={"file"}
 																			id="image"
-																			accept="image/png, image/jpeg, image/jfif, image/JPG"
+																			accept="image/png,image/PMG, image/jpeg, image/jfif, image/JPG,image/jpg"
 																			onChange={(e) =>
 																				postDetails(e.target.files[0])
 																			}
@@ -165,30 +170,31 @@ export default function AdminAddCashier() {
 																</div>
 																<div className="col-md-6">
 																	<div className="login-form-group">
-																		<label for="name">Name:</label>
-																		<br />
+																		<label htmlFor="name">Name:</label>
+																		<br></br>
 																		<input
-																			type="text"
+																			type="name"
+																			className="login-form-control px-3 bg-secondary"
 																			placeholder="Name"
 																			value={name}
-																			class="login-form-control px-3 bg-secondary"
 																			onChange={(e) => setName(e.target.value)}
 																		/>
 																	</div>
 																	<div className="login-form-group">
-																		<label for="email">Email:</label>
-																		<br />
+																		<label htmlFor="email">Email:</label>
+																		<br></br>
 																		<input
-																			type="text"
-																			placeholder="Email"
+																			type="email"
+																			className="login-form-control px-3 bg-secondary"
+																			placeholder="Name"
 																			value={email}
-																			class="login-form-control px-3 bg-secondary"
 																			onChange={(e) => setEmail(e.target.value)}
 																		/>
 																	</div>
 																	<div className="login-form-group">
-																		<label for="contact">Contact No:</label>
-																		<br />
+																		<label htmlFor="phoneNumber">
+																			Contact No:
+																		</label>
 																		<CurrencyFormat
 																			className="login-form-control px-3 bg-secondary"
 																			placeholder="Contact No."
@@ -201,22 +207,20 @@ export default function AdminAddCashier() {
 																		/>
 																	</div>
 																	<div className="login-form-group">
-																		<label for="address">Address:</label>
-																		<br />
+																		<label htmlFor="Address">Address:</label>
 																		<input
 																			type="text"
-																			class="login-form-control px-3 bg-secondary"
-																			value={address}
+																			className="login-form-control px-3 bg-secondary"
 																			placeholder="Address"
+																			value={address}
 																			onChange={(e) =>
 																				setAddress(e.target.value)
 																			}
 																		/>
 																	</div>
 																	<div className="login-form-group">
-																		<label for="CNIC">CNIC:</label>
-																		<br />
-
+																		<label htmlFor="CNIC">CNIC:</label>
+																		<br></br>
 																		<CurrencyFormat
 																			className="login-form-control px-3 bg-secondary"
 																			placeholder="CNIC"
@@ -227,8 +231,8 @@ export default function AdminAddCashier() {
 																		/>
 																	</div>
 																	<div className="login-form-group">
-																		<label for="DOB">Date of Birth:</label>
-																		<br />
+																		<label htmlFor="dob">Date of Birth:</label>
+																		<br></br>
 																		<input
 																			type="date"
 																			class="login-form-control px-3 bg-secondary"
@@ -237,50 +241,15 @@ export default function AdminAddCashier() {
 																			onChange={(e) => setDob(e.target.value)}
 																		/>
 																	</div>
-																	<div className="login-form-group">
-																		<label for="salary">Salary:</label>
-																		<br />
-																		<CurrencyFormat
-																			type="salary"
-																			className="login-form-control px-3 bg-secondary"
-																			thousandSeparator={true}
-																			prefix={"RS: "}
-																			placeholder="Salary"
-																			value={salary}
-																			onChange={(e) => {
-																				setSalary(
-																					parseInt(
-																						e.target.value
-																							.replace(/,/g, "")
-																							.slice(4, e.target.value.length)
-																					)
-																				);
-																			}}
-																		/>
-																	</div>
-																	<div className="login-form-group">
-																		<label for="deeignation">
-																			Designation:
-																		</label>
-																		<br />
-																		<input
-																			type="text"
-																			class="login-form-control px-3 bg-secondary"
-																			value={designation}
-																			onChange={(e) =>
-																				setDesignation(e.target.value)
-																			}
-																		/>
-																	</div>
 																</div>
-																<div className="login-form-group text-center">
-																	<button
-																		className="btn login-form-btn submit w-50"
-																		type="submit"
-																	>
-																		Update Cashier
-																	</button>
-																</div>
+															</div>
+															<div className="login-form-group text-center">
+																<button
+																	className="btn login-form-btn submit w-50"
+																	type="submit"
+																>
+																	Save Changes
+																</button>
 															</div>
 														</form>
 													</div>
