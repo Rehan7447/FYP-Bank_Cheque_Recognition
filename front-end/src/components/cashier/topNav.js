@@ -5,7 +5,7 @@ import image2 from "../../assets/male2.svg";
 import image3 from "../../assets/female1.svg";
 import image4 from "../../assets/female2.svg";
 
-export default function AdminNavbars() {
+export default function CashierNavbars() {
 	const [name, setName] = useState("");
 	return (
 		<nav class="navbar navbar-expand-lg navbar-light bg-white topbar mb-4 shadow border-0 py-0">

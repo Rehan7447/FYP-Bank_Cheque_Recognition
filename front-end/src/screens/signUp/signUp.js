@@ -180,14 +180,6 @@ export default function SignUp() {
 											/>
 										</div>
 										<div className="login-form-group">
-											{/* <input
-												type="text"
-												className="login-form-control"
-												placeholder="IBAN"
-												value={newIBAN}
-												onChange={(e) => cleanInput(e.target.value)}
-												// onChange={(e) => setIBAN(e.target.value)}
-											/> */}
 											<CurrencyFormat
 												className="login-form-control"
 												placeholder="IBAN"

@@ -7,7 +7,7 @@ import ErrorMessage from "../../../components/errorMessage";
 import axios from "axios";
 import Loading from "../../../components/loading";
 
-export default function CashierAddEmployee() {
+export default function AdminAddEmployee() {
 	const navigate = useNavigate();
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -41,9 +41,8 @@ export default function CashierAddEmployee() {
 				};
 
 				setLoading(true);
-				// console.log(name, email, phoneNumber, address, CNIC, dob, pic,password);
 				const { data } = await axios.post(
-					"/cashier/addEmployee",
+					"/admin/addEmployee",
 					{
 						name,
 						email,
@@ -60,7 +59,6 @@ export default function CashierAddEmployee() {
 					config
 				);
 				setLoading(false);
-				localStorage.setItem("userInfo", JSON.stringify(data));
 				navigate("/cashier");
 			} catch (error) {
 				setError(error.ErrorMessage);

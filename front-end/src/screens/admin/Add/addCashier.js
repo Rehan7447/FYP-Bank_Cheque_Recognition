@@ -56,7 +56,6 @@ export default function AdminAddCashier() {
 					config
 				);
 				setLoading(false);
-				localStorage.setItem("userInfo", JSON.stringify(data));
 				navigate("/admin");
 			} catch (error) {
 				setError(error.ErrorMessage);
@@ -233,7 +232,6 @@ export default function AdminAddCashier() {
 																		<label for="salary">Salary:</label>
 																		<br />
 																		<CurrencyFormat
-																			type="salary"
 																			className="login-form-control px-3 bg-secondary"
 																			thousandSeparator={true}
 																			prefix={"RS: "}

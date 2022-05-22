@@ -7,7 +7,7 @@ import ErrorMessage from "../../../components/errorMessage";
 import axios from "axios";
 import Loading from "../../../components/loading";
 
-export default function CashierAddCashier() {
+export default function AdminAddCashier() {
 	const navigate = useNavigate();
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -40,7 +40,7 @@ export default function CashierAddCashier() {
 				};
 				setLoading(true);
 				const { data } = await axios.post(
-					"/cashier/addCashier",
+					"/admin/addCashier",
 					{
 						name,
 						email,
@@ -56,7 +56,6 @@ export default function CashierAddCashier() {
 					config
 				);
 				setLoading(false);
-				localStorage.setItem("userInfo", JSON.stringify(data));
 				navigate("/cashier");
 			} catch (error) {
 				setError(error.ErrorMessage);
@@ -233,7 +232,6 @@ export default function CashierAddCashier() {
 																		<label for="salary">Salary:</label>
 																		<br />
 																		<CurrencyFormat
-																			type="salary"
 																			className="login-form-control px-3 bg-secondary"
 																			thousandSeparator={true}
 																			prefix={"RS: "}
