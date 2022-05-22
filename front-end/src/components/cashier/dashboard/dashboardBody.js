@@ -14,15 +14,22 @@ export default function Dashboard() {
 	const [customers, setCustomers] = useState([]);
 	const [errors, setErrors] = useState([]);
 	const [salaries, setSalaries] = useState();
-	const [pending, setPending] = useState();
+	const [pendings, setPendings] = useState();
+	const [complete, setComplete] = useState();
 	const fetchCheques = async () => {
 		const { data } = await axios.get(`/admin/cheques`);
 		setCheques(data);
-		var total = 0;
+		var pending = 0;
+		var error = 0;
+		var complete = 0;
 		data.map((cheque) => {
-			if (cheque.status == "pending") total++;
+			if (cheque.status == "pending") pending++;
+			if (cheque.status == "complete") complete++;
+			if (cheque.status == "error") error++;
 		});
-		setPending(total);
+		setComplete(complete);
+		setErrors(error);
+		setPendings(pending);
 	};
 	const fetchEmployees = async () => {
 		const { data } = await axios.get(`/admin/employees`);
@@ -31,10 +38,6 @@ export default function Dashboard() {
 		data.map((employee) => (total = total + employee.salary));
 		setSalaries(total);
 	};
-	const fetchErrors = async () => {
-		const { data } = await axios.get(`/admin/errors`);
-		setErrors(data);
-	};
 	const fetchCustomers = async () => {
 		const { data } = await axios.get(`/admin/customers`);
 		setCustomers(data);
@@ -42,7 +45,6 @@ export default function Dashboard() {
 	useEffect(() => {
 		fetchCheques();
 		fetchEmployees();
-		fetchErrors();
 		fetchCustomers();
 	}, []);
 	return (
@@ -88,7 +90,6 @@ export default function Dashboard() {
 												thousandSeparator={true}
 												prefix={"Rs: "}
 											/>
-											{/* {salaries} */}
 										</div>
 									</div>
 									<div className="col-auto">
@@ -128,7 +129,7 @@ export default function Dashboard() {
 											Pending Requests
 										</div>
 										<div className="h5 mb-0 font-weight-bold text-gray-800">
-											{pending}
+											{pendings}
 										</div>
 									</div>
 									<div className="col-auto">
@@ -197,7 +198,7 @@ export default function Dashboard() {
 								<h4 className="small font-weight-bold">
 									Error ratio
 									<span className="float-right">
-										{(cheques.length / pending) * 100}%
+										{errors == 0 ? 0 : (cheques.length / errors) * 100}%
 									</span>
 								</h4>
 								<div className="progress mb-4">
@@ -205,7 +206,7 @@ export default function Dashboard() {
 										className="progress-bar progress-bar-striped bg-danger"
 										role="progressbar"
 										style={{
-											width: `${pending}%`,
+											width: `${(cheques.length / errors) * 100}%`,
 										}}
 										aria-valuenow="20"
 										aria-valuemin="0"
@@ -213,14 +214,17 @@ export default function Dashboard() {
 									></div>
 								</div>
 								<h4 className="small font-weight-bold">
-									Pending <span className="float-right">{pending * 100}%</span>
+									Pending
+									<span className="float-right">
+										{pendings == 0 ? 0 : (cheques.length / pendings) * 100}%
+									</span>
 								</h4>
 								<div className="progress mb-4">
 									<div
 										className="progress-bar progress-bar-striped bg-warning"
 										role="progressbar"
 										style={{
-											width: `${pending}%`,
+											width: `${(cheques.length / pendings) * 100}%`,
 										}}
 										aria-valuenow="40"
 										aria-valuemin="0"
@@ -228,14 +232,17 @@ export default function Dashboard() {
 									></div>
 								</div>
 								<h4 className="small font-weight-bold">
-									Completed <span className="float-right">100%</span>
+									Completed{" "}
+									<span className="float-right">
+										{complete == 0 ? 0 : (cheques.length / complete) * 100}%
+									</span>
 								</h4>
 								<div className="progress mb-4">
 									<div
 										className="progress-bar progress-bar-striped"
 										role="progressbar"
 										style={{
-											width: `${errors.length}%`,
+											width: `${(cheques.length / complete) * 100}%`,
 										}}
 										aria-valuenow="60"
 										aria-valuemin="0"

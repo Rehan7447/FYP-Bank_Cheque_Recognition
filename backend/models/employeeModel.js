@@ -6,6 +6,7 @@ const employeeSchema = mongoose.Schema(
 		user: {
 			type: mongoose.Types.ObjectId,
 			ref: "User",
+			required: true,
 		},
 		salary: {
 			type: Number,
@@ -21,7 +22,7 @@ const employeeSchema = mongoose.Schema(
 		},
 		isAdmin: {
 			type: Boolean,
-			required: true,
+			required: false,
 			default: false,
 		},
 	},

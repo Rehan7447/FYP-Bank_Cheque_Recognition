@@ -5,7 +5,7 @@ const accountM = require("../models/accountModel");
 const errorM = require("../models/errorModel");
 // const generateToken = require("../utils/generateToken");
 
-// Get Admin Profile
+// Get Cashier Profile
 const getProfile = asyncHandler(async (req, res, next) => {
 	console.log("fetching cashier");
 	employeeM

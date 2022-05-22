@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import CurrencyFormat from "react-currency-format";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 
@@ -6,10 +7,11 @@ export default function CustomerTable() {
 	const [, setLoading] = useState(false);
 	const [, setError] = useState(false);
 	const [customers, setCustomers] = useState([]);
+	const [accounts, setAccounts] = useState([]);
 
 	const fetchCustomers = async () => {
-		const { data } = await axios.get(`/admin/customers`);
-		setCustomers(data);
+		const { data } = await axios.get(`/admin/accounts`);
+		setAccounts(data);
 	};
 
 	const deleteHandler = async (id) => {
@@ -21,7 +23,7 @@ export default function CustomerTable() {
 					},
 				};
 				setLoading(true);
-				await axios.delete(`/admin/deleteCustomer/${id}`, config);
+				await axios.delete("/admin/deleteAccount/" + id, config);
 				setLoading(false);
 				window.location.reload(false);
 			} catch (error) {
@@ -55,12 +57,12 @@ export default function CustomerTable() {
 					</tr>
 				</thead>
 				<tbody>
-					{customers.map((customer, i) => (
-						<tr key={customer._id}>
+					{accounts.map((account, i) => (
+						<tr key={account._id}>
 							<th className="m-0 font-weight-bold text-primary">{i + 1}</th>
 							<td>
 								<img
-									src={customer.pic}
+									src={account.accountHolder.pic}
 									alt="Profile Pic of Customer"
 									style={{
 										width: "50px",
@@ -69,27 +71,28 @@ export default function CustomerTable() {
 									}}
 								/>
 							</td>
-							<td>{customer.IBAN}</td>
-							<td>{customer.name}</td>
-							<td>{customer.phoneNumber}</td>
-							<td>{customer.CNIC}</td>
-							<td>{customer.dob}</td>
+							<td>{account.accountHolder.IBAN}</td>
+							<td>{account.accountHolder.name}</td>
+							<td>{account.accountHolder.phoneNumber}</td>
+							<td>{account.accountHolder.CNIC}</td>
+							<td>{account.accountHolder.dob}</td>
 							<td>
 								<span className="badge badge-primary px-2 py-1">Active</span>
 							</td>
-							<td>{customer.createdAt.substring(0, 10)}</td>
-							<td>Rs: 211,356.0</td>
+							<td>{account.createdAt.substring(0, 10)}</td>
+
+							<td>{account.balance}</td>
 							<td style={{ textAlign: "center" }}>
 								<Button
 									className="mx-1 bg-gray-500 border-0"
-									href={`admin/updateCustomer/${customer._id}`}
+									href={`admin/updateCustomer/${account.accountHolder._id}`}
 								>
 									<i className="fas fa-eye" style={{ color: "black" }}></i>
 								</Button>
 								<Button
 									variant="danger"
 									className="mx-1 border-0"
-									onClick={() => deleteHandler(customer._id)}
+									onClick={() => deleteHandler(account._id)}
 								>
 									<i className="fa fa-trash"></i>
 								</Button>

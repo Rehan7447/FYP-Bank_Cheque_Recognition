@@ -53,6 +53,7 @@ import CashierUpdateCashier from "./screens/cashier/Update/updateCashier";
 
 //user routes
 import User from "./screens/user/userHome/userHomePage";
+import Profile from "./screens/user/profile"
 import MoneyTransfer from "./screens/user/moneyTransfer/moneyTransfer";
 import RegisterComplain from "./screens/user/complain/registerComplain";
 import ChequeTransaction from "./screens/user/chequeTransaction/chequeTransaction";
@@ -150,6 +151,7 @@ const App = () => {
 				{/* <Route path="/admin/errors" element={<AdminErrors />} /> */}
 
 				<Route path="/user" element={<User />} />
+				<Route path="/user/profile" element={<Profile />} />
 				<Route path="/transferMoney" element={<MoneyTransfer />} />
 				<Route path="/chequeTransaction" element={<ChequeTransaction />} />
 				<Route path="/chequeDeposit" element={<ChequeDeposit />} />

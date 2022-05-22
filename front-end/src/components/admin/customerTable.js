@@ -23,7 +23,7 @@ export default function CustomerTable() {
 					},
 				};
 				setLoading(true);
-				await axios.delete(`/admin/deleteAccount/${id}`, config);
+				await axios.delete("/admin/deleteAccount/" + id, config);
 				setLoading(false);
 				window.location.reload(false);
 			} catch (error) {
