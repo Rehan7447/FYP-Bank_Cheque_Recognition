@@ -30,8 +30,11 @@ const findAccountByAccountNumber = asyncHandler(async (req, res) => {
 const editAccount = asyncHandler(async (req, res) => {
   const IBAN = req.body.IBAN;
   const bankInfo = await accountM.findOne({ IBAN });
-  if (bankInfo) {
-    if (bankInfo.balance < (req.body.amount + req.body.fee && req.body.fee)) {
+  if (bankInfo != null) {
+    if (
+      parseInt(bankInfo.balance) <
+      parseInt(req.body.amount) + parseInt(req.body.fee)
+    ) {
       res.status(400);
       throw new Error("Not Enough Balance");
     } else {
@@ -60,12 +63,12 @@ const editAccount = asyncHandler(async (req, res) => {
           throw new Error("Account not found");
         }
       } else {
-        res.json(400);
+        res.status(400);
         throw new Error("Error While Updating account");
       }
     }
   } else {
-    res.json(400);
+    res.status(400)
     throw new Error("Account not found");
   }
 });

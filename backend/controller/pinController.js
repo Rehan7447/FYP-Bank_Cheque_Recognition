@@ -25,25 +25,28 @@ const createPIN = asyncHandler(async (req, res) => {
 
 const getPin = asyncHandler(async (req, res) => {
   const pin = await pinM.find({ pin: req.body.pin });
-  if (pin) {
+  if (pin != "") {
     res.status(201);
     const data = pin[0];
     const currDate = new Date().getTime();
     if (data.expiration < currDate) {
       const expire = await pinM.findOneAndUpdate(pin, { status: "expired" });
       if (expire) {
-        res.status(201);
-        res.json("Pin has expired");
+        res.status(400);
+        throw new Error("expired");
       } else {
         res.status(400);
         throw new Error("Error resolving request");
       }
     } else if (data.status.toLowerCase() === "used".toLowerCase()) {
-      res.json("Used");
+      res.status(400);
+      throw new Error("used");
     } else if (data.status.toLowerCase() === "expired".toLowerCase()) {
-      res.json("Expired");
+      res.status(400);
+      throw new Error("expired");
     } else if (data.status.toLowerCase() === "invalid".toLowerCase()) {
-      res.json("Invalid");
+      res.status(400);
+      throw new Error("invalid");
     } else {
       res.json(pin);
     }
@@ -53,4 +56,21 @@ const getPin = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createPIN, getPin };
+const updatePin = asyncHandler(async (req, res) => {
+  const pin = await pinM.findByIdAndUpdate(req.params.id, req.body);
+  if (pin) {
+    const updated = await pinM.findById(req.params.id);
+    if (updated) {
+      res.status(201);
+      res.json(updated);
+    } else {
+      res.status(400);
+      throw new Error("Pin not found");
+    }
+  } else {
+    res.status(400);
+    throw new Error("Error While Updating Pin");
+  }
+});
+
+module.exports = { createPIN, getPin, updatePin };

@@ -85,4 +85,25 @@ const getChequeTransfer = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createChequeTransfer, getChequeTransfer };
+const updateChequeTransfer = asyncHandler(async (req, res) => {
+  const transfer = await chequeM.findByIdAndUpdate(req.params.id, req.body);
+  if (transfer) {
+    const updated = await chequeM.findById(req.params.id);
+    if (updated) {
+      res.status(201);
+      res.json(updated);
+    } else {
+      res.status(400);
+      throw new Error("Transfer Request not found");
+    }
+  } else {
+    res.status(400);
+    throw new Error("Error While Updating Transfer Request");
+  }
+});
+
+module.exports = {
+  createChequeTransfer,
+  getChequeTransfer,
+  updateChequeTransfer,
+};

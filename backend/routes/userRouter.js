@@ -8,13 +8,14 @@ const {
 const {
   createChequeTransfer,
   getChequeTransfer,
+  updateChequeTransfer,
 } = require("../controller/chequeTransferController");
 const {
   createTransfer,
   editTransferRequest,
   getTransfer,
 } = require("../controller/moneyTransferController");
-const { createPIN, getPin } = require("../controller/pinController");
+const { createPIN, getPin, updatePin } = require("../controller/pinController");
 const router = express.Router();
 const { registerUser, authorizeUser } = require("../controller/userController");
 // const notes = require("../data/notes");
@@ -30,7 +31,9 @@ router.get("/findAccountByAccountNumber", findAccountByAccountNumber);
 router.get("/getTransferHistory", getTransfer);
 router.post("/chequeTransaction", createChequeTransfer);
 router.post("/getChequeTransaction", getChequeTransfer);
+router.put("/updateChequeTransaction/:id", updateChequeTransfer);
 router.post("/createPin", createPIN);
 router.post("/getPin", getPin);
+router.put("/updatePin/:id", updatePin);
 
 module.exports = router;
