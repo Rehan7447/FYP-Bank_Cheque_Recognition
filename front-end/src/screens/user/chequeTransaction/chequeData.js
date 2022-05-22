@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 // import WebcamCapture from "../../../components/user/chequeTransaction/webcam";
+import "./chequeData.css";
 import UserTemplate from "../userTemplate";
 import "./chequeData.css";
 
@@ -197,9 +198,9 @@ function ChequeData() {
         <br />
         <br />
         <br />
-        <div className="form-group chequeDataButtons d-flex justify-content-around">
+        <div className="form-group chequeDataButtons row">
           <Button
-            className="col-sm-2 btn-danger"
+            className="col-sm-2 btn-danger col-md-3 col-sm-12  depositButtons"
             onClick={(e) => {
               e.preventDefault();
               navigate(-1);
@@ -208,7 +209,7 @@ function ChequeData() {
             Retake Image
           </Button>
           <Button
-            className="col-sm-2 btn-primary"
+            className="col-sm-2 btn-primary col-md-3 col-sm-12 depositButtons"
             data-toggle="modal"
             data-target="#exampleModal"
             onClick={(e) => {
@@ -219,7 +220,7 @@ function ChequeData() {
           </Button>
           {errors.length > 0 ? (
             <Button
-              className="col-sm-2 btn-secondary"
+              className="col-sm-2 btn-secondary col-md-3 col-sm-12 depositButtons"
               data-toggle="modal"
               data-target="#exampleModal"
               disabled
@@ -228,7 +229,7 @@ function ChequeData() {
             </Button>
           ) : (
             <Button
-              className="col-sm-2 btn-success "
+              className="col-sm-2 btn-success  col-md-3 col-sm-12 depositButtons"
               data-toggle="modal"
               data-target="#exampleModal"
               onClick={createOTP}

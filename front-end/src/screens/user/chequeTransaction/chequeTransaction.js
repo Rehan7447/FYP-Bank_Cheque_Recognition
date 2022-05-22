@@ -82,21 +82,19 @@ function ChequeTransaction() {
     <UserTemplate>
       <div className="mainContainer">
         <div>
-          <p>
-            <input
-              type="file"
-              accept="image/*"
-              name="image"
-              id="file"
-              className="btn btn-outline-primary inputForImage"
-              onChange={(e) => {
-                setImage("");
-                setPic("");
-                setImage(URL.createObjectURL(e.target.files[0]));
-                setPic(e.target.files[0]);
-              }}
-            />
-          </p>
+          <input
+            type="file"
+            accept="image/*"
+            name="image"
+            id="file"
+            className="btn btn-outline-primary inputForImage"
+            onChange={(e) => {
+              setImage("");
+              setPic("");
+              setImage(URL.createObjectURL(e.target.files[0]));
+              setPic(e.target.files[0]);
+            }}
+          />
         </div>
         <div>
           {showCameraBut == false ? (
@@ -104,7 +102,7 @@ function ChequeTransaction() {
               className="btn btn-outline-primary cameraButton"
               onClick={() => setShowCameraBut(true)}
             >
-              Take Image from Camera
+              Open Camera
             </button>
           ) : (
             <div>
