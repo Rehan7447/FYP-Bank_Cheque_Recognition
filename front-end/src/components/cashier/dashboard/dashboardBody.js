@@ -5,6 +5,7 @@ import Chart from "../chart";
 import EmployeeTable from "../employeeTable";
 import CustomerTable from "../customerTable";
 import CashierTable from "../cashierTable";
+import ErrorTable from "../errorTable";
 import PieChart from "../piechart";
 
 export default function Dashboard() {
@@ -284,6 +285,16 @@ export default function Dashboard() {
 						<CashierTable />
 					</div>
 				</div>
+				<div className="card shadow mb-4">
+					<div className="card-header py-3">
+						<h6 className="m-0 font-weight-bold text-primary">
+							Transaction Requests
+						</h6>
+					</div>
+					<div className="card-body">
+						<ErrorTable />
+					</div>
+				</div>
 
 				<footer className="sticky-footer bg-white">
 					<div className="container my-auto">
@@ -293,8 +304,6 @@ export default function Dashboard() {
 					</div>
 				</footer>
 			</div>
-
-			
 		</div>
 	);
 }

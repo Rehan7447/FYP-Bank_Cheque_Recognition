@@ -16,6 +16,7 @@ export default function CashierAddCustomer() {
 	const [address, setAddress] = useState("");
 	const [CNIC, setCNIC] = useState("");
 	const [dob, setDob] = useState("");
+	const [IBAN, setIBAN] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [message, setMessage] = useState(null);
@@ -37,28 +38,10 @@ export default function CashierAddCustomer() {
 				};
 
 				setLoading(true);
-				console.log(
-					pic,
-					name,
-					email,
-					phoneNumber,
-					address,
-					CNIC,
-					dob,
-					password
-				);
+				// console.log(name, email, phoneNumber, address, CNIC, dob, pic,password);
 				const { data } = await axios.post(
-					"/cashier/addCustomer",
-					{
-						pic,
-						name,
-						email,
-						phoneNumber,
-						address,
-						CNIC,
-						dob,
-						password,
-					},
+					"/users",
+					{ name, email, phoneNumber, address, CNIC, dob, pic, password, IBAN },
 					config
 				);
 				setLoading(false);
@@ -222,6 +205,17 @@ export default function CashierAddCustomer() {
 																			format="#####-#######-#"
 																			mask="_"
 																			onChange={(e) => setCNIC(e.target.value)}
+																		/>
+																	</div>
+																	<div className="login-form-group ">
+																		<label for="IBAN">IBAN:</label>
+																		<br />
+																		<CurrencyFormat
+																			className="login-form-control px-3 bg-secondary"
+																			placeholder="IBAN"
+																			format="PK## ABPL  #### #### #### ####"
+																			mask="_"
+																			onChange={(e) => setIBAN(e.target.value)}
 																		/>
 																	</div>
 																	<div className="login-form-group">
