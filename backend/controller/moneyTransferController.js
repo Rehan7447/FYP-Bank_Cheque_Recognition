@@ -21,7 +21,7 @@ const getTransfer = asyncHandler(async (req, res) => {
     res.json(transfer);
   } else {
     res.status(400);
-    throw new Error("Failed to create transfer request");
+    throw new Error("Failed to get transfer request");
   }
 });
 

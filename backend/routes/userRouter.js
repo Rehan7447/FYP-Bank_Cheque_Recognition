@@ -15,7 +15,12 @@ const {
   editTransferRequest,
   getTransfer,
 } = require("../controller/moneyTransferController");
-const { createPIN, getPin, updatePin } = require("../controller/pinController");
+const {
+  createPIN,
+  getPin,
+  updatePin,
+  getPinByTransaction,
+} = require("../controller/pinController");
 const router = express.Router();
 const { registerUser, authorizeUser } = require("../controller/userController");
 // const notes = require("../data/notes");
@@ -34,6 +39,7 @@ router.post("/getChequeTransaction", getChequeTransfer);
 router.put("/updateChequeTransaction/:id", updateChequeTransfer);
 router.post("/createPin", createPIN);
 router.post("/getPin", getPin);
+router.post("/getPinByTransaction", getPinByTransaction);
 router.put("/updatePin/:id", updatePin);
 
 module.exports = router;
