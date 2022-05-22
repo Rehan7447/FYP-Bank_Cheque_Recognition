@@ -64,7 +64,7 @@ export default function SignUp() {
     if (!pics) {
       return setPicMessage("Please Select an image");
     }
-    // console.log(pics);
+    console.log(pics);
     setPicMessage(null);
     const data = new FormData();
     data.append("file", pics);
@@ -138,107 +138,6 @@ export default function SignUp() {
                         placeholder="Name"
                         value={name}
                         required
-
-												onChange={(e) => setName(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="email"
-												className="login-form-control"
-												placeholder="Email"
-												value={email}
-												onChange={(e) => setEmail(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<CurrencyFormat
-												className="login-form-control"
-												placeholder="Contact No."
-												value={phoneNumber}
-												format="+92 (###) #######"
-												mask="_"
-												onChange={(e) => setPhoneNumber(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="text"
-												className="login-form-control"
-												placeholder="Address"
-												value={address}
-												onChange={(e) => setAddress(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<CurrencyFormat
-												className="login-form-control"
-												placeholder="CNIC"
-												value={CNIC}
-												format="#####-#######-#"
-												mask="_"
-												onChange={(e) => setCNIC(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<CurrencyFormat
-												className="login-form-control"
-												placeholder="IBAN"
-												format="PK## ABPL  #### #### #### ####"
-												mask="_"
-												onChange={(e) => setIBAN(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="date"
-												class="login-form-control"
-												placeholder="Date of Birth"
-												value={dob}
-												onChange={(e) => setDob(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="password"
-												className="login-form-control"
-												placeholder="Password"
-												value={password}
-												onChange={(e) => setPassword(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="password"
-												className="login-form-control"
-												placeholder="Confirm Password"
-												value={confirmPassword}
-												onChange={(e) => setConfirmPassword(e.target.value)}
-											/>
-										</div>
-										<button
-											className="btn login-form-btn submit w-100"
-											type="submit"
-										>
-											Sign Up
-										</button>
-									</form>
-									<p className="login-form-footer">
-										Already have account?{" "}
-										<a href="/login" className="text-primary">
-											Login
-										</a>{" "}
-										now
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-
                         onChange={(e) => setName(e.target.value)}
                       />
                     </div>
@@ -338,5 +237,4 @@ export default function SignUp() {
       </div>
     </div>
   );
-
 }

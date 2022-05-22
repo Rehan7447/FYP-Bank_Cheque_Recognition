@@ -7,83 +7,88 @@ import "./loginPage.css";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-	const navigate = useNavigate();
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [error, setError] = useState(false);
-	const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-	useEffect(()=>{
-		if(localStorage.getItem("userInfo")){
-			navigate("/user")
-		}
-	});
+  useEffect(() => {
+    if (localStorage.getItem("userInfo")) {
+      navigate("/user");
+    }
+  });
 
-	const submitHandler = async (e) => {
-		e.preventDefault();
-		try {
-			const config = {
-				headers: {
-					"Content-type": "application/json",
-				},
-			};
-			setLoading(true);
-			const { data } = await axios.post(
-				"/users/login",
-				{
-					email,
-					password,
-				},
-				config
-			);
-			localStorage.setItem("userInfo", JSON.stringify(data));
-			setError(false);
-			setLoading(false);
-			navigate("/user");
-		} catch (error) {
-			setError(true);
-			setLoading(false);
-		}
-	};
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (email === "admin@gmail.com" && password === "admin") {
+      localStorage.setItem("userInfo", { admin: true });
+      navigate("/admin");
+    } else {
+      try {
+        const config = {
+          headers: {
+            "Content-type": "application/json",
+          },
+        };
+        setLoading(true);
+        const { data } = await axios.post(
+          "/users/login",
+          {
+            email,
+            password,
+          },
+          config
+        );
+        localStorage.setItem("userInfo", JSON.stringify(data));
+        setError(false);
+        setLoading(false);
+        navigate("/user");
+      } catch (error) {
+        setError(true);
+        setLoading(false);
+      }
+    }
+  };
 
-	return (
-		<div className="login-body">
-			<Header />
-			{error && <ErrorMessage variant="danger"> Error </ErrorMessage>}
-			{loading && <Loading />}
-			<div className="container h-100">
-				<div className="row login-form-area">
-					<div className="col-xl-6">
-						<div className="login-form-input-content">
-							<div className="login-card mb-0">
-								<div className="login-card-body">
-									<h4 className="text-center">Login</h4>
-									<form className="login-input" onSubmit={submitHandler}>
-										<div className="login-form-group">
-											<input
-												type="email"
-												className="login-form-control"
-												placeholder="Email"
-												value={email}
-												onChange={(e) => setEmail(e.target.value)}
-											/>
-										</div>
-										<div className="login-form-group">
-											<input
-												type="password"
-												className="login-form-control"
-												placeholder="Password"
-												value={password}
-												onChange={(e) => setPassword(e.target.value)}
-											/>
-										</div>
-										<button
-											className="btn login-form-btn submit w-100"
-											type="submit"
-										>
-											Login
-										</button>
-										{/* <div className="row social-login-btn">
+  return (
+    <div className="login-body">
+      <Header />
+      {error && <ErrorMessage variant="danger"> Error </ErrorMessage>}
+      {loading && <Loading />}
+      <div className="container h-100">
+        <div className="row login-form-area">
+          <div className="col-xl-6">
+            <div className="login-form-input-content">
+              <div className="login-card mb-0">
+                <div className="login-card-body">
+                  <h4 className="text-center">Login</h4>
+                  <form className="login-input" onSubmit={submitHandler}>
+                    <div className="login-form-group">
+                      <input
+                        type="email"
+                        className="login-form-control"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
+                    <div className="login-form-group">
+                      <input
+                        type="password"
+                        className="login-form-control"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </div>
+                    <button
+                      className="btn login-form-btn submit w-100"
+                      type="submit"
+                    >
+                      Login
+                    </button>
+                    {/* <div className="row social-login-btn">
 											<div className="col-md-6">
 												<a
 													className="btn google-btn"
@@ -128,25 +133,25 @@ export default function Login() {
 												</a>
 											</div>
 										</div> */}
-									</form>
-									<p className="login-form-footer1">
-										<a href="/login" className="text-primary">
-											Forgot Password?
-										</a>
-									</p>
-									<p className="login-form-footer">
-										Dont have account?{" "}
-										<a href="/signup" className="text-primary">
-											Sign Up
-										</a>{" "}
-										now
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+                  </form>
+                  <p className="login-form-footer1">
+                    <a href="/login" className="text-primary">
+                      Forgot Password?
+                    </a>
+                  </p>
+                  <p className="login-form-footer">
+                    Dont have account?{" "}
+                    <a href="/signup" className="text-primary">
+                      Sign Up
+                    </a>{" "}
+                    now
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
