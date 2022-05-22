@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 // import WebcamCapture from "../../../components/user/chequeTransaction/webcam";
+import "./chequeData.css";
 import UserTemplate from "../userTemplate";
 import "./chequeData.css";
 
@@ -32,24 +33,31 @@ function ChequeData() {
     if (!check) {
       const accountData = JSON.parse(localStorage.getItem("userAccountInfo"));
       const data = JSON.parse(sessionStorage.getItem("chequeTransaction"));
-      setDate(data.date);
-      setChequeNumber(data.chequeNumber);
-      setAccountNumber(data.holderAccountNumber);
-      setHolderName(data.holderName);
-      setName(data.chequeName);
-      setBank(data.holderBankName);
-      setAmount(data.amount);
-      setImage(data.chequeImage);
-      setId(data._id);
+      if (data) {
+        setDate(data.date);
+        setChequeNumber(data.chequeNumber);
+        setAccountNumber(data.holderAccountNumber);
+        setHolderName(data.holderName);
+        setName(data.chequeName);
+        setBank(data.holderBankName);
+        setAmount(data.amount);
+        setImage(data.chequeImage);
+        setId(data._id);
+      }
       setAccountBal(accountData.balance);
       setIBAN(accountData.IBAN);
-      // sessionStorage.setItem("chequeTransaction", "");
+      sessionStorage.setItem("chequeTransaction", "");
       setCheck(true);
     }
 
     if (holderName != name) {
-      var temp = errors;
-      temp.push("Account Holder Name and the Payee Name Dont Match");
+      if (name.toLocaleLowerCase() != "self") {
+        var temp = errors;
+        temp.push(
+          "Account Holder Name and the Payee Name Dont Match, Cheque is invalid"
+        );
+      }
+
       setErrors(temp);
       setFlag(false);
     }
@@ -100,6 +108,24 @@ function ChequeData() {
     }
   };
 
+  const deleteData = (e) => {
+    e.preventDefault();
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      axios
+        .delete("/users/deleteChequeTransaction/" + id, {}, config)
+        .then((chequeDel) => {
+          navigate(-1);
+        });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   return (
     <UserTemplate>
       <form>
@@ -138,7 +164,7 @@ function ChequeData() {
               type="text"
               className="form-control"
               id="inputEmail3"
-              placeholder="Account No"
+              placeholder="Cheque No"
               disabled
               value={chequeNumber}
               //   onChange={(e) => setRecieverAccount(e.target.value)}
@@ -170,7 +196,7 @@ function ChequeData() {
               type="text"
               className="form-control"
               id="inputEmail3"
-              placeholder="Account No"
+              placeholder="Name"
               disabled
               value={name}
               //   onChange={(e) => setRecieverAccount(e.target.value)}
@@ -186,7 +212,7 @@ function ChequeData() {
               type="text"
               className="form-control"
               id="inputEmail3"
-              placeholder="Account No"
+              placeholder="Amount"
               disabled
               value={amount + " /-PKR"}
               //   onChange={(e) => setRecieverAccount(e.target.value)}
@@ -197,18 +223,17 @@ function ChequeData() {
         <br />
         <br />
         <br />
-        <div className="form-group chequeDataButtons d-flex justify-content-around">
+        <div className="form-group chequeDataButtons row">
           <Button
-            className="col-sm-2 btn-danger"
+            className="col-sm-2 btn-danger col-md-3 col-sm-12  depositButtons"
             onClick={(e) => {
-              e.preventDefault();
-              navigate(-1);
+              deleteData(e);
             }}
           >
             Retake Image
           </Button>
           <Button
-            className="col-sm-2 btn-primary"
+            className="col-sm-2 btn-primary col-md-3 col-sm-12 depositButtons"
             data-toggle="modal"
             data-target="#exampleModal"
             onClick={(e) => {
@@ -219,7 +244,7 @@ function ChequeData() {
           </Button>
           {errors.length > 0 ? (
             <Button
-              className="col-sm-2 btn-secondary"
+              className="col-sm-2 btn-secondary col-md-3 col-sm-12 depositButtons"
               data-toggle="modal"
               data-target="#exampleModal"
               disabled
@@ -228,7 +253,7 @@ function ChequeData() {
             </Button>
           ) : (
             <Button
-              className="col-sm-2 btn-success "
+              className="col-sm-2 btn-success  col-md-3 col-sm-12 depositButtons"
               data-toggle="modal"
               data-target="#exampleModal"
               onClick={createOTP}

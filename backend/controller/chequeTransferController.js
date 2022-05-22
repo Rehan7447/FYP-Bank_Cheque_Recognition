@@ -5,8 +5,9 @@ const OCR = require("../utils/OCR");
 const createChequeTransfer = asyncHandler(async (req, res) => {
   const data = await OCR(req.body.pic);
   const arr = data.split("\n");
+  console.log(arr);
   const numberReg = /\d+/g;
-  var chequeNumber = arr[0].match(numberReg);
+  var chequeNumber = "";
   var date = "";
   var bank = "";
   var reciever = "";
@@ -14,6 +15,10 @@ const createChequeTransfer = asyncHandler(async (req, res) => {
   var account = "";
   var holder = "";
   for (let i = 0; i < arr.length; i++) {
+    if (arr[i].indexOf("Cheque No") > -1) {
+      chequeNumber = arr[i].replace(/\s/g, "").match(numberReg);
+      console.log("Cheque Number: " + chequeNumber);
+    }
     if (arr[i].indexOf("Date") > -1) {
       date = arr[i].replace(/\s/g, "").match(numberReg);
       date =
@@ -27,32 +32,78 @@ const createChequeTransfer = asyncHandler(async (req, res) => {
         date[0][5] +
         date[0][6] +
         date[0][7];
+      console.log("date :" + date);
     }
-    if (arr[i].indexOf("ABL") > -1 || arr[i].indexOf("HBL") > -1) {
-      bank = arr[i].match(/^[A-Z]{3}/);
+    if (
+      arr[i].indexOf("ABL") > -1 ||
+      arr[i].indexOf("HBL") > -1 ||
+      arr[i].indexOf("NBP") > -1
+    ) {
+      if (!bank || bank != "") {
+        if (!(arr[i].indexOf("NBPA") > -1)) {
+          bank = arr[i].match(/^[A-Z]{3}/);
+        }
+        console.log("Bank: " + bank);
+      }
     }
     if (arr[i].indexOf("Pay") > -1) {
       reciever = arr[i].match(/(?<=Pay)(.*)(?=or bearer)/);
+      if (!reciever) {
+        console.log("Pay: " + reciever);
+        reciever = arr[i].match(/(?<=Pay)(.*)/);
+      }
+      console.log("Pay: " + reciever);
     }
     if (arr[i].indexOf("PKR") > -1) {
-      const temp = arr[i].replace(/[^a-zA-Z0-9 ]/g, "");
+      var temp = arr[i].replace(/[^a-zA-Z0-9 ]/g, "");
       amount = temp.match(numberReg);
+      if (!amount) {
+        temp = arr[i - 1].replace(/[^a-zA-Z0-9 ]/g, "");
+        amount = temp.match(numberReg);
+      }
+      console.log("amount is: " + amount);
     }
     if (arr[i].match(/\bPK.*\b/)) {
       account = arr[i]
         .replace(/\s*/g, "")
         .match(/^[PK]{2}[0-9]{2}[A-Z]{4}[0-9]{16}/);
+      console.log("account is: " + account);
     }
     if (i == arr.length - 3) {
       holder = arr[i].match(/^\s*(\w+ \w+)/);
+      console.log("Holder: " + holder);
     }
   }
-  chequeNumber = chequeNumber[0];
-  bank = bank[0];
-  reciever = reciever[0].trim();
-  amount = amount[0];
-  account = account[0];
-  holder = holder[0];
+  if (chequeNumber) {
+    chequeNumber = chequeNumber[0];
+  } else {
+    chequeNumber = "Not Found";
+  }
+  if (bank) {
+    bank = bank[0];
+  } else {
+    bank = "Not Found";
+  }
+  if (reciever) {
+    reciever = reciever[0].trim();
+  } else {
+    reciever = "Not Found";
+  }
+  if (amount) {
+    amount = amount[0];
+  } else {
+    amount = "Not Found";
+  }
+  if (account) {
+    account = account[0];
+  } else {
+    account = "Not Found";
+  }
+  if (holder) {
+    holder = holder[0];
+  } else {
+    holder = "Not Found";
+  }
 
   const transfer = await chequeM.create({
     chequeNumber: chequeNumber,
@@ -108,8 +159,27 @@ const updateChequeTransfer = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteChequeTransaction = asyncHandler(async (req, res, next) => {
+  const exists = await chequeM.findById({ _id: req.params.id });
+  if (exists == null) {
+    res.status(400);
+    throw new Error("Cheque data not found.");
+  }
+  chequeM
+    .deleteOne({ _id: req.params.id })
+    .then((result) => {
+      console.log("Cheque Data deleted successfully.");
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log("Error while deleting data.");
+      throw new Error("Cheque data not found.");
+    });
+});
+
 module.exports = {
   createChequeTransfer,
   getChequeTransfer,
   updateChequeTransfer,
+  deleteChequeTransaction,
 };

@@ -26,27 +26,33 @@ export default function User() {
         <hr className="horizontalRow" />
         <div className="mainMenu">
           <h2 className="menuHeading">Menu</h2>
-          <div className="menu">
-            <UserCardMenu
-              NavigateTo="/chequeTransaction"
-              iconName={<DocumentScannerIcon sx={{ fontSize: 40 }} />}
-              name="Cheque Transaction"
-            />
-            <UserCardMenu
+          <div className="menu row">
+            <div className="col-md-4 menuCardMain" >
+              <UserCardMenu
+                NavigateTo="/chequeTransaction"
+                iconName={<DocumentScannerIcon sx={{ fontSize: 40 }} />}
+                name="Cheque Transaction"
+              />
+            </div>
+            {/* <UserCardMenu
               NavigateTo="/chequeDeposit"
               iconName={<IosShareIcon sx={{ fontSize: 40 }} />}
               name="Cheque Deposit"
-            />
-            <UserCardMenu
-              NavigateTo="/transferMoney"
-              iconName={<SendIcon sx={{ fontSize: 40 }} />}
-              name="Transfer Money"
-            />
-            <UserCardMenu
-              NavigateTo="/registerComplain"
-              iconName={<ReportIcon sx={{ fontSize: 40 }} />}
-              name="Register Complain"
-            />
+            /> */}
+            <div className="col-md-4 menuCardMain" >
+              <UserCardMenu
+                NavigateTo="/transferMoney"
+                iconName={<SendIcon sx={{ fontSize: 40 }} />}
+                name="Transfer Money"
+              />
+            </div>
+            <div className="col-md-4 menuCardMain" >
+              <UserCardMenu
+                NavigateTo="/registerComplain"
+                iconName={<ReportIcon sx={{ fontSize: 40 }} />}
+                name="Register Complain"
+              />
+            </div>
           </div>
         </div>
       </div>

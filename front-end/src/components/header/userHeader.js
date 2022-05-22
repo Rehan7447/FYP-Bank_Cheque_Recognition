@@ -89,6 +89,7 @@ export default function UserHeader() {
 		setMobileMoreAnchorEl(event.currentTarget);
 	};
 
+
 	const menuId = "primary-search-account-menu";
 	const renderMenu = (
 		<Menu
@@ -111,6 +112,29 @@ export default function UserHeader() {
 			</Link>
 		</Menu>
 	);
+
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={()=>{navigate("/")}}>Profile</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
+    </Menu>
+  );
+
 
 	const mobileMenuId = "primary-search-account-menu-mobile";
 	const renderMobileMenu = (

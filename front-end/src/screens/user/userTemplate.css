@@ -9,35 +9,54 @@
   background-color: white;
   min-height: 500px;
   max-width: 95%;
-  margin: 2% auto;
+  margin: 2% auto 10%;
   border-radius: 10px;
 }
 
-.botDiv{
+.botDiv {
   width: 30%;
   position: fixed;
-  bottom:40px;
-	right:40px;
+  bottom: 40px;
+  right: 40px;
 }
 
-.chatBot{
+@media (max-width: 1000px) {
+  .botDiv {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .botDiv {
+    width: 70%;
+  }
+}
+
+.chatBot {
   display: none;
+  border: 1px solid royalblue;
+  border-radius: 10px;
 }
 
-.float{
-	position:fixed;
-	width:60px;
-	height:60px;
-	bottom:40px;
-	right:40px;
-	background-color:#1976d2;
-	color:#FFF;
-	border-radius:50px;
-	text-align:center;
-	box-shadow: 2px 2px 3px #999;
+.float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #1976d2;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
   cursor: pointer;
 }
 
-.my-float{
-	margin-top:22px;
+.my-float {
+  margin-top: 22px;
+}
+
+.footerMainTemplate footer{
+  background-color: #1976d2 !important;
+  color: white;
 }

@@ -4,6 +4,8 @@
   "private": true,
   "proxy": "http://127.0.0.1:5000",
   "dependencies": {
+    "@capacitor/android": "3.5.1",
+    "@capacitor/core": "^3.5.1",
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.4.2",
@@ -17,6 +19,7 @@
     "fs": "^0.0.1-security",
     "otp-input-react": "^0.3.0",
     "react": "^17.0.2",
+    "react-animation-on-scroll": "^5.1.0",
     "react-apexcharts": "^1.4.0",
     "react-bootstrap": "^2.0.2",
     "react-currency-format": "^1.1.0",
@@ -53,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^3.5.1"
   }
 }

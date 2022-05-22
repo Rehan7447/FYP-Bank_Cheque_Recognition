@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import WebcamCapture from "../../../components/user/chequeTransaction/webcam";
 import UserTemplate from "../userTemplate";
 import Webcam from "react-webcam";
-import "./chequeDeposit.css";
+// import "./chequeDeposit.css";
 import Loading from "../../../components/loading";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";

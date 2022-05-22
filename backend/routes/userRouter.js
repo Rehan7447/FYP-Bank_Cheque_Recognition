@@ -9,6 +9,7 @@ const {
   createChequeTransfer,
   getChequeTransfer,
   updateChequeTransfer,
+  deleteChequeTransaction,
 } = require("../controller/chequeTransferController");
 const {
   createTransfer,
@@ -36,6 +37,7 @@ router.get("/findAccountByAccountNumber", findAccountByAccountNumber);
 router.get("/getTransferHistory", getTransfer);
 router.post("/chequeTransaction", createChequeTransfer);
 router.post("/getChequeTransaction", getChequeTransfer);
+router.delete("/deleteChequeTransaction/:id", deleteChequeTransaction);
 router.put("/updateChequeTransaction/:id", updateChequeTransfer);
 router.post("/createPin", createPIN);
 router.post("/getPin", getPin);
