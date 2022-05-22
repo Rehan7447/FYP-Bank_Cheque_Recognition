@@ -80,7 +80,7 @@ function ChequeData() {
 
   const generateError = (e)=>{
     e.preventDefault();
-    
+    console.log("generate error");
   }
 
   return (
