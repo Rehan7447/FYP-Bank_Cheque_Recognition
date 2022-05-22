@@ -159,8 +159,27 @@ const updateChequeTransfer = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteChequeTransaction = asyncHandler(async (req, res, next) => {
+  const exists = await chequeM.findById({ _id: req.params.id });
+  if (exists == null) {
+    res.status(400);
+    throw new Error("Cheque data not found.");
+  }
+  chequeM
+    .deleteOne({ _id: req.params.id })
+    .then((result) => {
+      console.log("Cheque Data deleted successfully.");
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log("Error while deleting data.");
+      throw new Error("Cheque data not found.");
+    });
+});
+
 module.exports = {
   createChequeTransfer,
   getChequeTransfer,
   updateChequeTransfer,
+  deleteChequeTransaction,
 };

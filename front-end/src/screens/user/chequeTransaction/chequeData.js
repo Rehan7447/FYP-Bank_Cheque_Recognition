@@ -46,7 +46,7 @@ function ChequeData() {
       }
       setAccountBal(accountData.balance);
       setIBAN(accountData.IBAN);
-      // sessionStorage.setItem("chequeTransaction", "");
+      sessionStorage.setItem("chequeTransaction", "");
       setCheck(true);
     }
 
@@ -105,6 +105,24 @@ function ChequeData() {
       setReport("success");
     } catch (error) {
       setReport(error.response);
+    }
+  };
+
+  const deleteData = (e) => {
+    e.preventDefault();
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      axios
+        .delete("/users/deleteChequeTransaction/" + id, {}, config)
+        .then((chequeDel) => {
+          navigate(-1);
+        });
+    } catch (error) {
+      console.log(error.response);
     }
   };
 
@@ -209,8 +227,7 @@ function ChequeData() {
           <Button
             className="col-sm-2 btn-danger col-md-3 col-sm-12  depositButtons"
             onClick={(e) => {
-              e.preventDefault();
-              navigate(-1);
+              deleteData(e);
             }}
           >
             Retake Image
