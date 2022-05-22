@@ -3,6 +3,7 @@ import axios from "axios";
 import Clock from "../../clock";
 import "./upperWelcome.css";
 import Loading from "../../loading";
+import { Link } from "react-router-dom";
 
 function WelcomeMenu() {
   const [userInfo] = useState(JSON.parse(localStorage.getItem("userInfo")));
@@ -57,9 +58,8 @@ function WelcomeMenu() {
           <h5 className="balanceHeading">Current Balance</h5>
         </div>
         <div className="subMenu">
-          <a href="/transferHistory">Transfer History</a>
-          <a href="/">Recent Cheque Deposits</a>
-          <a href="/">Recent Cheque Transactions</a>
+          <Link to="/transferHistory">Transfer History</Link>
+          <Link to="/transactionHistory">Recent Cheque Transactions</Link>
         </div>
       </div>
     </div>

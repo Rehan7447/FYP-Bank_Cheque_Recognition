@@ -60,6 +60,7 @@ import ChequeDeposit from "./screens/user/chequeDeposit/chequeDeposit";
 import ChequeData from "./screens/user/chequeTransaction/chequeData";
 import TransferHistory from "./screens/user/transferHistory/transferHistory";
 import Bank from "./screens/bank/bank";
+import TransactionHistory from "./screens/user/transactionHistory/transactionHistory";
 
 const App = () => {
   return (

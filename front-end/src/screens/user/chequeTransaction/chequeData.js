@@ -26,6 +26,7 @@ function ChequeData() {
   const [pin, setPin] = useState("");
   const [flag, setFlag] = useState(true);
   const [errors, setErrors] = useState([]);
+  const [report, setReport] = useState();
 
   useEffect(() => {
     if (!check) {
@@ -78,10 +79,26 @@ function ChequeData() {
     } catch (error) {}
   };
 
-  const generateError = (e)=>{
+  const generateError = async (e) => {
     e.preventDefault();
-    console.log("generate error");
-  }
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      axios.put(
+        "/users/updateChequeTransaction/" + id,
+        {
+          status: "error",
+        },
+        config
+      );
+      setReport("success");
+    } catch (error) {
+      setReport(error.response);
+    }
+  };
 
   return (
     <UserTemplate>
@@ -192,6 +209,8 @@ function ChequeData() {
           </Button>
           <Button
             className="col-sm-2 btn-primary"
+            data-toggle="modal"
+            data-target="#exampleModal"
             onClick={(e) => {
               generateError(e);
             }}
@@ -243,25 +262,35 @@ function ChequeData() {
               </button>
             </div>
             <div className="modal-body">
-              <div className="form-group row">
-                <label
-                  htmlFor="inputEmail3"
-                  className="col-sm-2 col-form-label"
-                >
-                  Your Pin:
-                </label>
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputEmail3"
-                    placeholder="Account No"
-                    disabled
-                    value={pin}
-                    //   onChange={(e) => setRecieverAccount(e.target.value)}
-                  />
+              {report ? (
+                report == "success" ? (
+                  <p>
+                    Your issue has been reported, our staff will look into it
+                  </p>
+                ) : (
+                  <p>failed to generate report</p>
+                )
+              ) : (
+                <div className="form-group row">
+                  <label
+                    htmlFor="inputEmail3"
+                    className="col-sm-2 col-form-label"
+                  >
+                    Your Pin:
+                  </label>
+                  <div className="col-sm-10">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="inputEmail3"
+                      placeholder="Account No"
+                      disabled
+                      value={pin}
+                      //   onChange={(e) => setRecieverAccount(e.target.value)}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <div className="modal-footer">
               <button
