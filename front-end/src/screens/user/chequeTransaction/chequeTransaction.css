@@ -1,5 +1,5 @@
-.userMainContent{
-    padding: 3%;
+.userMainContent {
+  padding: 3%;
 }
 .mainContainer {
   display: flex;
@@ -9,14 +9,16 @@
 }
 
 .inputForImage {
-  width: 200px;
+  width: 80%;
   margin: 2% 3%;
   height: 50px;
+  font-size: 0.7rem;
 }
 
 .cameraButton {
   height: 50px;
   margin: 2% 3%;
+  font-size: 0.9rem;
 }
 
 .imageView {
@@ -24,11 +26,11 @@
   justify-content: center;
 }
 
-.imageView img{
+.imageView img {
   max-width: 500px;
   min-width: 300px;
 }
 
-.submitButton{
-    text-align: center;
+.submitButton {
+  text-align: center;
 }

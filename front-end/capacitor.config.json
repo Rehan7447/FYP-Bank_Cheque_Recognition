@@ -1,0 +1,8 @@
+{
+    "appId": "io.ionic.AutoBank",
+    "appName": "AutoBank",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "build",
+    "cordova": {}
+  }

@@ -46,9 +46,13 @@ function ChequeTransaction() {
         config
       );
       sessionStorage.setItem("chequeTransaction", JSON.stringify(data));
-      console.log(data);
       setLoading(false);
-      navigate("/chequeData");
+      // console.log(data);
+      if (data.message) {
+        alert("Cheque already Used, please use new Cheque");
+      } else {
+        navigate("/chequeData");
+      }
     } catch (error) {
       setLoading(false);
       alert(error);
@@ -82,21 +86,19 @@ function ChequeTransaction() {
     <UserTemplate>
       <div className="mainContainer">
         <div>
-          <p>
-            <input
-              type="file"
-              accept="image/*"
-              name="image"
-              id="file"
-              className="btn btn-outline-primary inputForImage"
-              onChange={(e) => {
-                setImage("");
-                setPic("");
-                setImage(URL.createObjectURL(e.target.files[0]));
-                setPic(e.target.files[0]);
-              }}
-            />
-          </p>
+          <input
+            type="file"
+            accept="image/*"
+            name="image"
+            id="file"
+            className="btn btn-outline-primary inputForImage"
+            onChange={(e) => {
+              setImage("");
+              setPic("");
+              setImage(URL.createObjectURL(e.target.files[0]));
+              setPic(e.target.files[0]);
+            }}
+          />
         </div>
         <div>
           {showCameraBut == false ? (
@@ -104,7 +106,7 @@ function ChequeTransaction() {
               className="btn btn-outline-primary cameraButton"
               onClick={() => setShowCameraBut(true)}
             >
-              Take Image from Camera
+              Open Camera
             </button>
           ) : (
             <div>

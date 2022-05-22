@@ -1,8 +1,6 @@
 const request = require("request");
 const imageBuffer = require("request").defaults({ encoding: null });
 
-
-
 const OCR = async (pic) => {
   const image = imageBuffer.get(pic, function (err, res, body) {
     // console.log(res);

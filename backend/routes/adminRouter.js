@@ -29,6 +29,7 @@ router.delete("/deleteCustomer/:uid", adminC.deleteCustomerWithId);
 // Customer With Accounts Routes
 router.get("/accounts", adminC.getAllAccounts);
 router.get("/account/:aid", adminC.getAccountWithId);
+router.get("/customerAccount/:cid", adminC.getCustomerAccountWithCustomerId);
 router.post("/addAccount/:uid", adminC.addAccount);
 router.put("/updateAccount/:aid", adminC.updateAccountWithId);
 router.delete("/deleteAccount/:aid", adminC.deleteAccountWithId);
@@ -38,4 +39,6 @@ router.get("/cheques", adminC.getAllCheques);
 
 // Report Error Routes
 router.get("/errors", adminC.getAllErrors);
+
+router.get("/chequeTransactions", adminC.getAllChequeTransactions);
 module.exports = router;

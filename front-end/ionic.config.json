@@ -1,0 +1,7 @@
+{
+    "name": "AutoBank",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "react"
+  }

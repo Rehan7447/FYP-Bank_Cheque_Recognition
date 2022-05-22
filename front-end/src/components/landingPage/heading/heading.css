@@ -1,15 +1,29 @@
 .headingDiv {
-    text-align: center;
-    color: white;
-    height: 70vh;
-  }
+  text-align: center;
+  color: white;
+}
+.mainHeaading {
+  margin: 13% auto 0;
+  font-weight: 400;
+  font-size: 3rem;
+  user-select: none;
+}
+
+@media (max-width: 1200px) {
   .mainHeaading {
-    margin:15% auto auto;
-    font-weight: 400;
-    font-size: 3rem;
-    user-select: none;
+    font-size: 2.3rem;
+    margin: 22% auto 0;
   }
-  .fa-chevron-down{
-      margin-top: 3%;
-      font-size: 2rem;
+}
+
+@media (max-width: 800px) {
+  .mainHeaading {
+    font-size: 2rem;
+    margin: 30% auto 0;
   }
+}
+
+.fa-chevron-down {
+  margin-top: 3%;
+  font-size: 2rem;
+}

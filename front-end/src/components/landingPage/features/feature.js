@@ -8,7 +8,7 @@ import "animate.css";
 
 export default function Feature(props) {
   return (
-    <Card sx={{ maxWidth: 300, minHeight:400 }} className="animate__animated animate__flipInX">
+    <Card sx={{ maxWidth: 300, minHeight: 400 }}>
       <CardActionArea>
         <CardMedia
           component="img"
