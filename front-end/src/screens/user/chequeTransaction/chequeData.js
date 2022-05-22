@@ -46,24 +46,24 @@ function ChequeData() {
       setCheck(true);
     }
 
-    // if (holderName != name) {
-    //   var temp = errors;
-    //   temp.push("Account Holder Name and the Payee Name Dont Match");
-    //   setErrors(temp);
-    //   setFlag(false);
-    // }
-    // if (parseInt(amount) > parseInt(accountBal)) {
-    //   var temp = errors;
-    //   temp.push("Insufficient Balance");
-    //   setErrors(temp);
-    //   setFlag(false);
-    // }
-    // if (accountNumber != IBAN.replace(/\s*/g, "")) {
-    //   var temp = errors;
-    //   temp.push("User account number and Cheque account number dont match");
-    //   setErrors(temp);
-    //   setFlag(false);
-    // }
+    if (holderName != name) {
+      var temp = errors;
+      temp.push("Account Holder Name and the Payee Name Dont Match");
+      setErrors(temp);
+      setFlag(false);
+    }
+    if (parseInt(amount) > parseInt(accountBal)) {
+      var temp = errors;
+      temp.push("Insufficient Balance");
+      setErrors(temp);
+      setFlag(false);
+    }
+    if (accountNumber != IBAN.replace(/\s*/g, "")) {
+      var temp = errors;
+      temp.push("User account number and Cheque account number dont match");
+      setErrors(temp);
+      setFlag(false);
+    }
   });
 
   const createOTP = async () => {
@@ -185,14 +185,23 @@ function ChequeData() {
           >
             Retake Image
           </Button>
+          <Button
+            className="col-sm-2 btn-primary"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(-1);
+            }}
+          >
+            Report Transaction
+          </Button>
           {errors.length > 0 ? (
             <Button
-              className="col-sm-2 btn-success "
+              className="col-sm-2 btn-secondary"
               data-toggle="modal"
               data-target="#exampleModal"
               disabled
             >
-              Cheque has Mistakes
+              Generate Pin
             </Button>
           ) : (
             <Button
@@ -201,7 +210,7 @@ function ChequeData() {
               data-target="#exampleModal"
               onClick={createOTP}
             >
-              Continue
+              Generate Pin
             </Button>
           )}
         </div>

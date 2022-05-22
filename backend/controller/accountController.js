@@ -19,7 +19,7 @@ const findAccountByAccountNumber = asyncHandler(async (req, res) => {
     res.json(account);
   } else {
     res.json(400);
-    res.json("Account not found");
+    throw new Error("Account not found");
   }
 });
 
@@ -30,13 +30,13 @@ const findAccountByAccountNumber = asyncHandler(async (req, res) => {
 const editAccount = asyncHandler(async (req, res) => {
   const IBAN = req.body.IBAN;
   const bankInfo = await accountM.findOne({ IBAN });
-  if (bankInfo) {
+  if (bankInfo != null) {
     if (
       parseInt(bankInfo.balance) <
       parseInt(req.body.amount) + parseInt(req.body.fee)
     ) {
       res.status(400);
-      res.json("Not Enough Balance");
+      throw new Error("Not Enough Balance");
     } else {
       res.status(201);
       let amount;
@@ -60,16 +60,16 @@ const editAccount = asyncHandler(async (req, res) => {
           res.json(updated);
         } else {
           res.json(400);
-          res.json("Account not found");
+          throw new Error("Account not found");
         }
       } else {
-        res.json(400);
-        res.json("Error While Updating account");
+        res.status(400);
+        throw new Error("Error While Updating account");
       }
     }
   } else {
-    res.json(400);
-    res.json("Account not found");
+    res.status(400)
+    throw new Error("Account not found");
   }
 });
 
@@ -85,7 +85,9 @@ const getAccountDetails = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    res.json("No account Associated With User " + accountHolder + " found");
+    throw new Error(
+      "No account Associated With User " + accountHolder + " found"
+    );
   }
 });
 
