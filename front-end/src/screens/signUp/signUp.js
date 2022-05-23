@@ -55,6 +55,7 @@ export default function SignUp() {
         localStorage.setItem("userInfo", JSON.stringify(data));
         navigate("/login");
       } catch (error) {
+        setLoading(false);
         setError(error.ErrorMessage);
       }
     }

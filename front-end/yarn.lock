@@ -10042,11 +10042,7 @@
   "resolved" "https://registry.npmjs.org/react-webcam/-/react-webcam-7.0.0.tgz"
   "version" "7.0.0"
 
-<<<<<<< HEAD
-"react@*", "react@^0.14 || ^15.0.0-rc || ^15.0.0 || ^16.0.0-rc || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0-rc.1", "react@^16.8.3 || ^17", "react@^17.0.0", "react@^17.0.2", "react@>= 15.4.1", "react@>= 16", "react@>=0.13", "react@>=0.14.0", "react@>=15.0.0", "react@>=16.14.0", "react@>=16.2.0", "react@>=16.3.2", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@17.0.2":
-=======
-"react@*", "react@^0.14 || ^15.0.0-rc || ^15.0.0 || ^16.0.0-rc || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0-rc.1", "react@^16.8.3 || ^17", "react@^17.0.0", "react@^17.0.2", "react@>= 16", "react@>=0.13", "react@>=0.14.0", "react@>=15.0.0", "react@>=16.14.0", "react@>=16.2.0", "react@>=16.3.2", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@17.0.2":
->>>>>>> f09475cb66f74b9df6ebd40203a1203a1a33ba3c
+"react@*", "react@^0.14 || ^15.0.0-rc || ^15.0.0 || ^16.0.0-rc || ^16.0.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0-rc.1", "react@^16.8.3 || ^17", "react@^17.0.0", "react@^17.0.2", "react@>= 15.4.1", "react@>= 16", "react@>=0.13", "react@>=0.14.0", "react@>=15.0.0", "react@>=16.14.0", "react@>=16.2.0", "react@>=16.3.2", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -11750,11 +11746,7 @@
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   "version" "1.14.1"
 
-<<<<<<< HEAD
-"tslib@^2.0.1", "tslib@^2.0.3", "tslib@^2.1.0", "tslib@^2.3.1":
-=======
-"tslib@^2.0.3", "tslib@^2.4.0":
->>>>>>> f09475cb66f74b9df6ebd40203a1203a1a33ba3c
+"tslib@^2.0.1", "tslib@^2.0.3", "tslib@^2.1.0", "tslib@^2.3.1", "tslib@^2.4.0":
   "integrity" "sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
   "version" "2.4.0"

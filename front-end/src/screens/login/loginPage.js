@@ -21,33 +21,29 @@ export default function Login() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (email === "admin@gmail.com" && password === "admin") {
-      localStorage.setItem("userInfo", { admin: true });
-      navigate("/admin");
-    } else {
-      try {
-        const config = {
-          headers: {
-            "Content-type": "application/json",
-          },
-        };
-        setLoading(true);
-        const { data } = await axios.post(
-          "/users/login",
-          {
-            email,
-            password,
-          },
-          config
-        );
-        localStorage.setItem("userInfo", JSON.stringify(data));
-        setError(false);
-        setLoading(false);
-        navigate("/user");
-      } catch (error) {
-        setError(true);
-        setLoading(false);
-      }
+
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      setLoading(true);
+      const { data } = await axios.post(
+        "/users/login",
+        {
+          email,
+          password,
+        },
+        config
+      );
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setError(false);
+      setLoading(false);
+      navigate("/user");
+    } catch (error) {
+      setError(true);
+      setLoading(false);
     }
   };
 

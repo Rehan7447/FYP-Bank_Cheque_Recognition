@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!localStorage.getItem("userInfo")) {
-      navigate("/login");
-    }
-  });
+//   useEffect(() => {
+//     if (!localStorage.getItem("userInfo")) {
+//       navigate("/login");
+//     }
+//   });
   return (
     <div id="wrapper">
       <Side />

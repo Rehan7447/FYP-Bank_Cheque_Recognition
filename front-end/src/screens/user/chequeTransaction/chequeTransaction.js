@@ -100,7 +100,7 @@ function ChequeTransaction() {
             }}
           />
         </div>
-        <div>
+        {/* <div>
           {showCameraBut == false ? (
             <button
               className="btn btn-outline-primary cameraButton"
@@ -132,7 +132,7 @@ function ChequeTransaction() {
               </button>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
       <div>
         {!loading ? (
