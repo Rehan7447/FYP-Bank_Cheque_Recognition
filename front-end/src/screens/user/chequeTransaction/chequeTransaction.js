@@ -47,7 +47,7 @@ function ChequeTransaction() {
       );
       sessionStorage.setItem("chequeTransaction", JSON.stringify(data));
       setLoading(false);
-      // console.log(data);
+      console.log(data);
       if (data.message) {
         alert("Cheque already Used, please use new Cheque");
       } else {
@@ -100,7 +100,7 @@ function ChequeTransaction() {
             }}
           />
         </div>
-        {/* <div>
+        <div>
           {showCameraBut == false ? (
             <button
               className="btn btn-outline-primary cameraButton"
@@ -132,7 +132,7 @@ function ChequeTransaction() {
               </button>
             </div>
           )}
-        </div> */}
+        </div>
       </div>
       <div>
         {!loading ? (

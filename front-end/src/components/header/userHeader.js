@@ -9,14 +9,15 @@ import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
+// import MenuIcon from "@mui/icons-material/Menu";
+// import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -85,7 +86,7 @@ export default function UserHeader() {
     handleMobileMenuClose();
   };
 
-  const handleLogout = (event) => {
+  const handleLogout = () => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("userAccountInfo");
     navigate("/login");
@@ -135,7 +136,7 @@ export default function UserHeader() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
@@ -146,7 +147,7 @@ export default function UserHeader() {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -163,7 +164,7 @@ export default function UserHeader() {
         <IconButton size="large" aria-label="logout">
           <LogoutIcon />
         </IconButton>
-        <p>Logout</p>
+        <p onClick={() => handleLogout()}>Logout</p>
       </MenuItem>
     </Menu>
   );
@@ -178,20 +179,24 @@ export default function UserHeader() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            className="mobileNav"
           >
-            <MenuIcon />
+            <Link to="/user" className="mobileNav" style={{ color: "white" }}>
+              <AccountBalanceIcon />
+            </Link>
           </IconButton>
           <Link to="/user">
             <Typography
               variant="h6"
               noWrap
               component="div"
-              sx={{ display: { xs: "none", sm: "block" } }}
+              sx={{ display: { xs: "none", sm: "block" }, color: "white" }}
             >
+              <AccountBalanceIcon style={{ marginRight: "10px" }} />
               Bank Application
             </Typography>
           </Link>
-          <Search>
+          {/* <Search>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -199,7 +204,18 @@ export default function UserHeader() {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
-          </Search>
+          </Search> */}
+          <Typography
+            variant="h6"
+            style={{
+              textAlign: "center",
+              marginTop: "8px",
+              marginLeft: "-15px",
+            }}
+            className="mobileNav"
+          >
+            Bank App
+          </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton

@@ -67,7 +67,8 @@ function ChequeData() {
       setErrors(temp);
       setFlag(false);
     }
-    if (accountNumber != IBAN.replace(/\s*/g, "")) {
+    if (accountNumber.replace(/\s*/g, "") != IBAN.replace(/\s*/g, "")) {
+      console.log(accountNumber, " ", IBAN);
       var temp = errors;
       temp.push("User account number and Cheque account number dont match");
       setErrors(temp);
@@ -134,9 +135,11 @@ function ChequeData() {
           <img src={image} alt="chequeImage" width="500px" className="m-2" />
         </div> */}
         <div className="text-center">
-          {errors.map((error) => {
-            return <p style={{ color: "red" }}>Error: {error}</p>;
-          })}
+          {errors
+            ? errors.map((error) => {
+                return <p style={{ color: "red" }}>Error: {error}</p>;
+              })
+            : ""}
         </div>
 
         <div className="form-group row">
@@ -242,7 +245,7 @@ function ChequeData() {
           >
             Report Transaction
           </Button>
-          {errors.length > 0 ? (
+          {errors ? (
             <Button
               className="col-sm-2 btn-secondary col-md-3 col-sm-12 depositButtons"
               data-toggle="modal"

@@ -1384,13 +1384,45 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@ionic/cli-framework-output@^2.2.1":
+"@ionic/cli-framework-output@^2.2.1", "@ionic/cli-framework-output@2.2.4":
   "integrity" "sha512-YdaXtHHg0zT1JSFlGrbTWe6uzD6u+w5yHE+aM7Js/3BNLYKIYngliMoojGxwNHbqMPNuvDzWMDAbxteY5u0vKg=="
   "resolved" "https://registry.npmjs.org/@ionic/cli-framework-output/-/cli-framework-output-2.2.4.tgz"
   "version" "2.2.4"
   dependencies:
     "@ionic/utils-terminal" "2.3.2"
     "debug" "^4.0.0"
+    "tslib" "^2.0.1"
+
+"@ionic/cli-framework@5.1.2":
+  "integrity" "sha512-7z9cCJy832lQTZrl8pqxZS+QhjYEgvguPOktkD7yh3I0Yv6QpQJecKb5Amyx2UXv4ImmlfJkyAC3tmQdPRgEAw=="
+  "resolved" "https://registry.npmjs.org/@ionic/cli-framework/-/cli-framework-5.1.2.tgz"
+  "version" "5.1.2"
+  dependencies:
+    "@ionic/cli-framework-output" "2.2.4"
+    "@ionic/utils-array" "2.1.5"
+    "@ionic/utils-fs" "3.1.5"
+    "@ionic/utils-object" "2.1.5"
+    "@ionic/utils-process" "2.1.9"
+    "@ionic/utils-stream" "3.1.5"
+    "@ionic/utils-subprocess" "2.1.10"
+    "@ionic/utils-terminal" "2.3.2"
+    "chalk" "^4.0.0"
+    "debug" "^4.0.0"
+    "lodash" "^4.17.5"
+    "minimist" "^1.2.0"
+    "rimraf" "^3.0.0"
+    "tslib" "^2.0.1"
+    "write-file-atomic" "^3.0.0"
+
+"@ionic/lab@3.2.12":
+  "integrity" "sha512-L/iLhFfeMgITtv0X+ELv+/WSlr6P+RcKTY6Mg1UNuuMRHSGBV/tJoVaWWreiZK2lA2UyK1J2fPJQagDM7NGRmQ=="
+  "resolved" "https://registry.npmjs.org/@ionic/lab/-/lab-3.2.12.tgz"
+  "version" "3.2.12"
+  dependencies:
+    "@ionic/cli-framework" "5.1.2"
+    "@ionic/utils-fs" "3.1.5"
+    "chalk" "^4.0.0"
+    "express" "^4.16.2"
     "tslib" "^2.0.1"
 
 "@ionic/utils-array@2.1.5":
@@ -1438,7 +1470,7 @@
     "debug" "^4.0.0"
     "tslib" "^2.0.1"
 
-"@ionic/utils-subprocess@^2.1.6":
+"@ionic/utils-subprocess@^2.1.6", "@ionic/utils-subprocess@2.1.10":
   "integrity" "sha512-X5wXiA4moEzbvchWqa7kwnYw3IqFyP1otlN/APFOmzmpsQWdyz5LRqqMhPozJeN11Mi3pwNR+BCQWd6vFBHTTg=="
   "resolved" "https://registry.npmjs.org/@ionic/utils-subprocess/-/utils-subprocess-2.1.10.tgz"
   "version" "2.1.10"
@@ -5419,7 +5451,7 @@
     "jest-message-util" "^26.6.2"
     "jest-regex-util" "^26.0.0"
 
-"express@^4.17.1":
+"express@^4.16.2", "express@^4.17.1":
   "integrity" "sha512-mHJ9O79RqluphRrcw2X/GTh3k9tVv8YcoyY4Kkh4WDMUYKRZUq0h1o0w2rrrxBqM7VoeUVqgb27xlEMXTnYt4g=="
   "resolved" "https://registry.npmjs.org/express/-/express-4.17.1.tgz"
   "version" "4.17.1"

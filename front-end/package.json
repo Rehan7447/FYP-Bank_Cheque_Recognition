@@ -35,9 +35,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npx cap sync",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "android": "npx cap add android"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +59,7 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "^3.5.1"
+    "@capacitor/cli": "^3.5.1",
+    "@ionic/lab": "3.2.12"
   }
 }
