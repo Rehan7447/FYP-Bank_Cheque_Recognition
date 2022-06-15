@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import WelcomeMenu from "../../../components/user/home/upperWelcome";
 import UserCardMenu from "../../../components/user/home/userCardMenu";
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
@@ -7,9 +7,20 @@ import SendIcon from "@mui/icons-material/Send";
 import ReportIcon from "@mui/icons-material/Report";
 import "./userHome.css";
 import UserTemplate from "../userTemplate";
+import { useNavigate } from "react-router-dom";
 
 export default function User() {
   const chatBot = React.createRef();
+  const navigate = useNavigate();
+  const [welcome, setWelcome] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem("userInfo")) {
+      navigate("/login");
+    } else {
+      setWelcome(true);
+    }
+  }, []);
 
   function chatBotBut() {
     if (chatBot.current.style.display !== "none") {
@@ -22,12 +33,12 @@ export default function User() {
   return (
     <UserTemplate>
       <div className="mainSub">
-        <WelcomeMenu />
+        {welcome ? <WelcomeMenu /> : ""}
         <hr className="horizontalRow" />
         <div className="mainMenu">
           <h2 className="menuHeading">Menu</h2>
           <div className="menu row">
-            <div className="col-md-4 menuCardMain" >
+            <div className="col-md-4 menuCardMain">
               <UserCardMenu
                 NavigateTo="/chequeTransaction"
                 iconName={<DocumentScannerIcon sx={{ fontSize: 40 }} />}
@@ -39,14 +50,14 @@ export default function User() {
               iconName={<IosShareIcon sx={{ fontSize: 40 }} />}
               name="Cheque Deposit"
             /> */}
-            <div className="col-md-4 menuCardMain" >
+            <div className="col-md-4 menuCardMain">
               <UserCardMenu
                 NavigateTo="/transferMoney"
                 iconName={<SendIcon sx={{ fontSize: 40 }} />}
                 name="Transfer Money"
               />
             </div>
-            <div className="col-md-4 menuCardMain" >
+            <div className="col-md-4 menuCardMain">
               <UserCardMenu
                 NavigateTo="/registerComplain"
                 iconName={<ReportIcon sx={{ fontSize: 40 }} />}

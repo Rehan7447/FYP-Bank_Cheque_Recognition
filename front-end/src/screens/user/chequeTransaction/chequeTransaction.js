@@ -47,7 +47,7 @@ function ChequeTransaction() {
       );
       sessionStorage.setItem("chequeTransaction", JSON.stringify(data));
       setLoading(false);
-      // console.log(data);
+      console.log(data);
       if (data.message) {
         alert("Cheque already Used, please use new Cheque");
       } else {

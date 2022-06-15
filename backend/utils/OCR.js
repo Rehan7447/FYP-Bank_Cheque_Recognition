@@ -13,7 +13,7 @@ const OCR = async (pic) => {
         "content-type":
           "multipart/form-data; boundary=---011000010111000001101001",
         "X-RapidAPI-Host": "pen-to-print-handwriting-ocr.p.rapidapi.com",
-        "X-RapidAPI-Key": "5cd2a107femsh5d8949603242e20p17cc44jsn9b0627dd252f",
+        "X-RapidAPI-Key": "c4fdf805cbmsh662331b53cf3d1bp10b6cbjsnf42c00c623ce",
         useQueryString: true,
       },
       formData: {
