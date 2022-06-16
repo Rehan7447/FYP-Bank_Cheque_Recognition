@@ -85,3 +85,10 @@
     margin-bottom: 10%;
   }
 }
+
+@media (max-width: 400px) {
+  .aboutUsMain {
+    /* margin-top: 45%; */
+    margin: 45% auto auto;
+  }
+}

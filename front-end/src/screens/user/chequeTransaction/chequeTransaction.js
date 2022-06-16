@@ -84,8 +84,8 @@ function ChequeTransaction() {
 
   return (
     <UserTemplate>
-      <div className="mainContainer">
-        <div>
+      <div className="mainContainer row">
+        <div className="col-md-3" > 
           <input
             type="file"
             accept="image/*"
@@ -100,7 +100,7 @@ function ChequeTransaction() {
             }}
           />
         </div>
-        <div>
+        <div className="col-md-9">
           {showCameraBut == false ? (
             <button
               className="btn btn-outline-primary cameraButton"
@@ -113,11 +113,12 @@ function ChequeTransaction() {
               <div>
                 <Webcam
                   audio={false}
-                  height={300}
+                  // height={300}
+                  className="webCam"
                   ref={webcamRef}
                   screenshotFormat="image/jpeg"
                   screenshotQuality="1"
-                  width={600}
+                  // width={600}
                   videoConstraints={videoConstraints}
                 />
               </div>

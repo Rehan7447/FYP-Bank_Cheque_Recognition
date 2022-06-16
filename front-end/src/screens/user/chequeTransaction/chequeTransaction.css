@@ -2,14 +2,15 @@
   padding: 3%;
 }
 .mainContainer {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: flex-start; */
   padding: 3%;
 }
 
 .inputForImage {
   width: 80%;
+  max-width: 200px;
   margin: 2% 3%;
   height: 50px;
   font-size: 0.7rem;
@@ -17,7 +18,7 @@
 
 .cameraButton {
   height: 50px;
-  margin: 2% 3%;
+  margin: 0.7% auto;
   font-size: 0.9rem;
 }
 
@@ -28,9 +29,22 @@
 
 .imageView img {
   max-width: 500px;
-  min-width: 300px;
+  min-width: 250px;
 }
 
 .submitButton {
   text-align: center;
 }
+
+.webCam {
+  width: 50%;
+  min-width: 250px;
+  min-height: 300px;
+  margin-top: auto;
+}
+/* 
+@media (max-width: 600px) {
+  .webCam {
+    display: block;
+  }
+} */

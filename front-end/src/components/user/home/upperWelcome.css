@@ -2,16 +2,16 @@
   margin-bottom: 5%;
 }
 
-.welcomeDiv{
-    display: flex;
-    justify-content: space-between;
+.welcomeDiv {
+  display: flex;
+  justify-content: space-between;
 }
 
-.welcomeDiv h2{
+.welcomeDiv h2 {
   margin-bottom: 0;
 }
 
-.iban{
+.iban {
   opacity: 0.8;
   font-size: 1.1rem;
   font-weight: 600;
@@ -42,4 +42,25 @@
 .subMenu {
   display: flex;
   justify-content: space-around;
+}
+
+@media (max-width: 600px) {
+  .iban {
+    font-size: 0.8rem;
+  }
+  .clock {
+    font-size: 0.8rem;
+    text-align: right;
+    margin-top: 5px;
+  }
+  .welcomeDiv h2 {
+    font-size: 1.2rem;
+  }
+  .amount {
+    font-size: 2rem;
+  }
+  .subMenu {
+    justify-content: space-between;
+    font-size: 12px;
+  }
 }

@@ -38,7 +38,7 @@ function WelcomeMenu() {
           <span className="iban">{userAccountInfo.IBAN}</span>
           <h2>Welcome, {userInfo.name}!</h2>
         </div>
-        <h5>
+        <h5 className="clock">
           <Clock />
         </h5>
       </div>
