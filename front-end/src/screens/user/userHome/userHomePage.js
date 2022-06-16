@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import WelcomeMenu from "../../../components/user/home/upperWelcome";
 import UserCardMenu from "../../../components/user/home/userCardMenu";
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
-import IosShareIcon from "@mui/icons-material/IosShare";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import SendIcon from "@mui/icons-material/Send";
 import ReportIcon from "@mui/icons-material/Report";
 import "./userHome.css";
@@ -79,7 +79,14 @@ export default function User() {
           src="https://console.dialogflow.com/api-client/demo/embedded/1bebf071-b8c1-4f62-bd3c-1f24cec93f20"
         ></iframe>
         <a className="float" id="chatButton" onClick={chatBotBut}>
-          <i className="fa-solid fa-comments my-float"></i>
+          <ChatBubbleIcon
+            style={{
+              color: "white",
+              fontSize: "40px",
+              textAlign: "center",
+              marginTop: "10px",
+            }}
+          />
         </a>
       </div>
     </UserTemplate>
