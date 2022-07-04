@@ -76,7 +76,7 @@ export default function User() {
           width="90%"
           height="430"
           allow="microphone;"
-          src="https://console.dialogflow.com/api-client/demo/embedded/1bebf071-b8c1-4f62-bd3c-1f24cec93f20"
+          src="https://console.dialogflow.com/apix-client/demo/embedded/1bebf071-b8c1-4f62-bd3c-1f24cec93f20"
         ></iframe>
         <a className="float" id="chatButton" onClick={chatBotBut}>
           <ChatBubbleIcon
